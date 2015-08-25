@@ -1,112 +1,0 @@
-10
-
-dir
-0
-https://github.com:443/davidecrenna/tmgdev.git/PHPMailer
-https://github.com:443/davidecrenna/tmgdev.git
-add
-
-
-
-
-
-has-props
-has-prop-mods
-
-
-
-
-
-
-
-
-
-
-
-incomplete
-12e35b5c-3ed1-be2f-8307-ce57b7db7bff
-
-test
-dir
-
-
-
-add
-
-LICENSE
-file
-
-
-
-add
-
-language
-dir
-
-
-
-add
-
-test_script
-dir
-
-
-
-add
-
-changelog.txt
-file
-
-
-
-add
-
-docs.ini
-file
-
-
-
-add
-
-extras
-dir
-
-
-
-add
-
-docs
-dir
-
-
-
-add
-
-class.phpmailer.php
-file
-
-
-
-add
-
-class.pop3.php
-file
-
-
-
-add
-
-README
-file
-
-
-
-add
-
-class.smtp.php
-file
-
-
-
-add
-

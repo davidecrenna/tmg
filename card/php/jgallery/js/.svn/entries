@@ -1,70 +1,0 @@
-10
-
-dir
-0
-https://github.com:443/davidecrenna/tmgdev.git/card/php/jgallery/js
-https://github.com:443/davidecrenna/tmgdev.git
-add
-
-
-
-
-
-has-props
-has-prop-mods
-
-
-
-
-
-
-
-
-
-
-
-
-12e35b5c-3ed1-be2f-8307-ce57b7db7bff
-
-jgallery.js
-file
-
-
-
-add
-
-touchswipe.js
-file
-
-
-
-add
-
-jgallery.min.js
-file
-
-
-
-add
-
-touchswipe.min.js
-file
-
-
-
-add
-
-tinycolor-0.9.16.min.js
-file
-
-
-
-add
-
-jquery-2.0.3.min.js
-file
-
-
-
-add
-
