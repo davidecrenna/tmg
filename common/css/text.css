@@ -1,0 +1,53 @@
+/* CSS Document */
+.text14px{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:normal;
+	font-size:1em;
+	/*font-size:14px;*/
+	font-weight:700;
+	text-decoration:none;
+}
+.text16px{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:normal;
+	font-size:16px;
+	font-weight:700;
+	text-decoration:none;
+}
+.text18px{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:normal;
+	font-size:18px;
+	font-weight:500;
+	text-decoration:none;
+}
+.text12px{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:normal;
+	font-size:12px;
+	font-weight:700;
+	text-decoration:none;
+}
+.text11px{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:normal;
+	font-size:11px;
+	font-weight:700;
+	text-decoration:none;
+	color:#F1F1F1;
+}
+.link1{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:normal;
+	font-size:14px;
+	font-weight:700;
+}
+.link1:hover{
+	text-decoration:underline;
+}
+span.evidenzio{
+/*background-color:#275300;*/
+color:#0F0;
+/*border:1px solid #f44;*/
+}
+

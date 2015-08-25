@@ -1,0 +1,30 @@
+    ## Mod_rewrite in use.
+
+   	RewriteEngine on
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301] # Remove trailing slash
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([A-Za-z0-9]+)$ users.php?u=$1  [NC,L]
+	
+	RewriteRule ^melixaroncari/brown$ users.php?u=melixaroncari&color=brown [NC,L]
+	RewriteRule ^melixaroncari/black$ users.php?u=melixaroncari&color=black [NC,L]
+	RewriteRule ^melixaroncari/green$ users.php?u=melixaroncari&color=green [NC,L]
+	RewriteRule ^melixaroncari/blue$ users.php?u=melixaroncari&color=blue [NC,L]
+	RewriteRule ^melixaroncari/pink$ users.php?u=melixaroncari&color=pink [NC,L]
+	RewriteRule ^melixaroncari/azzurro$ users.php?u=melixaroncari&color=azzurro [NC,L]
+	RewriteRule ^melixaroncari/orange$ users.php?u=melixaroncari&color=orange [NC,L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([A-Za-z0-9]+)/index.php$ users.php?u=$1  [NC,L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([A-Za-z0-9]+)/personal_area$ users.php?u=$1&personal_area=true  [NC,L]
+	
+	
+	

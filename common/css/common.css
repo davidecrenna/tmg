@@ -1,0 +1,97 @@
+/* CSS Document */
+body {
+	background-image: url(../../image/background/background.jpg) ;
+	background-repeat:no-repeat;
+	background-position:top;
+	font-size: 12px;
+}
+
+.cols_crop { 
+	background-image:url(../../image/photo_bg_center.png);
+	background-repeat:repeat-y;
+	width: 980px; 
+	position: relative;  
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:medium;
+	font-size:14px;
+	color:#FFF;
+	height: 420px;
+}
+
+.col_crop_image { 
+	text-align:left;
+	position: absolute; 
+	left: 10px; 
+	width: 700px 
+}
+.col_crop_save{
+	text-align:left;
+	position: absolute; 
+	left: 30px; 
+	width: 400px;
+}
+.col_crop_btn{
+	text-align:left;
+	position: absolute; 
+	left: 800px; 
+	top: 30px;
+	width: 700px 
+}
+.col_crop_btn_save{
+	text-align:left;
+	position: absolute; 
+	left: 270px; 
+	top: 52px;
+}
+.col { 
+	text-align:left;
+	position: absolute; 
+	top: 0px;
+	left: 50px; 
+}
+.col2 { 
+	text-align:left;
+	position: absolute; 
+	left: 100px; top: 30px; 
+	width: 700px 
+}
+.col3 { 
+	text-align:right;
+	position: absolute; 
+	left: 40px; top: 30px; 
+	width: 170px 
+}
+.fileinput{
+	background-color:#523030;
+	border:0px;
+	height: 30px;
+	width: 400px;
+	color:#FFF;
+	font-size:16px;
+	border-color:#FFF;
+}
+.img_button{
+	cursor:pointer;	
+	vertical-align:middle;
+}
+
+#upload_process{
+	display:none;	
+}
+#crop{
+	display:none;	
+}
+#save{
+	display:none;	
+}
+#main_upload_form{
+	margin:0px;	
+	
+}
+.button_cambia{
+	background-image:url(../../image/btn/btn_choose_photo.png);
+	border:0px;	
+	height:30px;
+	width:68px;
+	cursor:pointer;
+}

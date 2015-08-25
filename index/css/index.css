@@ -1,0 +1,641 @@
+/* CSS Document */
+img{
+	border:0;
+}
+a{
+	color:#FFF;
+	font-weight:bold;
+	text-decoration:underline;
+}
+.a{
+	color:#FFF;
+	font-weight:bold;
+	text-decoration:underline;
+	cursor:pointer;
+}
+.a2{
+	text-decoration:none;
+	border:0px;
+	opacity:1;
+	position:relative;
+	top:3px;
+	margin:0px;
+	
+	transition-property: opacity; /*standard*/
+	transition-duration: 1s;
+   
+	-webkit-transition-property: opacity; /*Safari e Chrome */
+	-webkit-transition-duration: 1s;
+		   
+	-o-transition-property: opacity;      /*Opera*/
+	-o-transition-duration: 1s;
+		   
+	-moz-transition-property: opacity;    /*Firefox*/
+	-moz-transition-duration: 1s;
+	
+}
+
+.a2:hover{
+	opacity:1;
+}
+/*
+.overlay{
+	/*//filter: progid:DXImageTransform.Microsoft.gradient(GradientType=.85,startColorstr='#FFFFFF', endColorstr='#FFFFFF');*/
+	width:100%;
+	min-height:680px;
+	height:100%;
+	position:absolute;
+	/*background-color:#FFF;*/
+	background-color:rgba(255,255,255,0.65);
+	z-index:15000;
+}
+.overlay_caricamento{
+	
+	background-color:#ffff;
+	background-color:rgba(255,255,255,1);
+	
+	width:410px;
+	height:43px;
+	border-bottom-left-radius:2px;
+	border-bottom-right-radius:2px;
+	border-top-left-radius:2px;
+	border-top-right-radius:2px;
+	 border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    -khtml-border-radius: 2px;
+	border: 1px solid #000;
+	
+  -webkit-box-shadow: #000 0 0 12px;
+  -moz-box-shadow: #000 0 0 12px;
+  
+	border-radius: 2px;
+   behavior:url(http://localhost/TMG/card/css/border-radius.htc);
+
+	font-size:14px; 
+	font-weight:700; 
+	z-index:9000;
+	
+	padding:10px;
+	
+	border-radius: 5px;
+	text-align:left;
+}*/
+
+
+
+.col3_scheda1 { 
+	position: absolute; 
+	width: 400px ;
+	top:24px;
+}
+ 
+.col { 
+	text-align:left;
+	position: absolute; 
+	left: 40px; 
+	width: 600px 
+}
+.col_promoter { 
+	text-align:left;
+	position: absolute; 
+	left: 40px;
+	top:30px; 
+	width: 400px 
+}
+.col_news { 
+	text-align:left;
+	position: absolute; 
+	left: 200px;
+	top:30px; 
+	width: 400px 
+}
+
+.col2 { 
+	text-align:left;
+	position: absolute; 
+	left: 40px; 
+	width: 500px; 
+}
+
+ 
+.col3 { 
+	position: absolute; 
+	width: 400px 
+}
+
+
+#card_down{
+	background-image:url(../../image/homepage/bg_inizia_down.png);
+	background-repeat:no-repeat;
+	width: 997px;
+	height: 117px;
+	top:-1px;
+}
+.nav_buttons{
+	margin-left:10px;
+	cursor:pointer;	
+}
+
+#scheda2{
+	display:none;	
+}
+
+#scheda3{
+	display:none;	
+}
+
+#scheda4{
+	display:none;	
+}
+
+#scheda5{
+	display:none;	
+}
+
+#scheda6{
+	display:none;	
+}
+#scheda7{
+	display:none;	
+}
+
+#scheda_redirect{
+	display:none;	
+}
+#scheda_cb_carta{
+	display:none;
+	text-align:center;	
+}
+#scheda_cb_sito{
+	display:none;
+	text-align:center;	
+}
+#scheda_cb_guadagno{
+	display:none;
+	text-align:center;	
+}
+#scheda_cb_mailing{
+	display:none;
+	text-align:center;	
+}
+#scheda_cb_biglietto{
+	display:none;
+	text-align:center;	
+}
+#scheda_cb_filebox{
+	display:none;
+	text-align:center;	
+}
+#scheda_cb_networks{
+	display:none;
+	text-align:center;		
+}
+#scheda_cb_giovani{
+	display:none;
+	text-align:center;		
+}
+/*COSTI BENFICI*/
+.col_cb { 
+	text-align:left;
+	position: absolute; 
+	left: 60px;
+	top:70px;
+	width: 300px; 
+}
+.col2_promoter{
+	top:25px;
+	font-size:14px;	
+	text-align:left;
+	position: absolute; 
+	width: 500px; 
+	font-weight:600;
+}
+.col2_cb { 
+	text-align:center;
+	position: absolute;
+	width: 500px;
+	text-decoration:none;
+	
+	padding-top:8px;
+	padding-left:15px;
+	margin-left:21px;
+	margin-bottom:5px;
+	
+	vertical-align:middle;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:700;
+	text-align:left;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -khtml-border-radius: 5px;
+	border: 1px solid #FFF;
+	color:#FFF;
+	
+	background-color:rgba(146, 119, 119, 0.3);
+	-webkit-box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;
+    box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;	
+	 box-shadow: 3px 3px 4px  rgba(0,0,0,0.50);		
+}
+
+
+.col2_cb_up { 
+	text-align:center;
+	position: absolute;
+	width: 500px;
+	left: 415px;
+	text-decoration:none;
+	
+	padding-top:10px;
+	padding-left:15px;
+	margin-left:21px;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	
+	padding-right:10px;
+	
+	vertical-align:middle;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:700;
+	text-align:left;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -khtml-border-radius: 5px;
+	border: 1px solid #FFF;
+	color:#FFF;
+	
+	-webkit-box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;
+    box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;	
+	 box-shadow: 3px 3px 4px  rgba(0,0,0,0.50);		
+	
+	background-color:rgba(146, 119, 119, 0.3);
+}
+.col2_cb_center { 
+	text-align:center;
+	position: absolute;
+	width: 500px;
+	left: 415px;
+	text-decoration:none;
+	
+	padding-top:10px;
+	padding-left:15px;
+	margin-left:21px;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	
+}
+.col2_cb_down { 
+	text-align:center;
+	position: absolute;
+	width: 500px;
+	left: 415px;
+	text-decoration:none;
+	
+	padding-top:10px;
+	padding-left:15px;
+	margin-left:21px;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	padding-right:10px;
+	
+	vertical-align:middle;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:700;
+	text-align:left;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -khtml-border-radius: 5px;
+	border: 1px solid #FFF;
+	color:#FFF;
+	
+	-webkit-box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;
+    box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;	
+	 box-shadow: 3px 3px 4px  rgba(0,0,0,0.50);		
+	
+	background-color:rgba(146, 119, 119, 0.3);
+}
+
+
+
+.costi_benefici_main_icon{
+	height:250px;
+	width:250px;
+}
+.torna_cb{
+	cursor:pointer;	
+}
+.menu_cb_container{
+	position:absolute; 
+	top:350px; 
+	left:-20px;
+	width:1050px;
+}
+.testo1{
+	color:#ead1c2;
+}
+.testo_verde {
+	color:#8cff71;	
+}
+/*FINE COSTI BENEFICI*/
+
+
+/* OVERLAY VIDEO */
+.apple_overlay {
+	background-image:url(../../image/card/bg_overlay.png);
+	display:none;
+	overflow:hidden;
+	height:448px;
+	width:850px;
+	padding-top:0px;
+	/*position:absolute;*/
+	position: fixed; 
+	
+	font-family:Arial, Helvetica, sans-serif;
+	text-align:left;
+	color:#000;
+}
+.apple_overlay .close {
+	background-image:url(../../image/card/btn/btn_chiudi.png);
+	background-repeat:no-repeat;
+	position:absolute; 
+	right:10px; 
+	top:-5px;
+	cursor:pointer;
+	height:27px;
+	width:57px;
+	z-index:90000;
+}
+
+/* the overlayed element */
+.simple_overlay {
+ 
+    /* must be initially hidden */
+    display:none;
+ 
+    /* place overlay on top of other elements */
+    z-index:10000;
+ 
+    /* styling */
+    background-color:#623939;
+ 
+    width:830px;
+    min-height:200px;
+    border:1px solid #FFF;
+ 
+    /* CSS3 styling for latest browsers */
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;
+}
+ 
+/* close button positioned on upper right corner */
+.simple_overlay .close {
+    background-image:url(../../image/homepage/btn/close.png);
+    position:absolute;
+    right:-15px;
+    top:-15px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
+}
+
+.vertical_termini {  
+	position:relative;
+	height:500px;	
+	overflow:hidden;	
+	width:900px;
+	text-align:left;
+	padding-left:0px;
+}
+
+#btn_home{	
+	width: 200px;
+	  height: 200px;
+	  opacity:0.2;
+	 
+	  transition-property: opacity; /*standard*/
+	  transition-duration: 2s;
+	 
+	  -webkit-transition-property: opacity; /*Safari e Chrome */
+	  -webkit-transition-duration: 2s;
+			 
+	  -o-transition-property: opacity;      /*Opera*/
+	  -o-transition-duration: 2s;
+			 
+	  -moz-transition-property: opacity;    /*Firefox*/
+	  -moz-transition-duration: 2s;
+	
+}
+#btn_home:hover {
+  opacity:1;
+}
+
+
+/* CSS3 border radius for various elements. yea - CSS isn't perfect */
+.rounded, #sheet input, .error {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+}
+ 
+/* validation error message */
+.error {
+  background-color:#E8FF6D;
+  padding:5px;
+  font-size:10px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:700;
+  color:#000;
+  -webkit-box-shadow: #000 0 0 12px;
+  -moz-box-shadow: #000 0 0 12px;
+}
+ 
+/* nested arrow inside error message. It's 100% CSS. No images. */
+.error em {
+  border:10px solid;
+  border-color:#E8FF6D transparent transparent;
+  bottom:-17px;
+  display:block;
+  height:0;
+  left:10px;
+  position:absolute;
+  width:0;
+}
+ 
+/* input field that caused validation error */
+.invalid {
+  background-color:inherit !important;
+  
+}
+.error, #calroot {
+    z-index:10000;
+}
+.col3_iscrizione{
+	position:absolute;
+ 	top:35px;
+ 	left:325px;
+ 	text-align:center;
+	width: 235px;
+	padding: 5px;
+	
+	background-color:rgba(79,51,51,0.75);
+	
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -khtml-border-radius: 5px;
+	border: 1px solid #FFF;
+	color:#FFF;
+}
+.box_accedi{
+	text-align:center;
+	position:absolute; 
+	left:460px; 
+	top:323px; 
+	font-size:14px; 
+	font-weight:700; 
+	z-index:9000; 
+	width:180px;
+	height:43px;
+	background-color:#523434;
+	background-color:rgba(79,51,51,0.85);
+	
+	/*border: 1px solid #FFF;*/
+	padding:10px;
+	
+	border-radius: 5px;
+}
+
+.box_8euro{
+	background-image:url(../../image/homepage/bg_box_home.png);
+	position:absolute;
+	width:220px;
+	font-size:14px; 
+	font-weight:700; 
+	z-index:8000;
+	/*border: 1px solid #FFF;*/
+	padding:5px;
+	
+	border-radius: 5px;
+	
+	width: 220px;
+	height: 374px;
+	left: 35px;
+	top: 35px;
+	
+}
+
+.start_message_container_popup{
+	width:600px; 
+	height:375px;
+	margin-top:160px;
+	color:#000;
+	background-color:rgba(255,255,255,1);
+	text-align:left;
+}
+
+ .shadow2 {		
+	-webkit-box-shadow: rgba(0,0,0,0.70) 0px 0px 15px;
+    box-shadow: rgba(0,0,0,0.70) 0px 0px 15px;
+	 box-shadow: 0px 0px 15px rgba(0,0,0,0.70);		
+ }
+ 
+ .rounded2{
+	border-bottom-left-radius:2px;
+	border-bottom-right-radius:2px;
+	border-top-left-radius:2px;
+	border-top-right-radius:2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    -khtml-border-radius: 2px;
+}
+.rounded15{
+	border-bottom-left-radius:20px;
+	border-bottom-right-radius:20px;
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -o-border-radius: 20px;
+    -khtml-border-radius: 20px;
+}
+#info_go_to_card{
+	font-size:11px;
+	width:200px;
+}
+.login_input_email_home{
+	background-color:#523333;
+	height:20px;
+	width:160px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+	vertical-align:middle;
+	border: 1px solid #FFF;
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:700;
+}
+.login_input_pass_home{
+	background-color:#523333;
+	height:20px;
+	width:160px;
+	
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+	vertical-align:middle;
+	border: 1px solid #FFF;
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:700;
+}
+.div_banner_sx{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.tmgdoit{
+	width:280px;
+}

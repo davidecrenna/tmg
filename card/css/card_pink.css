@@ -1,0 +1,86 @@
+/* CSS Document */
+
+.card_up{
+	background-color:#E778AD;
+	background-image: -o-linear-gradient(bottom, #E73A8C 0%, #E778AD 78%);
+	background-image: -moz-linear-gradient(bottom, #E73A8C 0%, #E778AD 78%);
+	background-image: -webkit-linear-gradient(bottom, #E73A8C 0%, #E778AD 78%);
+	background-image: -ms-linear-gradient(bottom, #E73A8C 0%, #E778AD 78%);
+	background-image: linear-gradient(to bottom, #E73A8C 0%, #E778AD 78%);
+	
+}
+
+#card_down{
+	background-color:#E778AD;
+	background-image: -o-linear-gradient(top, #E73A8C 0%, #E778AD 78%);
+	background-image: -moz-linear-gradient(top, #E73A8C 0%, #E778AD 78%);
+	background-image: -webkit-linear-gradient(top, #E73A8C 0%, #E778AD 78%);
+	background-image: -ms-linear-gradient(top, #E73A8C 0%, #E778AD 78%);
+	background-image: linear-gradient(to top, #E73A8C 0%, #E778AD 78%);
+}
+.jspDrag
+{
+	background-color:#E778AD;
+}
+.contatto{
+	background-color:#E73A8C;
+}
+
+.content_overlay_container{
+	background-color:rgba(231,58,140,0.25);
+}
+.content_overlay_container_filebox{
+	background-color:rgba(231,58,140,0.25);
+}
+.content_overlay_container_filebox_file{
+	background-color:rgba(231,58,140,0.25);
+}
+.file_box_private_files_content{
+	background-color:rgba(231,58,140,0.25);
+}
+.file_box_folder_file{
+	background-color:rgba(231,58,140,0.25);
+}
+.overlay_title_container{
+	background-color:rgba(231,58,140,0.8);
+}
+.curriculum_content{
+	background-color:#E73A8C;
+}
+.textarea_assistenza{
+	background-color:#E73A8C;
+}
+.file_container{
+	background-color:#E73A8C;
+}
+.container{
+	background-color:#E73A8C;
+}
+
+
+#slide_download{
+	background-color:rgba(231,58,140,0.8);
+}
+#foto_download{
+	background-color:rgba(231,58,140,0.8);
+}
+
+#preview{
+	background:#7B5858;	
+}
+
+.uploaderprogresspanel{
+	/*background-color:#7B5858;*/
+	background-color:transparent;
+}
+.overlay_button{
+	background-color:#E73A8C; 
+}
+.input_text_normal{
+	background-color:#E73A8C; 
+}
+.tooltip{
+	background:transparent url(../../image/card_pink/add_friend.png);
+}
+
+

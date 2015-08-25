@@ -1,0 +1,90 @@
+/* CSS Document */
+
+.card_up{
+	background-color:#917777;
+	background-image: -o-linear-gradient(bottom, #623939 0%, #917777 78%);
+	background-image: -moz-linear-gradient(bottom, #623939 0%, #917777 78%);
+	background-image: -webkit-linear-gradient(bottom,#623939 0%, #917777 78%);
+	background-image: -ms-linear-gradient(bottom, #623939 0%, #917777 78%);
+	background-image: linear-gradient(to bottom, #623939 0%, #917777 78%);
+}
+
+#card_down{
+	background-color:#917777;
+	background-image: -o-linear-gradient(top, #623939 0%, #917777 78%);
+	background-image: -moz-linear-gradient(top, #623939 0%, #917777 78%);
+	background-image: -webkit-linear-gradient(top, #623939 0%, #917777 78%);
+	background-image: -ms-linear-gradient(top, #623939 0%, #917777 78%);
+	background-image: linear-gradient(to top, #623939 0%, #917777 78%);
+}
+.jspDrag
+{
+	background-color:#917777;
+}
+.contatto{
+	background-color:#623939;
+}
+
+.content_overlay_container{
+	background-color:rgba(79,51,51,0.25);
+}
+.content_overlay_container_filebox{
+	background-color:rgba(79,51,51,0.25);
+}
+.content_overlay_container_filebox_file{
+	background-color:rgba(79,51,51,0.25);
+}
+.file_box_private_files_content{
+	background-color:rgba(79,51,51,0.25);
+}
+.file_box_folder_file{
+	background-color:rgba(79,51,51,0.25);
+}
+.overlay_title_container{
+	background-color:rgba(98,57,57,0.8);
+}
+
+.curriculum_content{
+	background-color:#623939;
+}
+.textarea_assistenza{
+	background-color:#623939;
+}
+
+.file_container{
+	background-color:#623939;
+}
+.container{
+	background-color:#623939;
+}
+
+
+#slide_download{
+	background-color:rgba(98,57,57,0.8);
+}
+#foto_download{
+	background-color:rgba(98,57,57,0.8);
+}
+
+
+#preview{
+	background:#7B5858;	
+}
+
+.uploaderprogresspanel{
+	/*background-color:#7B5858;*/
+	background-color:transparent;
+}
+.overlay_button{
+	background-color:#623939; 
+}
+.input_text_normal{
+	background-color:#623939; 
+}
+.tooltip{
+	background:transparent url(../../image/card_brown/add_friend.png);
+}
+
+
+
+

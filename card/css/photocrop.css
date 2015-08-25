@@ -1,0 +1,12 @@
+/* CSS Document */
+body{
+	background-color:#838383;	
+}
+.preview_container{
+	 position:absolute;
+	 left:400px;	
+}
+.img_crop{
+	border:1px solid #FFF;
+	max-width:650px;
+}

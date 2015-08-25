@@ -1,0 +1,113 @@
+/* CSS Document */
+
+.tooltip {
+	display:none;
+	background:transparent;
+	background-image:url(../../image/homepage/tooltip_mini.png);
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	height:85px;
+	width:190px;
+	padding:25px;
+	color:#fff;	
+	z-index:10000;
+}
+
+.forminput{
+	background-color:#523030;
+	border:0px;
+	height: 30px;
+	width: 200px;
+	color:#FFF;
+	font-size:16px;
+	
+	vertical-align:middle; 
+	border-bottom-left-radius:5px; 
+	border-bottom-right-radius:5px; 
+	border-top-left-radius:5px; 
+	border-top-right-radius:5px;
+	text-decoration:none;
+	font-style:normal;
+	font-size:14px;
+	font-weight:700;
+	border:1px #FFF solid;
+	padding-left:10px;
+}
+.textinput{
+	background-color:#623939;
+	color:#FFF;
+	
+	vertical-align:middle; 
+	/*border-bottom-left-radius:5px; 
+	border-bottom-right-radius:5px; 
+	border-top-left-radius:5px; 
+	border-top-right-radius:5px;*/
+	text-decoration:none;
+	font-style:normal;
+	font-size:14px;
+	font-weight:700;
+	/*border:1px #FFF solid;*/
+	border:hidden;
+	padding-left:10px;
+}
+.forminput#_email{
+	width: 350px;
+}
+
+.forminput#_confirm_email{
+	width: 350px;
+}
+.confirm_pass{
+	top: 10px;
+	margin-top: 20px;	
+	padding-top:20px;
+}
+/* the overlayed element */
+.apple_overlay {
+	
+	/* initially overlay is hidden */
+	display:none;
+	
+	/* growing background image */
+	background-image:url(../img/overlay/white.png);
+	
+	/* 
+		width after the growing animation finishes
+		height is automatically calculated
+	*/
+	width:640px;		
+	
+	/* some padding to layout nested elements nicely  */
+	padding:35px;
+
+	/* a little styling */	
+	font-size:11px;
+}
+
+/* default close button positioned on upper right corner */
+.apple_overlay .close {
+	background-image:url(../../image/homepage/btn/close.png);
+	position:absolute; right:5px; top:5px;
+	cursor:pointer;
+	height:35px;
+	width:35px;
+}
+.condizioni{
+	font-size:9px;
+	line-height:10px;	
+}
+.testo{
+	font-size:14px;
+}
+.subscribe{
+	background-image:url(../../image/homepage/btn/btn_iscriviti.png);
+	background-color:transparent;
+	width:240px; 
+	background-repeat:no-repeat;
+	border:0;
+	height:50px; 
+	cursor:pointer;
+	position:relative;
+	left:80px;
+}
+

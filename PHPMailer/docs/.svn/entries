@@ -1,0 +1,84 @@
+10
+
+dir
+0
+https://github.com:443/davidecrenna/tmgdev.git/PHPMailer/docs
+https://github.com:443/davidecrenna/tmgdev.git
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+
+
+
+
+
+
+
+
+
+
+
+12e35b5c-3ed1-be2f-8307-ce57b7db7bff
+
+5.0-phpdocs
+dir
+
+
+
+add
+
+pop3_article.txt
+file
+
+
+
+add
+
+use_gmail.txt
+file
+
+
+
+add
+
+Callback_function_notes.txt
+file
+
+
+
+add
+
+Note_for_SMTP_debugging.txt
+file
+
+
+
+add
+
+extending.html
+file
+
+
+
+add
+
+DomainKeys_notes.txt
+file
+
+
+
+add
+
+faq.html
+file
+
+
+
+add
+

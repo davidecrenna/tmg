@@ -1,0 +1,138 @@
+/* CSS Document */
+.mailing_groups_container{
+	height:234px; 
+	width:200px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	position:absolute; 
+	left:0px; 
+	top:5px;
+}
+.mailing_add_groups_container{
+	height:21px; 
+	width:180px; 
+	text-align:left;
+	background-color:#6B6B6B;
+}
+.mailing_groups_action_container{
+	height:100px; 
+	width:180px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	overflow-x:none; 
+	position:absolute; 
+	left:0px; 
+	top:240px;
+	padding:10px;
+	background-color: #6B6B6B;
+}
+.mailing_contacts_container{
+	height:330px; 
+	width:680px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	overflow-x:hidden; 
+	position:absolute; 
+	left:205px;
+	top:5px;
+}
+.mailing_contacts_action_container{
+	height:23px; 
+	width:670px; 
+	border:1px solid #FFF; 
+	padding-top:2px;
+	text-align:left;
+	background-color:#6B6B6B;
+	position:absolute; 
+	padding-left:10px;
+	left:205px;
+	top:335px;
+	float:right;
+}
+.mailing_contacts_import_container{
+	height:39px; 
+	width:480px; 
+	border:1px solid #FFF; 
+	padding-top:2px;
+	text-align:left;
+	background-color:#6B6B6B;
+	position:absolute; 
+	padding-left:10px;
+	left:0px;
+	top:365px;
+	float:right;
+}
+.mailing_send_groups_email_container{
+	height:39px; 
+	width:230px; 
+	border:1px solid #FFF; 
+	padding-top:2px;
+	text-align:left;
+	background-color:#6B6B6B;
+	position:absolute; 
+	padding-left:10px;
+	left:645px;
+	top:365px;
+	float:right;
+}
+.nomegruppo_mailing_header{
+	width:200px;
+}
+.mailing_group_name{
+	width:200px;
+}
+.mailing_group_row{
+	heigth:20px;
+	cursor:pointer;
+}
+.nomecontact_mailing_header{
+	width:150px;
+}
+.cognomecontact_mailing_header{
+	width:150px;
+}
+.emailcontact_mailing_header{
+	width:300px;
+}
+.mailing_contact_name{
+	width:150px;
+}
+.mailing_contact_surname{
+	width:150px;
+}
+.mailing_contact_email{
+	width:300px;
+}
+.mailing_contact_cell{
+	width:300px;
+}
+.maling_contact_checkbox{
+	width:15px;
+}
+.chekbox_mailing_header{
+	width:15px;
+}
+.move_contact_container{
+	width:200px;
+	float:left;	
+	border:1px solid #FFF;
+	color:#FFF;
+}
+.move_contact{
+	background-color:#6B6B6B;
+	heigth:23px;
+	border:none;
+	text-align:center;
+   	font-size:12px;
+	font-weight:700;
+	width:200px;
+	color:#FFF;
+}
+.mailing_contact_field{
+	text-align:left;
+}
+.mailing_contact_field_group{
+	text-align:left;
+	padding:5px;
+	border:dotted 1px #FFFFFF;
+}

@@ -1,0 +1,450 @@
+/* CSS Document */
+/* == Media queries (breakpoint) ===== */
+ 	.tmgheader {
+		
+		/*position: fixed;*/
+		background-color:#FFF;
+		width: 100%;
+		min-width: 320px;
+		z-index: 1;
+		text-align: center;
+		display: block;
+		padding-top:0.5em;
+		margin-bottom:1em;
+		z-index:9999;
+		position: fixed;
+		top: 0px;
+		left:0px;
+    	height: 3.5em
+		-webkit-box-shadow: 0px 12px 12px -8px rgba(50, 50, 50, 0.68);
+		-moz-box-shadow:    0px 12px 12px -8px rgba(50, 50, 50, 0.68);
+		box-shadow:         0px 12px 12px -8px rgba(50, 50, 50, 0.68);
+	}
+	.tmgheader_mobile{
+		text-align: left;
+	}
+	.tmgheader_mobile_logo{
+		float:left;
+		width:30%;
+		margin-left:1.5em;
+	}
+	.tmgheader_mobile_actions{
+		float:right;
+		width:15%;
+		
+	}
+	.tmgheader_container{
+		max-width: 1028px;
+		width: 100%;
+		margin: 0 auto;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:600;
+		color:#000;
+		font-size: 1.1em;
+	}
+	.tmgheader_logo{
+		float:left;
+		width:21%;
+		text-align:left;
+		margin-left:1.5em;
+	}
+	
+	.tmgheader_actions{
+		float: right;
+		width: 54%;
+		text-align: right;
+		min-width: 15.2em;
+	}
+	.tmgheader_actions_card{
+		float: right;
+		width: 54%;
+		text-align: right;
+		min-width: 21em;
+	}
+	.ti_piace_la_card{
+		width: 11em;
+		float: right;
+		margin-right:0.2em;
+	}
+	.card_menu_avatar_text{
+		float: right;
+		margin-right: 0em;
+		text-align: left;
+		width: 5em;
+	}
+	.card_menu_avatar_icon{
+		float: right;
+		width: 3em;
+		margin-right: 0.3em;
+	}
+	.iscriviti{
+		width: 7.4em;
+		float: right;
+		margin-right: 0.4em;
+	}
+	.triggers_personal{
+		float:right;
+		margin-right: 1.5em;
+	}
+	.banner_right_text{
+		font-family:Arial, Helvetica, sans-serif;
+		font-style:italic;
+		color:#000;
+		width: 234px;
+	}
+	.banner_right_text:hover{
+		color:#000;
+	}
+	.header_button_utente{
+		display: inline-block;
+		background-color: #F5F5F5;
+		background-image: linear-gradient(#F5F5F5,#F1F1F1);
+		background-image: -ms-linear-gradient(top, #F5F5F5, #F1F1F1);
+		
+		background-image: linear-gradient(#F5F5F5,#F1F1F1);
+		color: #444;
+		
+		border: 1px solid #DCDCDC;
+		
+		
+		border-radius: 5px;
+		
+		cursor: pointer;
+		font-size: 1.2em;
+		font-weight: bold;
+		text-align: center;
+		height: 32px;
+		line-height: 32px;
+		min-width: 64px;
+		padding: 0 8px;
+		text-decoration: none;
+		list-style:none;
+	}
+	.header_button_utente:hover {
+		background-color: #F8F8F8;
+		background-image: linear-gradient(#F8F8F8,#F1F1F1);
+		background-image: -ms-linear-gradient(top, #F8F8F8, #F1F1F1);
+		background-image: linear-gradient(#F8F8F8,#F1F1F1);
+		border: 1px solid #C6C6C6;
+		color: #333;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, .1)
+	}
+	.avatar_utente{
+		border-radius: 1px;
+		height: 22px;
+		vertical-align: middle;
+		width: 20px;
+		border-bottom-left-radius:1px;
+		border-bottom-right-radius:1px;
+		border-top-left-radius:1px;
+		border-top-right-radius:1px;
+		 border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-moz-border-radius: 1px;
+		-o-border-radius: 1px;
+		-khtml-border-radius: 1px;
+	}
+	
+	/*CSS HEADER MENU*/
+	.avatar_header_menu li {
+	}
+	
+	.avatar_header_menu {
+		display: inline-block;
+		background-color: #F5F5F5;
+		background-image: linear-gradient(#F5F5F5,#F1F1F1);
+		background-image: -ms-linear-gradient(top, #F5F5F5, #F1F1F1);
+		
+		background-image: linear-gradient(#F5F5F5,#F1F1F1);
+		color: #444;
+		
+		border: 1px solid #DCDCDC;
+		
+		
+		border-radius: 5px;
+		
+		cursor: pointer;
+		font-weight: bold;
+		text-align: center;
+		height: 32px;
+		line-height: 32px;
+		min-width: 64px;
+		padding: 0 8px;
+		text-decoration: none;
+		list-style:none;
+		
+		position:relative;  
+		padding:0;
+		margin: 0;
+		z-index:90000;
+	}
+	
+	.sub, .sub2 {
+		display:none;
+		
+		list-style: outside none none;
+		position: absolute;
+		text-align: left;
+		padding: 0.2em   
+	}
+	
+	.sub2 { 
+		float:left;
+		left:75px; 
+		top:0px;    
+	}
+	
+	.avatar_header_menu li:hover .sub,
+	.sub li:hover .sub2{
+		display:block;    
+	}
+	.avatar_header_menu_element{
+		background-color:#FFF;
+		height: 32px;
+		min-width: 146px;
+		padding-left: 0.3em;
+		z-index:90000;
+	}
+	/*END CSS HEADER MENU*/
+	
+	/* OVERLAY LOGIN */
+	.apple_overlay_login {
+		background-color:#FFF;
+		display:none;
+		overflow:hidden;
+		height:100%;
+		width:100%;
+		padding-top:0px;
+		
+		z-index: 15000;
+		
+		position:fixed;
+		top:0;
+		left:0;
+
+		display:none;
+		overflow:hidden;
+		
+		color:#000;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-align:left;
+		
+		
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		 border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		-webkit-box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		-moz-box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+	}
+	.apple_overlay_login .close {
+		background-image:url(../../image/card/btn/btn_close_overlay.png);
+		background-repeat:no-repeat;
+		position:absolute; 
+		left:5%;
+		cursor:pointer;
+		height: 50px;
+		z-index:98;
+		top: -2px;
+   		width: 165px;
+	}
+	.apple_overlay_login .close:hover {
+		cursor: pointer;
+		z-index: 90000;
+	}
+	
+	
+	
+	/*.login_input_user{
+		position:absolute; 
+		top:54px; 
+		left:20px;	
+		color:#333333;
+		
+		background-color:#333333;
+		position:absolute;
+		left:20px;
+		height:29px;
+		width:193px;
+		
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		border-radius: 5px;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	    -o-border-radius: 5px;
+	    -khtml-border-radius: 5px;
+		vertical-align:middle;
+		border: 1px solid #FFF;
+		padding-left:10px;
+		font-size:14px;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:700;
+		color:#FFF;
+	}*/
+	.ajax_login{
+		display: block;
+		height: 40px;
+		left: 20px;
+		position: absolute;
+		top: 152px;
+		width: 200px;
+	}
+	.login_input_pass{
+		background-color:#333333;
+		position:absolute;
+		top:113px;
+		left:20px;
+		height:29px;
+		width:193px;
+		
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		border-radius: 5px;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	    -o-border-radius: 5px;
+	    -khtml-border-radius: 5px;
+		vertical-align:middle;
+		border: 1px solid #FFF;
+		padding-left:10px;
+		font-size:14px;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:700;
+		color:#FFF;
+	}
+	.login_container{
+		height:200px;
+		width:60%;
+		min-width:280px;
+		max-width:360px;
+		
+		border: 1px solid rgba(0,0,0,0.10);
+		border-radius: 5px;
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		background-color:rgba(173,173,173,0.55);
+		
+		-webkit-box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		-moz-box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		text-align:center;
+		
+		color:#FFF;
+		font-family:Arial, Helvetica, sans-serif;
+		
+		font-weight:700;
+	}
+	.login_content_container{
+		height:20px;
+		width:95%;
+		margin:2%;
+		text-align:center;
+		font-size: 1em;
+		
+		border: 1px solid rgba(0,0,0,0.10);
+		border-radius: 5px;
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		background-color:rgba(0,0,0,0.65);
+	}
+	.login_input{
+		background-color:rgba(0,0,0,0.65);
+		
+		height:29px;
+		width:75%;
+		
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		vertical-align:middle;
+		border: 1px solid #FFF;
+		padding-left:10px;
+		font-size:14px;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:700;
+		color:#FFF;
+	}
+	.login_label{
+		color:#000;
+		font-size:0.7em;
+		width:100%;
+		margin-top:0.2em;
+	}
+	.login_button{
+		margin-top:0.8em;
+	}
+	.login_img{
+		background-image: url(../../image/icone/login_lock.png);
+		width:65px;
+		height:80px;
+		position:relative;
+		left:80%;
+		top:-10%;
+	}
+	/* END OVERLAY LOGIN */
+	
+/* -----------------------------------
+IPAD PORTRAIT
+------------------------------------ */
+@media only screen and (min-width: 615px) {
+	.tmgheader_container{
+		font-size: 1.2em;
+	}
+	.tmgheader_logo{
+		width:35%;
+	}
+	.iscriviti{
+		float: right;
+		margin-right: 1.4em;
+		width: 10em;
+	}
+}
+ 
+ 
+/* -----------------------------------
+IPAD LANDSCAPE + NETBOOK
+------------------------------------ */
+@media only screen and (min-width: 1024px){
+     
+}
+ 
+/* -----------------------------------
+DESKTOP
+------------------------------------ */
+@media only screen and (min-width: 1200px){
+    
+}
+
+

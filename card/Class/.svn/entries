@@ -1,0 +1,140 @@
+10
+
+dir
+0
+https://github.com:443/davidecrenna/tmgdev.git/card/Class
+https://github.com:443/davidecrenna/tmgdev.git
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+
+
+
+
+
+
+
+
+
+
+
+12e35b5c-3ed1-be2f-8307-ce57b7db7bff
+
+readvcard.php
+file
+
+
+
+add
+
+SimpleImage.php
+file
+
+
+
+add
+
+favicon.inc.php
+file
+
+
+
+add
+
+CreateZipFile.inc.php
+file
+
+
+
+add
+
+fattura_blank.pdf
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+Ctrluser.php
+file
+
+
+
+add
+
+secure_login_class.php
+file
+
+
+
+add
+
+database.php
+file
+
+
+
+add
+
+login.php
+file
+
+
+
+add
+
+pdf.php
+file
+
+
+
+add
+
+uploader.php
+file
+
+
+
+add
+
+personalarea.php
+file
+
+
+
+add
+
+storevcard.php
+file
+
+
+
+add
+
+iscrizione.php
+file
+
+
+
+add
+
+main.php
+file
+
+
+
+add
+

@@ -1,0 +1,41 @@
+
+#flight, .active, #calroot {
+    -moz-border-radius:4px;
+}
+
+
+
+.active input {
+    color:#333;
+    text-shadow:none;
+}
+
+/* date input */
+.date {
+    float:left;
+    display:block;
+    border:1px solid #FFF;
+    background-color:#6B6B6B;
+    font-size:18px;
+    color:#fff;
+    text-shadow:0 0 1px #000;
+    cursor:pointer;
+	width: 213px;
+    text-align: center;
+}
+
+/* date input trigger element */
+.caltrigger {
+    display:block;
+    width:30px;
+    height:32px;
+    float:left;
+    background:url(../../image/calendar/icon.jpg) no-repeat 0 0;
+    margin-top:-8px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+
+.active .caltrigger {
+    background-position: 0 -32px;
+}

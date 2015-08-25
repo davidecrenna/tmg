@@ -1,0 +1,304 @@
+/* CSS Document */
+/* == Media queries (breakpoint) ===== */
+	@font-face {
+		font-family: ethnocentric;
+		src: url('font/ethnocentric.ttf');
+	}
+	
+	body {
+		background-image: url(../../image/background/background.jpg) ;
+		background-repeat:no-repeat;
+		background-position:top;
+		overflow-x:hidden;
+		overflow-y:auto;
+		/*font-size:12px;*/
+		font-size:62.5%;
+		margin-top: 4.6em;
+		text-align:center;
+	}
+	
+	.shadow {		
+		-webkit-box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;
+    	box-shadow: rgba(0,0,0,0.50) 3px 3px 5px;	
+		box-shadow: 3px 3px 4px  rgba(0,0,0,0.50);		
+ 	}
+	.rounded{
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-khtml-border-radius: 5px;
+	}
+	
+	/* CSS SCHEDA 1 */
+	.cols { 
+		width:95%;
+		max-width: 1033px;
+		min-width:351px;
+		min-height: 430px;
+		background-color:#623939;
+		border: 1px solid rgba(0,0,0,0.10);
+		border-top-left-radius:6px;
+		border-top-right-radius:6px;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		color:#FFF;
+		margin:auto;
+	}
+	.card_shadowed{
+		-webkit-box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		-moz-box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+	}
+	
+	.cols p { padding: 3px; margin: 0 }
+	
+	.box_col1{
+		background-color:#DDDDDD;
+		text-align:center;
+		width: 95%;
+		margin: 0.5em;
+		padding-bottom:0.5em;
+		
+		border-bottom-left-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+		-khtml-border-radius: 5px;
+	}
+	
+	.col2_scheda1{
+		text-align: left;
+		width:95%;
+	}
+	
+	.styledbuttonhome {
+		display: inline-block;
+		background-color: #505050;
+		color: #F3F3F3;
+		border: 1px solid #DCDCDC;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 0.9em;
+		text-shadow: 2px 2px 7px #000;
+		font-weight: 700;
+		text-align: center;
+		line-height: 27px;
+		width: 95%;
+		max-width: 13em;
+		height: 20px;
+		padding: 0px 8px;
+		text-decoration: none;
+		padding-bottom: 8px;
+		margin-top: 1em;
+	}
+	.styledbuttonhome:hover{
+		color:#F4CE37;
+	}
+	.box_search{
+		width:100%;
+		height: 43px;
+		font-size: 0.9em;
+		font-weight: 700;
+		background-color: rgba(79, 51, 51, 0.85);
+		border-radius: 5px;
+		padding: 10px;
+		text-align: left;
+		margin: 0.4em;
+	}
+	.in_go_to_card{
+		background-color:#623939; 
+		display:inline-block;
+		min-width: 365px;
+		height:25px;
+		vertical-align:middle; 
+		border-bottom-left-radius:5px; 
+		border-bottom-right-radius:5px; 
+		border-top-left-radius:5px; 
+		border-top-right-radius:5px;
+		text-decoration:none;
+		font-style:normal;
+		font-size:14px;
+		font-weight:700;
+		border:1px #FFF solid;
+		padding-left:10px;
+		z-index:9000;
+		color:#FFF;
+	}
+	
+	
+	.box_esempio{
+		font-size: 14px;
+		font-weight: 700;
+		z-index: 9000;
+		height: 300px;
+		background-color: rgba(79, 51, 51, 0.85);
+		padding: 5px;
+		border-radius: 5px;
+		max-width: 430px;
+		overflow: hidden;
+		margin-left: 0.4em;
+	}
+	
+	
+	
+	/* SLIDE SHOW */
+	#slideshow {
+	  width: 480px;
+	  height: 280px;
+	  text-align:center;
+	  
+	}
+	#slides{
+		/* This is the slide area */
+		height:280px;
+		
+		/* jQuery changes the width later on to the sum of the widths of all the slides. */
+		width:450px;
+		overflow:hidden;
+		padding-top:25px;
+	}
+	
+	.slide{
+		float:left;
+	}
+	
+	#menu{
+		/* This is the container for the thumbnails */
+		height:45px;
+		position:absolute;
+		top:20px;
+		left:50px;
+		width:300px;
+		float:right;
+	}
+	.menuItem{
+		float:left;
+	}
+	.btn_colore{
+		height:20px;
+		width:20px;
+		padding-right:7px;	
+	}
+	
+	
+	/* FINE SLIDE SHOW */
+		
+		
+	
+	
+	/* END CSS SCHEDA 1*/
+	
+/* -----------------------------------
+SLIDESHOW BREAKPOINT
+------------------------------------ */
+@media only screen and (min-width: 450px) {
+	
+	
+}	
+/* -----------------------------------
+COL BREAKPOINT
+------------------------------------ */
+@media only screen and (min-width: 615px) {
+	.box_col1{
+		float:left;
+		background-color:transparent;
+		padding-top: 2.29em;
+		padding-bottom:0em;
+	}
+	.col2_scheda1{
+		float: left;
+	}
+	.box_col1{
+		background-image:url(../../image/homepage/bg_box_home.png);
+		background-repeat:no-repeat;
+		text-align:center;
+		width: 230px;
+		height: 349px;
+		padding-top: 2.29em;
+		margin: 0.5em;
+	}
+	.styledbuttonhome {
+		display: inline-block;
+		background-color: #505050;
+		color: #F3F3F3;
+		border: 1px solid #DCDCDC;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 0.9em;
+		text-shadow: 2px 2px 7px #000;
+		font-weight: 700;
+		text-align: center;
+		line-height: 27px;
+		width: 95%;
+		max-width: 13em;
+		height: 20px;
+		padding: 0px 8px;
+		text-decoration: none;
+		padding-bottom: 8px;
+		margin-top: 1em;
+	}
+	.styledbuttonhome:hover{
+		color:#F4CE37;
+	}
+	
+	.box_search{
+		max-width: 430px;
+	}
+	.col2_scheda1{
+		max-width: 450px;
+	}
+
+		
+}
+
+/* -----------------------------------
+IPAD PORTRAIT
+------------------------------------ */
+@media only screen and (min-width: 768px) {
+ 	
+}
+ 
+ 
+/* -----------------------------------
+IPAD LANDSCAPE + NETBOOK
+------------------------------------ */
+@media only screen and (min-width: 1024px){
+     
+}
+ 
+/* -----------------------------------
+DESKTOP
+------------------------------------ */
+@media only screen and (min-width: 1200px){
+     .in_go_to_card{
+		background-color:#623939; 
+		display:inline-block;
+		min-width: 365px;
+		height:25px;
+		vertical-align:middle; 
+		border-bottom-left-radius:5px; 
+		border-bottom-right-radius:5px; 
+		border-top-left-radius:5px; 
+		border-top-right-radius:5px;
+		text-decoration:none;
+		font-style:normal;
+		font-size:14px;
+		font-weight:700;
+		border:1px #FFF solid;
+		padding-left:10px;
+		z-index:9000;
+		color:#FFF;
+	}
+	
+}
+
+
+
+

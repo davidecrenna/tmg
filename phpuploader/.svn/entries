@@ -1,0 +1,63 @@
+10
+
+dir
+0
+https://github.com:443/davidecrenna/tmgdev.git/phpuploader
+https://github.com:443/davidecrenna/tmgdev.git
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+
+
+
+
+
+
+
+
+
+
+
+12e35b5c-3ed1-be2f-8307-ce57b7db7bff
+
+license
+dir
+
+
+
+add
+
+ajaxuploaderhandler.php
+file
+
+
+
+add
+
+resources
+dir
+
+
+
+add
+
+include_phpuploader.php
+file
+
+
+
+add
+
+ajaxuploaderresource.php
+file
+
+
+
+add
+

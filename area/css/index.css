@@ -1,0 +1,91 @@
+/* CSS Document */
+body{
+	font-family:Arial, Helvetica, sans-serif;	
+}
+.area_main_container{
+	position:absolute;
+	top:50px;
+	width: 1100px;
+}
+.area_menu_item{
+	width: 150px;
+	text-align:center;
+	height:22px;
+	cursor:pointer;
+	vertical-align:middle;
+	padding-top:5px;
+}
+.area_menu_item:hover{
+	background-color:#CCC;	
+}
+.area_menu_container{
+	width: 150px;
+	float:left;
+}
+
+.area_content_container{
+	width: 900px;
+	float:right;
+}
+.area_loading{
+	position:absolute;
+	top:0px;
+	left:400px;
+	height:25px;
+	width:200px;
+	display:none;
+	font-size:15px;
+	font-weight:700;
+	color:#000;
+	text-align:center;
+  	background-color:#A8A8A8;
+	z-index:9000;
+}
+
+.Nome_utente_header{
+	width:200px;
+}
+.id_utente_header{
+	width:30px;	
+}
+.Data_utente_header{
+	width:70px;		
+}
+.Dettagli_utente_header{
+	width:35px;
+}
+.Elimina_utente_header{
+	width:50px;
+}
+.user_list_icon{
+	width:20px;	
+}
+.user_list_details{
+	cursor:pointer;
+	padding-left:10px;
+}
+.status_utente_header{
+	width:150px;
+}
+
+.user_details_main_photo{
+	position:absolute;
+	left:200px;
+	top:0px;
+	width:210px;
+	height:330px;
+}
+.user_details_information{
+	position:absolute;
+	left:420px;
+	top:0px;
+	width:550px;
+	height:330px;
+}
+.user_slide_photo_information{
+	position:absolute;
+	left:200px;
+	top:535px;
+	width:760px;
+	height:430px;
+}

@@ -1,0 +1,80 @@
+
+
+.cols p { padding: 3px; margin: 0 }
+.col { 
+text-align:left;
+position: absolute; 
+left: 40px; top: 30px;
+ width: 500px; 
+ 
+ }
+ 
+.col2 { 
+text-align:left;
+position: absolute; 
+left: 40px; top: 30px; 
+z-index: 6;
+ width: 350px }
+.col3 { 
+text-align:right;
+position: absolute; 
+left: 40px; top: 30px; 
+z-index: 6;
+ width: 170px }
+ 
+
+#card_down{
+	background-image:url(../../image/homepage/bg_inizia_down.png);
+	width: 997px;
+	height: 115px;
+	background-repeat:no-repeat;
+}
+/* CSS Document */
+.cols { 
+width: 997px; 
+height: 430px; 
+background-image:url(../../image/homepage/bg_inizia_up.png); 
+position: relative;  
+font-family:"Franklin Gothic Medium";
+font-size:14px;
+color:#FFF;
+}
+.cols p { padding: 3px; margin: 0 }
+.col { 
+text-align:left;
+position: absolute; 
+left: 40px; top: 30px;
+z-index: 6;
+ width: 907px;
+ }
+ 
+.col2 { 
+text-align:left;
+position: absolute; 
+left: 40px; top: 30px; 
+z-index: 6;
+ width: 350px }
+.col3 { 
+text-align:right;
+position: absolute; 
+left: 40px; top: 30px; 
+z-index: 6;
+ width: 170px }
+ 
+
+#card_down{
+	background-image:url(../../image/homepage/bg_inizia_down.png);
+	width: 997px;
+	height: 115px;
+	background-repeat:no-repeat;
+}
+.prev{
+	background-image:url(../../image/homepage/btn/btn_inizia_indietro.png);
+	width:192px; 
+	background-repeat:no-repeat;
+	border:0;
+	height:97px; 
+	float:left;
+	cursor:pointer;
+}
+

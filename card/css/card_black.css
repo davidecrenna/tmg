@@ -1,0 +1,84 @@
+/* CSS Document */
+.card_up{
+	background-color:#525252;
+	background-image: -o-linear-gradient(bottom, #000000 0%, #525252 78%);
+	background-image: -moz-linear-gradient(bottom, #000000 0%, #525252 78%);
+	background-image: -webkit-linear-gradient(bottom, #000000 0%, #525252 78%);
+	background-image: -ms-linear-gradient(bottom, #000000 0%, #525252 78%);
+	background-image: linear-gradient(to bottom, #000000 0%, #525252 78%);
+	
+}
+
+#card_down{
+	background-color:#525252;
+	background-image: -o-linear-gradient(top, #000000 0%, #525252 78%);
+	background-image: -moz-linear-gradient(top, #000000 0%, #525252 78%);
+	background-image: -webkit-linear-gradient(top, #000000 0%, #525252 78%);
+	background-image: -ms-linear-gradient(top, #000000 0%, #525252 78%);
+	background-image: linear-gradient(to top, #000000 0%, #525252 78%);
+}
+.jspDrag
+{
+	background-color:#525252;
+}
+.contatto{
+	background-color:#000;
+}
+
+.content_overlay_container{
+	background-color:rgba(0,0,0,0.25);
+}
+.content_overlay_container_filebox{
+	background-color:rgba(0,0,0,0.25);
+}
+.content_overlay_container_filebox_file{
+	background-color:rgba(0,0,0,0.25);
+}
+.file_box_private_files_content{
+	background-color:rgba(0,0,0,0.25);
+}
+.file_box_folder_file{
+	background-color:rgba(0,0,0,0.25);
+}
+.overlay_title_container{
+	background-color:rgba(0,0,0,0.8);
+}
+.curriculum_content{
+	background-color:#000;
+}
+
+.textarea_assistenza{
+	background-color:#000;
+}
+
+.file_container{
+	background-color:#000;
+}
+.container{
+	background-color:#000;
+}
+
+#slide_download{
+	background-color:rgba(0,0,0,0.8);
+}
+#foto_download{
+	background-color:rgba(0,0,0,0.8);
+}
+
+#preview{
+	background:#7B5858;	
+}
+
+.uploaderprogresspanel{
+	/*background-color:#7B5858;*/
+	background-color:transparent;
+}
+.overlay_button{
+	background-color:#000; 
+}
+.input_text_normal{
+	background-color:#000; 
+}
+.tooltip{
+	background:transparent url(../../image/card_black/add_friend.png);
+}

@@ -1,0 +1,26 @@
+/* CSS Document */
+body {
+	background-image: url(../../image/background/background.jpg) ;
+	background-repeat:no-repeat;
+	background-position:top;
+	font-size: 12px;
+}
+a{
+	color:#FFF;	
+	text-decoration:none;
+}
+a:hover{
+	color:#FFF;	
+	text-decoration:underline;
+	cursor:pointer;
+}
+img {
+ border:0;	
+}
+.col{
+	font-size:16px;
+	width:600px;	
+}
+#subuser{
+	padding-left:35px;	
+}

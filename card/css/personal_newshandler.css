@@ -1,0 +1,196 @@
+/* CSS Document */
+body{
+
+	font-size:12px;
+	font-weight:700;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+}
+
+.div_newshandler_content{
+	position:absolute;
+	width:885px;
+	height:300px;
+	text-align:left;
+	left:0px;	
+}
+.sorterbar{
+	background-color:#F1F1F1;
+	color:#000;
+	font-size:12px;
+	font-weight:500;
+	font-family:Arial, Helvetica, sans-serif;
+	text-align:left;
+}
+
+.data_news_header{
+	width:60px;
+}
+.titolo_news_header{
+	width:215px;
+}
+.descrizione_news_header{
+	width:400px;
+}
+.action_news_header{
+	width:16px;
+}
+.col-select{
+	width:15px;	
+}
+.news_checkbox{
+	width:15px;
+}
+.news_data{
+	width:150px;	
+}
+.news_titolo{
+	width:215px;
+}
+.news_descrizione{
+	width:400px;
+}
+.news_action{
+	width:15px;
+}
+
+.personal_tab_loading{
+	position:absolute;
+	top:38px;
+	left:370px;
+	height:20px;
+	width:200px;
+	display:none;
+	font-size:15px;
+	font-weight:700;
+	color:#000;
+	text-align:center;
+  	background-color:#A8A8A8;
+	z-index:9000;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.in_evidenza{
+	background-color:#333333;
+	border:1px solid #FFF;
+	height: 30px;
+	width: 622px;
+	color:#FFF;
+	font-size:14px;
+	margin-top:3px;
+	padding-left: 3px;
+}
+.textbox_evidenza{
+	background-color:#333333;
+	border:1px solid #FFF;
+	height: 70px;
+	width: 622px;
+	color:#FFF;
+	font-size:14px;
+	margin-top:3px;
+	padding-left: 3px;	
+}
+.personal_tab_loading_onpage{
+	position:absolute;
+	top:2px;
+	left:335px;
+	height:20px;
+	width:250px;
+	display:none;
+	font-size:15px;
+	font-weight:700;
+	color:#000;
+	text-align:center;
+  	background-color:#A8A8A8;
+	z-index:9000;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.calendario_div{
+	display:block;
+	position:absolute; 
+	top:0px; 
+	left:0px; 
+	width:830px; 
+	height:30px; 
+	text-align:left; 
+}
+#calroot{
+	display:none;	
+}
+.gruppi_div{
+	height:200px; 
+	width:200px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	position:absolute; 
+	left:240px; 
+	top:50px;
+}
+.gruppi_mod_div{
+	height:200px; 
+	width:200px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	position:absolute; 
+	left:240px; 
+	top:50px;
+}
+.gruppi_select_div{
+	height:200px; 
+	width:200px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	position:absolute; 
+	left:450px; 
+	top:50px;
+}
+.opt_invio_div{
+	height:50px; 
+	width:400px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	position:absolute; 
+	left:0px; 
+	left:450px; 
+	top:50px;
+}
+.gruppi_mod_select_div{
+	height:200px; 
+	width:200px; 
+	border:1px solid #FFF; 
+	overflow-y:auto; 
+	position:absolute; 
+	left:220px; 
+	top:90px;
+}
+.nomegruppo_mailing_header{
+	width:180px;
+}
+.mailing_group_row_arrow_header{
+	width:20px;	
+}
+.mailing_group_name{
+	width:180px;
+}
+.mailing_group_row{
+	heigth:20px;
+	cursor:pointer;
+}
+.mailing_group_row_arrow{
+	heigth:20px;
+	cursor:pointer;
+}
+.div_evidenza_file{
+	background-color:#333333;
+	border:1px solid #FFF;
+	height: 30px;
+	width: 619px;
+	color:#FFF;
+	font-size:14px;
+	margin-top:3px;	
+	border-top-width: 1px; 
+	padding: 3px 3px 3px;
+}
+.evidenza_file_name{
+	position:relative; 
+	top:-11px;
+}

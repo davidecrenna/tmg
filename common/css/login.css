@@ -1,0 +1,137 @@
+/* CSS Document */
+body {
+	background-image: url(../../image/background/background.jpg) ;
+	background-repeat:no-repeat;
+	background-position:top;
+	font-size: 12px;
+}
+a{
+	color:#FFF;	
+	text-decoration:none;
+}
+a:hover{
+	color:#FFF;	
+	text-decoration:underline;
+	cursor:pointer;
+}
+img {
+ border:0;	
+}
+.login_header{
+	text-align:left;
+	padding-left:35px; 
+	font-size:16px;		
+}
+.forminput_login{
+	background-color:#523030;
+	border:0px;
+	height: 30px;
+	width: 300px;
+	color:#FFF;
+	font-size:12px;
+}
+
+.login_loading{
+	position:absolute;
+	top:122px;
+	left:230px;
+	width:50px;
+	height:20px;
+	display:none;
+}
+.personal_login{
+	background-image:url(../../image/login/bg_personal_login_home.png);
+	background-repeat:no-repeat;
+	position:absolute;
+	top: 60px;
+	left: 220px;
+	
+	height:226px;
+	width:439px;
+	
+	color:#FFF;
+}
+.personal_recupero{
+	background-repeat:no-repeat;
+	position:absolute;
+	top: 60px;
+	left: 220px;
+	
+	height:226px;
+	width:439px;
+	
+	color:#FFF;
+}
+
+.login_input_email{
+	background-color:#623939;
+	position:absolute;
+	top:54px;
+	left:20px;
+	height:28px;
+	width:156px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+	vertical-align:middle;
+	border: 1px solid #FFF;
+	padding-left:10px;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:700;
+}
+.login_domain_container{
+	position:absolute; 
+	top:61px; 
+	left:190px;	
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:700;
+	color:#FFF;
+}
+.login_input_pass{
+	background-color:#623939;
+	position:absolute;
+	top:113px;
+	left:20px;
+	height:29px;
+	width:193px;
+	
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	 border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+	vertical-align:middle;
+	border: 1px solid #FFF;
+	padding-left:10px;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:700;
+}
+.in_recupero_email{
+	background-color:#D5C8C8;
+	position:absolute;
+	top:54px;
+	left:125px;
+	height:28px;
+	width:256px;
+	border:0px;
+}
+.personal_recupero{
+	background-image:url(../../image/card_brown/bg_personal_recupero.png);	
+}
+
+.img_button{
+	cursor:pointer;	
+}

@@ -1,0 +1,266 @@
+/* CSS Document */
+body {
+	background-color:#838383;
+	background-repeat:no-repeat;
+	background-position:top;
+	font-size: 12px;
+	overflow:hidden;
+}
+a{
+	color:#FFF;	
+	text-decoration:none;
+	cursor:pointer;
+}
+a:hover{
+	color:#FFF;	
+	text-decoration:underline;
+	cursor:pointer;
+}
+.cols { 
+	background-color:#838383;
+	background-repeat:repeat-y;
+	position: relative;  
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:medium;
+	font-size:14px;
+	color:#FFF;
+	height: 300px;
+	width:700px;
+}
+
+.col { 
+	text-align:left;
+	position: absolute; 
+	top: 0px;
+	left:0px;
+}
+.col2 { 
+	text-align:left;
+	position: absolute; 
+	left: 100px; top: 30px; 
+	width: 700px 
+}
+.col3 { 
+	text-align:right;
+	position: absolute; 
+	left: 40px; top: 30px; 
+	width: 170px 
+}
+.fileinput{
+	background-color:#523030;
+	border:0px;
+	height: 30px;
+	width: 400px;
+	color:#FFF;
+	font-size:16px;
+	border-color:#FFF;
+}
+.img_button{
+	cursor:pointer;	
+	vertical-align:middle;
+}
+
+#file{
+	display:none;
+	height:350px;
+	
+}
+#files_container{
+	overflow-y:auto;
+	height:250px;
+	width:800px;
+	border:1px solid #FFF;
+	background-color:#787878;
+}
+
+.file_actions_container{
+	position:absolute; 
+	top:288px; 
+	left:0px;
+	width:795px;
+	padding-left:5px;
+	background-color:#6B6B6B;
+	border: 1px solid #FFF; 
+}
+.filebox_upload{	
+	position:absolute; 
+	top:325px; 
+	left:600px; 
+}
+
+#main_upload_form{
+	margin:0px;	
+	
+}
+.forminput{
+	background-color:#523030;
+	border:0px;
+	height: 25px;
+	width: 375px;
+	color:#FFF;
+	font-size:16px;
+}
+.file_container{
+	display:block;
+	float:left;
+	width:782px; 
+	background-color:#6B6B6B;
+	z-index:6000;
+	vertical-align:middle;
+	height:32px;
+}
+.subfolder_container{
+	display:block;
+	float:left;
+	width:647px; 
+	background-color:#6B6B6B;
+	z-index:6000;
+	height:33px;
+}
+.container{
+	display:block;
+	float:left; 
+	margin:1px; 
+	width:413px;
+	background-color:#6B6B6B;
+	height: 32px;
+	margin-bottom:0px;
+	cursor:pointer;
+	vertical-align:middle;
+}
+
+.file_icon{
+	vertical-align:middle; 
+	margin-left:5px;
+	height:28px;
+}
+.folder_icon{
+	vertical-align:middle; 
+	margin-left:5px;
+	width:32px;
+	height:32px;
+}
+.mod_file{
+	display:block;
+	position:relative; 
+	top:1px; 
+	left:5px; 
+	cursor:pointer;
+	vertical-align:top;
+}
+.sub_folder_main_container{
+	width:380px;
+	height:30px;
+}
+
+.subfolder_container{
+	display:block;
+	float:left; 
+	margin-top:2px;
+	margin-bottom:2px;
+	padding:1px; 
+	width:587px;
+	background-color:#6B6B6B;
+	height: 32px;
+	cursor:pointer;
+}
+.subfolder_name{
+	display:block;
+	position:relative;
+	top:-35px;
+	left:40px;
+	vertical-align:middle;
+	float:left;
+	background-color:#6B6B6B;
+	width:330px;
+	height:17px;
+	margin-top:2px;
+	margin-bottom:2px;
+	padding:1px;
+	font-weight:700;
+}
+.subfolder_icon{
+	
+}
+.subfolder_info{
+	display:block;
+	position:relative;
+	top:-18px;
+	left:-292px;
+	vertical-align:middle;
+	float:left;
+	background-color:#6B6B6B;
+	width:250px;
+	height:15px;
+	margin-top:2px;
+	margin-bottom:2px;
+	padding:1px; 
+	font-size:12px;
+}
+.folderinput{
+	background-color:#6B6B6B;
+	border:1px solid #FFF;
+	height: 25px;
+	width: 200px;
+	color:#FFF;
+	font-size:16px;
+	margin:2px;
+}
+.passinput{
+	background-color:#6B6B6B;
+	border:1px solid #FFF;
+	height: 23px;
+	width: 150px;
+	color:#FFF;
+	font-size:16px;
+	margin:2px;
+}
+
+
+
+.apple_overlay_create_folder {
+	background-image:url(../../image/filebox/bg_overlay_crea_cartella.png);
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	display:none;
+	overflow:hidden;
+	width:450px;
+	height:200px;
+	font-size:16px;
+	text-align:center;
+	padding-top:50px;
+}
+.apple_overlay_create_folder .close {
+	background-image:url(../../image/icone/close.png);
+	position:absolute; 
+	right:5px; 
+	top:3px;
+	cursor:pointer;
+	height:35px;
+	width:35px;
+	z-index:9000;
+}
+
+.vertical_create_folder{
+	position:relative;
+	height:300px;
+	overflow:hidden;	
+	width:500px;
+	text-align:left;
+	z-index:9000;
+}
+
+
+.items {	
+	position:absolute;
+	width:500px;
+	height:200px;	
+	margin: 0px;
+}
+.item {
+	margin:10px 0;
+	padding-left:15px;
+	font-size:12px;
+	height:180px;
+}
+

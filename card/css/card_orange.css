@@ -1,0 +1,89 @@
+/* CSS Document */
+.card_up{
+	background-color:#FFA953;
+	background-image: -o-linear-gradient(bottom, #FF7F00 0%, #FFA953 78%);
+	background-image: -moz-linear-gradient(bottom, #FF7F00 0%, #FFA953 78%);
+	background-image: -webkit-linear-gradient(bottom, #FF7F00 0%, #FFA953 78%);
+	background-image: -ms-linear-gradient(bottom, #FF7F00 0%, #FFA953 78%);
+	background-image: linear-gradient(to bottom, #FF7F00 0%, #FFA953 78%);
+	
+}
+
+#card_down{
+	background-color:#FFA953;
+	background-image: -o-linear-gradient(top, #FF7F00 0%, #FFA953 78%);
+	background-image: -moz-linear-gradient(top, #FF7F00 0%, #FFA953 78%);
+	background-image: -webkit-linear-gradient(top, #FF7F00 0%, #FFA953 78%);
+	background-image: -ms-linear-gradient(top, #FF7F00 0%, #FFA953 78%);
+	background-image: linear-gradient(to top, #FF7F00 0%, #FFA953 78%);
+}
+.jspDrag
+{
+	background-color:#FFA953;
+}
+
+
+.contatto{
+	background-color:#FF7F00;
+}
+
+.content_overlay_container{
+	background-color:rgba(255, 127, 0, 0.25);
+}
+.content_overlay_container_filebox{
+	background-color:rgba(255, 127, 0, 0.25);
+}
+.content_overlay_container_filebox_file{
+	background-color:rgba(255, 127, 0, 0.25);
+}
+.file_box_private_files_content{
+	background-color:rgba(255, 127, 0, 0.25);
+}
+.file_box_folder_file{
+	background-color:rgba(255, 127, 0, 0.25);
+}
+.overlay_title_container{
+	background-color:rgba(255, 127, 0, 0.8);
+}
+
+.curriculum_content{
+	background-color:#FF7F00;
+}
+
+
+.textarea_assistenza{
+	background-color:#FF7F00;
+}
+.file_container{
+	background-color:#FF7F00;
+}
+.container{
+	background-color:#FF7F00;
+}
+
+
+#slide_download{
+	background-color:rgba(255, 127, 0, 0.8);
+}
+#foto_download{
+	background-color:rgba(255, 127, 0, 0.8);
+}
+
+#preview{
+	background:#7B5858;	
+}
+
+.uploaderprogresspanel{
+	/*background-color:#7B5858;*/
+	background-color:transparent;
+}
+.overlay_button{
+	background-color:#FF7F00; 
+}
+.input_text_normal{
+	background-color:#FF7F00; 
+}
+
+.tooltip{
+	background:transparent url(../../image/card_orange/add_friend.png);
+}

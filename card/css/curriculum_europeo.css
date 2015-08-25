@@ -1,0 +1,58 @@
+/* CSS Document */
+.cols { 
+	font-size:14px;
+}
+.textinput{
+	background-color:#523030;
+	border:0px;
+	height: 30px;
+	width: 200px;
+	color:#FFF;
+	font-size:16px;
+	border-color:#FFF;
+}
+.textinput_long{
+	background-color:#523030;
+	border:0px;
+	height: 30px;
+	width: 400px;
+	color:#FFF;
+	font-size:16px;
+	border-color:#FFF;
+}
+
+body {
+	background-image: url(../../image/background/background.jpg) ;
+	background-repeat:no-repeat;
+	background-position:top;
+	font-size: 12px;
+}
+
+.col { 
+	text-align:left;
+	position: absolute; 
+	top: 0px;
+	left: 40px; 
+}
+.col2 { 
+	text-align:left;
+	position: absolute; 
+	left: 100px; top: 30px; 
+	width: 700px 
+}
+.col3 { 
+	text-align:right;
+	position: absolute; 
+	left: 40px; top: 30px; 
+	width: 170px 
+}
+
+.img_button{
+	cursor:pointer;	
+	vertical-align:middle;
+}
+.step_label{
+	vertical-align:middle;
+}
+
+

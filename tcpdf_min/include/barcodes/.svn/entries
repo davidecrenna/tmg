@@ -1,0 +1,49 @@
+10
+
+dir
+0
+https://github.com:443/davidecrenna/tmgdev.git/tcpdf_min/include/barcodes
+https://github.com:443/davidecrenna/tmgdev.git
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+
+
+
+
+
+
+
+
+
+
+
+12e35b5c-3ed1-be2f-8307-ce57b7db7bff
+
+qrcode.php
+file
+
+
+
+add
+
+datamatrix.php
+file
+
+
+
+add
+
+pdf417.php
+file
+
+
+
+add
+

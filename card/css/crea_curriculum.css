@@ -1,0 +1,105 @@
+/* CSS Document */
+a{
+	color:#FFF;	
+	text-decoration:none;
+}
+a:hover{
+	color:#FFF;	
+	text-decoration:underline;
+	cursor:pointer;
+}
+.cols { 
+	font-size:14px;
+	min-height:304px;
+	position: relative;  
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:medium;
+	color:#FFF;
+}
+.cols{
+	height:360px;	
+}
+#step1{
+	height:410px;
+}
+#step4{
+	height:380px;
+}
+#step6{
+	height:250px;
+}
+.textinput{
+	background-color:#333333;
+	height: 30px;
+	width: 200px;
+	color:#FFF;
+	font-size:16px;
+	border-color:#FFF;
+	border: 1px solid;
+}
+.textinput_long{
+	background-color:#333333;
+	border:0px;
+	height: 30px;
+	width: 300px;
+	color:#FFF;
+	font-size:16px;
+	border-color:#FFF;
+	border: 1px solid;
+}
+.textarea{
+	background-color: #333333; 
+	border:1px solid #FFF;
+	color:#FFF;
+}
+
+body {
+	background-color:#838383;
+	background-repeat:no-repeat;
+	background-position:top;
+	font-size: 12px;
+	overflow:hidden;
+}
+
+.col { 
+	text-align:left;
+	position: absolute; 
+	top: 0px;
+	left:0px; 
+}
+.col2 { 
+	text-align:left;
+	position: absolute; 
+	left: 100px; top: 30px; 
+	width: 700px 
+}
+.col3 { 
+	text-align:right;
+	position: absolute; 
+	left: 40px; top: 30px; 
+	width: 170px 
+}
+
+.img_button{
+	cursor:pointer;	
+	vertical-align:middle;
+}
+.step_label{
+	vertical-align:middle;
+}
+.personal_tab_loading_onpage{
+	position:absolute;
+	top:2px;
+	left:335px;
+	height:20px;
+	width:250px;
+	display:none;
+	font-size:15px;
+	font-weight:700;
+	color:#000;
+	text-align:center;
+  	background-color:#A8A8A8;
+	z-index:9000;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
