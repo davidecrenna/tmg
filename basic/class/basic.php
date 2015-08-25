@@ -101,20 +101,24 @@ class Basic {
 				</div>
 			  </div>';
 	}
-	public function Show_Login($in_login=NULL,$password=NULL,$error_messsage=NULL,$login_attempt=NULL){
-		echo '<div class="personal_login">';
-			echo "<div class='ajax_login' id='ajax_login'></div>";
-				echo '<input type="text" name="user" id="personal_login_user" class="login_input_user" value="" onchange="Login_request_sfida()" />';
-				echo '<input class="login_input_pass" type="password" name="pwd" id="pwd" onkeydown="PressioneInvioLogin(event);" value="" />';
-				
-				echo "<div style='position:absolute; top: 180px; left:220px;'>";
-				echo "<div class='styledbutton grey' id='log_in_button' onclick='Javascript:Personal_form_submit()'>
-						<span class='text14px'>LOGIN</a>
-				  </div>";
-			echo "</div>";
-			echo "<input type='hidden' name='copia_sfida' id='copia_sfida'>";
-			echo '<input type="hidden" name="pwd_codified" id="pwd_codified" value="" />';
-		echo "</div>";
+	public function Show_Login($prepath="",$in_login=NULL,$password=NULL,$error_messsage=NULL,$login_attempt=NULL){
+		echo "<div class='login_container'>
+			<div class='login_content_container'>
+				LOGIN
+			</div>
+			<div class='login_label'>NOME UTENTE</div>";
+			echo '<input type="text" name="login_user" id="login_user" class="login_input" value="" onchange="Javascript:Login_request_sfida(\''.$prepath.'\')" />';
+			echo "<div class='login_label'>PASSWORD</div>";
+			echo '<input type="password" class="login_input" name="login_pwd" id="login_pwd" value="" />';
+			echo "
+			<div class='styledbutton grey login_button' onclick='Javascript:Login_submit(\"".$prepath."\")'>
+				<span class='text14px'>LOGIN</a>
+			</div>
+			 <div class='ajax_login'></div>
+			<div class='login_img'></div>
+		</div>";
+		echo "<input type='hidden' name='copia_sfida' id='copia_sfida'>";
+		echo '<input type="hidden" name="pwd_codified" id="pwd_codified" value="" />';
 	}
 	
 	/*

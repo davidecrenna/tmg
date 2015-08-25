@@ -150,7 +150,6 @@ function Ctrl_pass_match(){
 }
 
 function validatePwd() {
-
 	//Initialise variables
 	var errorMsg = "";
 	var space  = " ";

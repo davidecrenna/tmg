@@ -67,13 +67,16 @@ $(document).ready(function(){
 			
 			
 		}).click(function(){
-	  		Load_login("");
+	  		Load_login("../");
 	});
+});
+
 	function Load_login(prepath){
 		$.ajax({
 		  type: 'POST',
 		  url: prepath+"card/php/card_handler.php",
-		  data: { Load_login: "true"
+		  data: { Load_login: "true",
+		  prepath: prepath
 				 },
 		  dataType: "html",
 		  beforeSend:function(){
@@ -88,4 +91,67 @@ $(document).ready(function(){
 		  }
 		});
 	}
-});
+	 
+	function Login_request_sfida(prepath){
+		var user = $("#login_user").val();
+		$.ajax({
+		  type: 'POST',
+		  url: prepath+"card/php/card_handler.php",
+		  data: { __user: "true", 
+					user: user
+				 },
+		  dataType: "html",
+		  beforeSend:function(){
+			//$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
+		  },
+		  success:function(data){
+			  $('#copia_sfida').val(data.trim());
+		  },
+		  error:function(){
+			// failed request; give feedback to user
+			$('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+		  }
+		});
+	}
+	
+	function Login_submit(prepath){
+		
+		var sfida = $("#copia_sfida").val();
+   	 	var pwd = $("#login_pwd").val();
+		var pwd = MD5(sfida+MD5(pwd));
+		var login_user = $("#login_user").val();
+		
+		
+		$.ajax({
+		  type: 'POST',
+		  url: prepath+"card/php/card_handler.php",
+		  data: { __submit: "true", 
+					user: login_user,
+					pwd: pwd,
+					copia_sfida: sfida
+				 },
+		  dataType: "html",
+		  beforeSend:function(){
+			$('#ajax_login').html('<img src="'+prepath+'image/icone/ajax_small.gif" alt="Loading..." />');
+		  },
+		  success:function(data){
+			  var obj = jQuery.parseJSON(data);
+			  if(obj.result=="true"){
+				  var username=$("#in_username").val();
+				  /*if(obj.user == username){
+					  Load_personal_area();
+					  Aggiorna_menu_avatar();
+				  }else{*/
+				  location.href=prepath+obj.user+'/index.php?personal_area=true';
+				  /*}*/
+			  }else{
+				 $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
+				  
+			  }
+		  },
+		  error:function(){
+			// failed request; give feedback to user
+			$('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+		  }
+		});
+	}

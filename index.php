@@ -39,6 +39,7 @@
 		elem = document.getElementById("bodydiv");
 		 elem.style.visibility="visible"; 
 	 }*/
+	
  </script>
 
 <script src="common/js/all_jquery_and_tools.min.js "></script>

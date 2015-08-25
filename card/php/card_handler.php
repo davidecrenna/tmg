@@ -78,7 +78,7 @@
 		
 	}
 	if(isset($_POST["Load_login"])){
-		$basic->Show_login();
+		$basic->Show_login($_POST["prepath"]);
 	}
 	
 	if(isset($_POST["load_personal_area"])){
