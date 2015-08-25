@@ -261,16 +261,15 @@
 	
 	
 	.ajax_login{
-		position:relative;
+		color: #000;
+		font-size: 0.85em;
+		margin-top: 1em;
+		padding-left: 0.8em;
+		text-align: left;
 		width: 17em;
-		text-align:left;
-		height:1.3 em;
-		padding-left:0.3em;
-		color:#000;
-		font-size:0.85em;
 	}
 	.login_container{
-		height:200px;
+		height:240px;
 		width:60%;
 		min-width:280px;
 		max-width:360px;
@@ -355,9 +354,9 @@
 		background-image: url(../../image/icone/login_lock.png);
 		width:65px;
 		height:80px;
-		position:relative;
-		left:80%;
-		top:-10%;
+		left: 13%;
+		position: relative;
+		top: -50px;
 	}
 	/* END OVERLAY LOGIN */
 	
