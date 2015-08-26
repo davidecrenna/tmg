@@ -336,7 +336,7 @@ function PressioneInvioLogin(e) {
         tasto = e.which;
       }
       if (tasto == 13) {
-        Personal_form_submit()
+        Personal_form_submit("../");
    }
 }
 function PressioneInvioContact(e){
@@ -1188,11 +1188,11 @@ function Refresh_social_rows(fromadd){
 	});
 }
 
-function Login_request_sfida(){
+function Personal_login_request_sfida(prepath){
 	var personal_login_user = $("#personal_login_user").val();
 	$.ajax({
 	  type: 'POST',
-	  url: "../card/php/card_handler.php",
+	  url: prepath+"card/php/card_handler.php",
 	  data: { __user: "true", 
 				user: personal_login_user
 			 },
@@ -1210,10 +1210,51 @@ function Login_request_sfida(){
 	});
 }
 
-function Personal_form_submit(){
+function Personal_form_submit(prepath){
+    var sfida = $("#copia_sfida").val();
+    var pwd = $("#personal_login_pwd").val();
+    var pwd = hex_sha512(pwd);
+    var login_user = $("#personal_login_user").val();
+
+    $('#personal_login_pwd').val("");
+    $("#personal_login_user").val("");
+    $.ajax({
+        type: 'POST',
+        url: prepath+"card/php/card_handler.php",
+        data: { __submit: "true",
+            user: login_user,
+            pwd: pwd,
+            copia_sfida: sfida
+        },
+        dataType: "html",
+        beforeSend:function(){
+            $('#ajax_login').html('<img src="'+prepath+'image/icone/ajax_small.gif" alt="Loading..." />');
+        },
+        success:function(data){
+            var obj = jQuery.parseJSON(data);
+            if(obj.result=="true"){
+                var username=$("#in_username").val();
+                if(obj.user == username){
+                    Load_personal_area();
+                    Aggiorna_menu_avatar();
+
+                }else{
+                    location.href=prepath+obj.user+'/index.php?personal_area=true';
+                }
+            }else{
+                $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
+            }
+        },
+        error:function(){
+            // failed request; give feedback to user
+            $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+        }
+    });
+
+/*
 	var copia_sfida = $("#copia_sfida").val();
 	codifica_password();
-	var pwd = $("#pwd_codified").val();
+	var pwd = $("#personal_login_pwd").val();
 	var personal_login_user = $("#personal_login_user").val();
 	
 	
@@ -1249,7 +1290,7 @@ function Personal_form_submit(){
 		// failed request; give feedback to user
 		$('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
 	  }
-	});
+	});*/
 }
 function Logout(){
 	var ajaxRequest = create_ajaxRequest();

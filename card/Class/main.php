@@ -3512,6 +3512,7 @@ class Card {
 				<script src="../common/js/login.js" type="text/javascript"></script>
 				<script src="../common/js/ajax.inc.js" type="text/javascript"></script>
 				<script src="../common/js/md5.js" type="text/javascript"></script>
+				<script src="../common/js/sha512.js" type="text/javascript"></script>
 				<script src="../common/js/json2.js" type="text/javascript"></script>
 				<script src="../common/js/card_common.js" type="text/javascript" ></script>
 				
@@ -4823,20 +4824,26 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 	//LOGIN(IN PERSONAL AREA) FUNCTIONS START
 	//##################################################################################
 	public function Show_personal_login_on_card(){
-		echo '<div id="personal_login_container">';
-		echo '<div class="personal_login">';
-			echo "<div class='ajax_login' id='ajax_login'></div>";
+		echo '<div class="login_container">';
+            echo "<div class='login_content_container'>
+                LOGIN
+			</div>
+			<div class='login_label'>NOME UTENTE</div>";
 			
-			echo '<input type="text" name="user" id="personal_login_user" class="login_input_user" value="" onchange="Login_request_sfida()" />';
-			echo '<input class="login_input_pass" type="password" name="pwd" id="pwd" onkeydown="PressioneInvioLogin(event);" value="" />';
-			
-			echo "<div style='position:absolute; top: 180px; left:220px;'>";
-			echo "<div class='styledbutton grey' id='log_in_button' onclick='Javascript:Personal_form_submit()'>
-					<span class='text14px'>LOGIN</a>
-				  </div>";
-			echo "</div>";
+			echo '<input type="text" name="user" id="personal_login_user"  class="login_input" value="" onchange="Personal_login_request_sfida(\'../\')" />';
+            echo "<div class='login_label'>PASSWORD</div>";
+            echo '<input  class="login_input" type="password" name="personal_login_pwd" id="personal_login_pwd" onkeydown="PressioneInvioLogin(event);" value="" />';
+
+        echo "
+			<div class='styledbutton grey login_button' onclick='Personal_form_submit(\"../\")'>
+				<span class='text14px'>LOGIN</a>
+			</div>
+			 <div class='ajax_login' id='ajax_login'></div>
+
+		</div>
+		<div class='login_img'></div>";
+
 			echo "<input type='hidden' name='copia_sfida' id='copia_sfida'>";
-			echo '<input type="hidden" name="pwd_codified" id="pwd_codified" value="" />';
 			echo "</div>";
 		echo "</div>"; 
 	}
