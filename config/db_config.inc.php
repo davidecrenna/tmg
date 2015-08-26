@@ -2,6 +2,7 @@
 	define('USER_CONTACT_TABLE',"user_contact");
 	define('USER_SOCIAL_TABLE',"user_social");
 	define('USER_TABLE',"user");
+        define('USER_TABLE_ID',"kupEeZeSWfysaFvT");
 	define('USER_PRENOTA_TABLE',"user_prenota");
 	define('USER_ADMIN_TABLE',"user_admin");
 	define('USER_TEMP_TABLE',"user_temp");

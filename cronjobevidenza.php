@@ -26,7 +26,7 @@
 	$connessione = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD);
 	mysql_select_db(DB_DATABASE, $connessione);
 	
-	$query = "SELECT ID,Username FROM ".USER_TABLE;
+	$query = "SELECT ".USER_TABLE_ID.",Username FROM ".USER_TABLE;
 	$result = mysql_query($query, $connessione);
 	
 	for($i=0;$row = mysql_fetch_array($result, MYSQLI_ASSOC);$i++){

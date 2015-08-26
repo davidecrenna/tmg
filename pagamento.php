@@ -138,7 +138,7 @@
 			$error_message= ERR_DB_CONNECTION;
 		}
 		
-		$query = "SELECT ID FROM ".USER_TABLE." WHERE Username = '$username_referente'";
+		$query = "SELECT ".USER_TABLE_ID." FROM ".USER_TABLE." WHERE Username = '$username_referente'";
 		$result = $mysqli->query($query);
 	
 		/* associative array */

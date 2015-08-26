@@ -1195,7 +1195,7 @@ class MySqlDatabase implements Database{
 	}
 	
 	public function Update_profilo($user_id, $new_profilo_professione, $new_profilo_cellulare,$new_profilo_email,&$professione,&$cellulare,$new_bv_professione,$new_bv_cellulare,$new_bv_email,&$bv_cellulare,&$bv_professione){
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Professione=? WHERE ID=?");
+		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Professione=? WHERE ".USER_TABLE_ID."=?");
 		
 		$stmt->bind_param("si", $new_profilo_professione, $user_id);
 		
@@ -1441,7 +1441,7 @@ class MySqlDatabase implements Database{
 	
 	public function Isusername($user){
 		
-		$query = "SELECT ID FROM ".USER_TABLE." WHERE Username= ?";
+		$query = "SELECT ".USER_TABLE_ID." FROM ".USER_TABLE." WHERE Username= ?";
 		
 		
 		if(!$stmt = $this->sec_mysqli->prepare($query))
@@ -1582,7 +1582,7 @@ class MySqlDatabase implements Database{
 	public function Update_impostazioni_password( $user_id,$new_pass = NULL){
 		
 		if($new_pass!=NULL){
-			$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Password=? WHERE ID=?");
+			$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Password=? WHERE ".USER_TABLE_ID."=?");
 			
 			$stmt->bind_param("si",md5($new_pass), $user_id);
 			
@@ -1683,7 +1683,7 @@ class MySqlDatabase implements Database{
 	
 	public function Get_user_referente(&$user_referente,&$email_referente,&$nome_referente,&$cognome_referente,$id_referente){
 		
-		$query = "SELECT * FROM ".USER_TABLE." WHERE ID= ?";
+		$query = "SELECT * FROM ".USER_TABLE." WHERE ".USER_TABLE_ID."= ?";
 		if($stmt = $this->sec_mysqli->prepare($query)){
 			  $stmt->bind_param('i',$id_referente);
 			  $row = $this->Execute_and_fetch_data_assoc($stmt);
@@ -1827,7 +1827,7 @@ class MySqlDatabase implements Database{
 	}
 	public function Change_password($password,$user_id){
 		
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Password=? WHERE ID=?");
+		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Password=? WHERE ".USER_TABLE_ID."=?");
 		
 		$stmt->bind_param("si",md5($password), $user_id);
 		$stmt->execute();
@@ -1840,7 +1840,7 @@ class MySqlDatabase implements Database{
 			return;	
 		}
 		
-		$query="DELETE FROM ".USER_TABLE." WHERE ID=?";
+		$query="DELETE FROM ".USER_TABLE." WHERE ".USER_TABLE_ID."=?";
 		$stmt = $this->mysqli->prepare($query);
 		$stmt->bind_param("i",$user_id);
 		$stmt->execute();
@@ -1990,7 +1990,7 @@ class MySqlDatabase implements Database{
 		return $this->sec_mysqli->prepare($query);
 	}
     public function Get_stmt_logged(){
-        $query = "SELECT Password FROM ".USER_TABLE." WHERE ID = ? LIMIT 1";
+        $query = "SELECT Password FROM ".USER_TABLE." WHERE ".USER_TABLE_ID." = ? LIMIT 1";
         return $this->sec_mysqli->prepare($query);
     }
 	public function Check_brute($user_id){
@@ -2022,7 +2022,7 @@ class MySqlDatabase implements Database{
 	}
 	public function verifica_login($user,$password_utente,$sfida){
 		
-		$query = "SELECT ID,Cognome,Username FROM ".USER_TABLE." WHERE Username=? AND sfida_corrente=? AND MD5(CONCAT(?,Password))=?";
+		$query = "SELECT ".USER_TABLE_ID.",Cognome,Username FROM ".USER_TABLE." WHERE Username=? AND sfida_corrente=? AND MD5(CONCAT(?,Password))=?";
 		if($stmt = $this->sec_mysqli->prepare($query)){
 			   $stmt->bind_param('ssss',$user,$sfida,$sfida,$password_utente);
 			    $row = $this->Execute_and_fetch_data_assoc($stmt);
@@ -2073,7 +2073,7 @@ class MySqlDatabase implements Database{
 
 	public function Get_user_id($email){
 		
-		$query = "SELECT ID FROM ".USER_TABLE." WHERE Email= ?";
+		$query = "SELECT ".USER_TABLE_ID." FROM ".USER_TABLE." WHERE Email= ?";
 
 		if(!$stmt = $this->sec_mysqli->prepare($query))
 		{
@@ -2169,7 +2169,7 @@ class MySqlDatabase implements Database{
   function Update_professione($professione,$category,$nameshowed,$user_id){
 	  
 		
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Professione=?,Category=? WHERE ID=?");
+		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Professione=?,Category=? WHERE ".USER_TABLE_ID."=?");
 		
 		
 		$stmt->bind_param("sii", $professione,$category, $user_id);
@@ -2283,7 +2283,7 @@ class MySqlDatabase implements Database{
 	
 	public function Set_account_deleted_now($user_id){
 		
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET `status`=? , `remove_date`=? WHERE `ID`=?");
+		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET `status`=? , `remove_date`=? WHERE `".USER_TABLE_ID."`=?");
 		$status = 1;
 		$today = date("Y/m/d");
 		
@@ -2302,7 +2302,7 @@ class MySqlDatabase implements Database{
 	
 	public function Set_account_deleted($user_id,$data_iscrizione){
 		
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET `status`=? , `remove_date`=? WHERE `ID`=?");
+		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET `status`=? , `remove_date`=? WHERE `".USER_TABLE_ID."`=?");
 		$status = 1;
 		$data_iscrizione = date("Y/m/d",strtotime($data_iscrizione));
 		$date_added = strtotime('+1 year',strtotime($data_iscrizione));
@@ -2320,7 +2320,7 @@ class MySqlDatabase implements Database{
 	
 	public function Unset_account_deleted($user_id){
 		
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET `status`=? , `remove_date`=? WHERE `ID`=?");
+		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET `status`=? , `remove_date`=? WHERE `".USER_TABLE_ID."`=?");
 		$status = 0;
 		$datetime = NULL;
 		
