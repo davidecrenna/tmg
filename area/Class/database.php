@@ -150,7 +150,7 @@ class AreaMySqlDatabase implements AreaDatabase{
 		if (mysqli_connect_errno()) {
 			$this->UpdateLog ( ERR_DB_CONNECTION. "on Update_curriculum()",DB_ERROR_LOG_FILE);
 		}
-		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status='2' WHERE ".USER_TABLE_ID."=?");
+		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status='2' WHERE ID=?");
 		/* bind parameters for markers */
 		$stmt->bind_param("i",$user_id);
 		
@@ -170,7 +170,7 @@ class AreaMySqlDatabase implements AreaDatabase{
 		if (mysqli_connect_errno()) {
 			$this->UpdateLog ( ERR_DB_CONNECTION. "on Update_curriculum()",DB_ERROR_LOG_FILE);
 		}
-		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status='0' WHERE ".USER_TABLE_ID."=?");
+		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status='0' WHERE ID=?");
 		/* bind parameters for markers */
 		$stmt->bind_param("i",$user_id);
 		
@@ -189,7 +189,7 @@ class AreaMySqlDatabase implements AreaDatabase{
 		if (mysqli_connect_errno()) {
 			$this->UpdateLog ( ERR_DB_CONNECTION. "on Update_curriculum()",DB_ERROR_LOG_FILE);
 		}
-		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status=?,remove_date=NULL WHERE ".USER_TABLE_ID."=?");
+		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status=?,remove_date=NULL WHERE ID=?");
 		/* bind parameters for markers */
 		$stmt->bind_param("ii",$status,$user_id);
 		
@@ -215,7 +215,7 @@ class AreaMySqlDatabase implements AreaDatabase{
 					
 		$datetime = $date_added.' '.date('H:i:s') ;
 		$status=4;
-		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status=?,remove_date=? WHERE ".USER_TABLE_ID."=?");
+		$stmt = $mysqli->prepare("UPDATE ".USER_TABLE." SET status=?,remove_date=? WHERE ID=?");
 		/* bind parameters for markers */
 		$stmt->bind_param("isi",$status,$datetime,$user_id);
 		
@@ -336,7 +336,7 @@ class AreaMySqlDatabase implements AreaDatabase{
 		if (mysqli_connect_errno()) {
 			$error_message= ERR_DB_CONNECTION;
 		}
-		$query = "SELECT ".USER_TABLE_ID." FROM ".USER_TABLE." WHERE Username = '$username_referente'";
+		$query = "SELECT ID FROM ".USER_TABLE." WHERE Username = '$username_referente'";
 		$result = $mysqli->query($query);
 	
 		/* associative array */
