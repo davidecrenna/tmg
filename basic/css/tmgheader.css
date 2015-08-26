@@ -273,6 +273,8 @@
 		width:60%;
 		min-width:280px;
 		max-width:360px;
+
+		margin: 15% auto;
 		
 		border: 1px solid rgba(0,0,0,0.10);
 		border-radius: 5px;
@@ -296,7 +298,6 @@
 		font-family:Arial, Helvetica, sans-serif;
 		
 		font-weight:700;
-		margin-top: 15%;
 	}
 	.login_content_container{
 		height:20px;
@@ -354,9 +355,8 @@
 		background-image: url(../../image/icone/login_lock.png);
 		width:65px;
 		height:80px;
-		left: 13%;
+		left: 80%;
 		position: relative;
-		top: -50px;
 	}
 	/* END OVERLAY LOGIN */
 	

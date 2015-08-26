@@ -115,9 +115,9 @@ class Basic {
 				<span class='text14px'>LOGIN</a>
 			</div>
 			 <div class='ajax_login' id='ajax_login'></div>
-			
+			<div class='login_img'></div>
 		</div>
-		<div class='login_img'></div>";
+		";
 		echo "<input type='hidden' name='copia_sfida' id='copia_sfida'>";
 		echo '<input type="hidden" name="pwd_codified" id="pwd_codified" value="" />';
 	}

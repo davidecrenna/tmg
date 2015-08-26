@@ -3801,9 +3801,10 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 			foreach($this->social_rows as $social_row){
 				echo '	<tr class="riga_social_elements" style="cursor:pointer;" onclick="Javascript:window.open(\''.$social_row["value"].'\')">
 					   <td class="card_social_favicon_coloumn" style="padding-left:7px; text-align:center;" border="1" frame="lhs" rules="none">';
-							
+                                if(!DEVELOPMENT)
 									echo "<img src='".$social_row["favicon"]."' width='25' height='25' />";
-					   
+                                else
+                                    echo "<img src='' width='25' height='25' />";
 					   echo '</td>';
 					   
 					   echo '<td class="card_social_title_coloumn" style="padding-left:10px;">';
@@ -3950,7 +3951,25 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	DESCRIPTION: show personal area overlay code.
 	*/
 	public function Show_overlay_personal_area(){
-		echo '<div class="apple_overlay_personal" id="personal_area" style="left:50px;">
+        echo '
+		   <div class="apple_overlay_personal" id="personal_area">
+				<div class="overlay_vertical">
+					<div class="clear"></div>
+                         <div style="display:none">';
+									$this->fix_upload();
+								echo '</div>
+							  <div class="item_personal" id="personal_area_login">';
+									if($this->is_user_logged())
+										 //$this->Show_personal_logged();
+										 echo "<img style='position:absolute; top:240px; left:470px;' src='../image/icone/ajax-loader.gif' alt='loading'/>";
+									else{
+										 $this->Show_Personal_Login_on_card();
+									 }
+							 echo ' </div>
+				</div>
+		  </div>';
+
+        /*echo '<div class="apple_overlay_personal" id="personal_area" style="left:50px;">
 					<div id="actions">
 						
 					</div>
@@ -3971,7 +3990,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 						  </div>
 					 </div>
 				  </div>
-			  </div>';
+			  </div>';*/
 	}
 	
 	
@@ -4839,9 +4858,9 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 				<span class='text14px'>LOGIN</a>
 			</div>
 			 <div class='ajax_login' id='ajax_login'></div>
+		<div class='login_img'></div>
 
-		</div>
-		<div class='login_img'></div>";
+		</div>";
 
 			echo "<input type='hidden' name='copia_sfida' id='copia_sfida'>";
 			echo "</div>";
