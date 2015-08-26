@@ -28,4 +28,5 @@
 	define('SUB_USER_TABLE',"sub_user");
 	define('FATTURE',"fatture");
 	define('SESSION',"sessions");
+	define('LOGIN_ATTEMPTS',"login_attempts");
 ?>

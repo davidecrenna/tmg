@@ -4956,9 +4956,14 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 		DESCRIPTION: unset user login session var .
 	*/
 	public function Logout(){
-		unset($_SESSION['ID']);
-		unset($_SESSION['Cognome']);
-		setcookie("resta_collegato", "", time()-60000,"/");
+        // Elimina tutti i valori della sessione.
+        $_SESSION = array();
+        // Recupera i parametri di sessione.
+        $params = session_get_cookie_params();
+        // Cancella i cookie attuali.
+        setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+        // Cancella la sessione.
+        session_destroy();
 	}
 	
 	/*  METHOD: Login()
@@ -4979,15 +4984,52 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 		DESCRIPTION: return true if user is logged, if not return false .
 	*/
 	public function is_user_logged(){
-		if(isset($_SESSION['ID'])&&isset($_SESSION['Cognome'])&&isset($_SESSION['Username'])){
-			if(($_SESSION['ID']==$this->user_id)&&($_SESSION['Cognome']==$this->Cognome)&&($_SESSION['Username']==$this->username)){
-				return true;
-			}else{
+		// Verifica che tutte le variabili di sessione siano impostate correttamente
+		if(isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
+            $user_id = $_SESSION['user_id'];
+			$login_string = $_SESSION['login_string'];
+			$username = $_SESSION['username'];
+			$user_browser = $_SERVER['HTTP_USER_AGENT']; // reperisce la stringa 'user-agent' dell'utente.
+			if ($stmt = $this->mysql_database->Get_stmt_logged()) {
+				$stmt->bind_param('i', $user_id); // esegue il bind del parametro '$user_id'.
+				$stmt->execute(); // Esegue la query creata.
+				$stmt->store_result();
+
+				if($stmt->num_rows == 1) { // se l'utente esiste
+					$stmt->bind_result($db_password); // recupera le variabili dal risultato ottenuto.
+					$stmt->fetch();
+					$login_check = hash('sha512', $db_password.$user_browser);
+					if($login_check == $login_string) {
+						// Login eseguito!!!!
+						return true;
+					} else {
+						//  Login non eseguito
+						return false;
+					}
+				} else {
+					// Login non eseguito
+					return false;
+				}
+			} else {
+				// Login non eseguito
 				return false;
 			}
-		}else{
+		} else {
+			// Login non eseguito
 			return false;
 		}
+
+
+
+//	if(isset($_SESSION['ID'])&&isset($_SESSION['Cognome'])&&isset($_SESSION['Username'])){
+//			if(($_SESSION['ID']==$this->user_id)&&($_SESSION['Cognome']==$this->Cognome)&&($_SESSION['Username']==$this->username)){
+//				return true;
+//			}else{
+//				return false;
+//			}
+//		}else{
+//			return false;
+//		}
 	}
 	
 	

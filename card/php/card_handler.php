@@ -26,15 +26,8 @@
         {
 			$login = new classe_login();
 			
-			if ($dati = $login->verifica_login($_POST['user'],$_POST['pwd'],$_POST['copia_sfida']))
+			if ($login->verifica_login($_POST['user'],$_POST['pwd'],$_POST['copia_sfida']))
 			{
-				//echo "entro qui id: ".$dati['ID']." username: ".$dati['Username']." Cognome: ".$dati['Cognome'];
-				// Utente valido: inserisco i dati contenuti nel db nella sessione.
-				session_unset();
-				session_regenerate_id();
-				$_SESSION['ID'] = $dati['ID'];
-				$_SESSION['Username'] = $dati['Username'];
-            	$_SESSION['Cognome'] = $dati['Cognome'];
 				$json_string = json_encode(array("result"=>"true","user"=>$_POST['user'])); 
 				echo $json_string;
 			}

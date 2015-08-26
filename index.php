@@ -1,4 +1,4 @@
-<? 
+<?php
    require_once "headerbasic.php";
    include("header.php");
    $login = new Login();
@@ -42,15 +42,16 @@
 	
  </script>
 
-<script src="common/js/all_jquery_and_tools.min.js "></script>
-<script src="common/js/ajax.inc.js"></script>
-<script src="common/js/json2.js"></script>
-<script src="index/js/index.js"></script>
+<script type="text/javascript" src="common/js/all_jquery_and_tools.min.js "></script>
+<script type="text/javascript" src="common/js/ajax.inc.js"></script>
+<script type="text/javascript" src="common/js/json2.js"></script>
+<script type="text/javascript" src="index/js/index.js"></script>
 <script type="text/javascript" src="index/js/formvalidator.js"></script> 
 <script type="text/javascript" src="index/js/inizia.js"></script>
 <script type="text/javascript" src="index/js/slide-show.js"></script>
-<script src="common/js/md5.js" type="text/javascript"></script>
-<script src="common/js/login.js" type="text/javascript"></script>
+<script type="text/javascript" src="common/js/md5.js"></script>
+<script type="text/javascript" src="common/js/login.js"></script>
+<script type="text/javascript" src="common/js/sha512.js"></script>
 <script type="text/javascript" src="basic/js/tmgheader.js"></script>
 <?php
 if(DEVELOPMENT)

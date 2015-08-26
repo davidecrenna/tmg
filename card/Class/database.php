@@ -133,6 +133,14 @@ interface Database
 	function elimina_sfida($user);
 	
 	function verifica_login($user,$password_utente,$sfida);
+
+	function Get_stmt_login();
+
+    function Get_stmt_logged();
+
+	function Check_brute($user_id);
+
+	function Insert_login_attempt($user_id,$now);
 	
 	function Set_cookie_resta_collegato($hash,$email);
 	
@@ -1968,7 +1976,7 @@ class MySqlDatabase implements Database{
 	}
 	public function elimina_sfida($user){
 		$this->sec_mysqli = new mysqli($this->db_host, $this->sec_db_user , $this->sec_db_password, $this->db_database);
-		  $this->sec_mysqli->set_charset('utf8');
+        $this->sec_mysqli->set_charset('utf8');
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET sfida_corrente=NULL WHERE Username=?");
 		
 		$stmt->bind_param("s",$user);
@@ -1976,10 +1984,42 @@ class MySqlDatabase implements Database{
 		$stmt->execute();
 		
 		$stmt->close();
-		
-		
 	}
-	
+	public function Get_stmt_login(){
+		$query = "SELECT ID, Username, Password, Salt FROM ".USER_TABLE." WHERE Username = ? AND sfida_corrente=? LIMIT 1";
+		return $this->sec_mysqli->prepare($query);
+	}
+    public function Get_stmt_logged(){
+        $query = "SELECT Password FROM ".USER_TABLE." WHERE ID = ? LIMIT 1";
+        return $this->sec_mysqli->prepare($query);
+    }
+	public function Check_brute($user_id){
+		// Recupero il timestamp
+		$now = time();
+		// Vengono analizzati tutti i tentativi di login a partire dalle ultime due ore.
+		$valid_attempts = $now - (2 * 60 * 60);
+		if ($stmt = $this->sec_mysqli->prepare("SELECT time FROM ".LOGIN_ATTEMPTS." WHERE user_id = ? AND time > '$valid_attempts'")) {
+			$stmt->bind_param('i', $user_id);
+			// Eseguo la query creata.
+			$stmt->execute();
+			$stmt->store_result();
+			// Verifico l'esistenza di più di 5 tentativi di login falliti.
+			if($stmt->num_rows > 5) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	public function Insert_login_attempt($user_id,$now){
+		$stmt = $this->sec_mysqli->prepare("INSERT INTO ".LOGIN_ATTEMPTS." (user_id, time) VALUES (?, ?)");
+
+		$stmt->bind_param("ss", $user_id, $now);
+
+		$stmt->execute();
+
+		$stmt->close();
+	}
 	public function verifica_login($user,$password_utente,$sfida){
 		
 		$query = "SELECT ID,Cognome,Username FROM ".USER_TABLE." WHERE Username=? AND sfida_corrente=? AND MD5(CONCAT(?,Password))=?";
@@ -1994,8 +2034,6 @@ class MySqlDatabase implements Database{
 		}else{
 			return array("ID" => $row["ID"],"Cognome" => $cognome = $row["Cognome"],"Username" => $row["Username"]);
 		}
-			
-		
 	}
 	public function Set_cookie_resta_collegato($hash,$user){
 		

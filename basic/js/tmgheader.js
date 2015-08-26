@@ -118,10 +118,11 @@ $(document).ready(function(){
 		
 		var sfida = $("#copia_sfida").val();
    	 	var pwd = $("#login_pwd").val();
-		var pwd = MD5(sfida+MD5(pwd));
+		var pwd = hex_sha512(pwd);
 		var login_user = $("#login_user").val();
-		
-		
+
+		$('#login_pwd').val("");
+		$("#login_user").val("");
 		$.ajax({
 		  type: 'POST',
 		  url: prepath+"card/php/card_handler.php",
