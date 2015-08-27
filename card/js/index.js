@@ -1235,7 +1235,7 @@ function Personal_form_submit(prepath){
             if(obj.result=="true"){
                 var username=$("#in_username").val();
                 if(obj.user == username){
-                    Load_personal_area();
+                    Load_personal_area("interfaccia");
                     Aggiorna_menu_avatar();
 
                 }else{

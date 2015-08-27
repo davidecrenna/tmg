@@ -1,5 +1,5 @@
 var personaloverlay;
-var personal_tab_open;
+var personal_tab_open="interfaccia";
 $(".overlay").css("left",0);
 $(".overlay").css("top",0);
 $(".overlay").css("height","100%");
