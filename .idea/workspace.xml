@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c09372f1-75ba-4d00-9bd1-4185f0fc2ec3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/card/js/index.js" afterPath="$PROJECT_DIR$/card/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/card/js/triggers_scrollable.js" afterPath="$PROJECT_DIR$/card/js/triggers_scrollable.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tmg.iws" />
@@ -1345,7 +1343,13 @@
       <option name="project" value="LOCAL" />
       <updated>1440687467386</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="FIXED OPEN PERSONAL AREA FROM URL">
+      <created>1440688411881</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1440688411883</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1397,6 +1401,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="SWITCHED PHPSTORM 9.0.2" />
     <MESSAGE value="FIXED OPEN PERSONAL AREA FROM URL" />
     <option name="LAST_COMMIT_MESSAGE" value="FIXED OPEN PERSONAL AREA FROM URL" />
