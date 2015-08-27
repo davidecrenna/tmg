@@ -1239,7 +1239,7 @@ function Personal_form_submit(prepath){
                     Aggiorna_menu_avatar();
 
                 }else{
-                    location.href=prepath+obj.user+'/index.php?personal_area=true';
+                    location.href=prepath+obj.user+'/index.php/personal_area';
                 }
             }else{
                 $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
@@ -1332,7 +1332,7 @@ function Aggiorna_menu_avatar(){
 		}
 	 });
 }
-function Load_personal_area(){
+function Load_personal_area(tab){
 	var username = $("#in_username").val();
 	$.ajax({
 	  type: 'POST',
@@ -1364,6 +1364,9 @@ function Load_personal_area(){
 						  GeneratePersonalMenu();
 						  Refresh_notifica_message();
 						  Set_progress_size_bar();
+                          if(tab!="interfaccia"){
+                              personal_tab_change(tab);
+                          }
 					  }
 				  },
 				  error:function(){

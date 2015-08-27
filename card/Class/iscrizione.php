@@ -229,7 +229,7 @@ class Iscrizione
 		if($this->id_referente!=0&&$this->is_giovane!=1){
 			$mail2 = new PHPMailer(true);
 			$data_ora = date("m.d.y, g:i a");
-			$this->pagina_referente = PATH_SITO.$this->user_referente."?personal_area=true";
+			$this->pagina_referente = PATH_SITO.$this->user_referente."/personal_area";
 			try { 
 			  $mail2->AddAddress($this->emailtmg_referente,$this->user_referente);
 			  $mail2->SetFrom("no-reply@topmanagergroup.com","TopManagerGroup.com");
@@ -286,7 +286,7 @@ class Iscrizione
 		}else if($this->id_referente!=0&&$this->is_giovane==1){
 			$mail2 = new PHPMailer(true);
 			$data_ora = date("m.d.y, g:i a");
-			$this->pagina_referente = PATH_SITO.$this->user_referente."?personal_area=true";
+			$this->pagina_referente = PATH_SITO.$this->user_referente."/personal_area";
 			try { 
 			  $mail2->AddAddress($this->emailtmg_referente,$this->user_referente);
 			  $mail2->SetFrom("no-reply@topmanagergroup.com","TopManagerGroup.com");

@@ -25,6 +25,12 @@
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^([A-Za-z0-9]+)/personal_area$ users.php?u=$1&personal_area=true  [NC,L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([A-Za-z0-9]+)/([A-Za-z0-9]+)$ users.php?u=$1&personal_area=true&tab=$2  [NC,L]
+
+
 	
 	
 	

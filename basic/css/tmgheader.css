@@ -1,14 +1,13 @@
 /* CSS Document */
 /* == Media queries (breakpoint) ===== */
  	.tmgheader {
-		
+		display:block;
 		/*position: fixed;*/
 		background-color:#FFF;
 		width: 100%;
 		min-width: 320px;
 		z-index: 1;
 		text-align: center;
-		display: block;
 		padding-top:0.5em;
 		margin-bottom:1em;
 		z-index:9999;
@@ -323,8 +322,8 @@
 		background-color:rgba(0,0,0,0.65);
 		
 		height:29px;
-		width:75%;
-		
+		width: 80%;
+
 		border-bottom-left-radius:5px;
 		border-bottom-right-radius:5px;
 		border-top-left-radius:5px;

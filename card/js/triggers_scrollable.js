@@ -1,3 +1,5 @@
+var personaloverlay;
+var personal_tab_open;
 $(".overlay").css("left",0);
 $(".overlay").css("top",0);
 $(".overlay").css("height","100%");
@@ -189,7 +191,7 @@ $(document).ready(function(){
 		personaloverlay.overlay().close();
 	}*/
 	
-	var personaloverlay = $("#triggers_personal a[rel]").overlay({top: top,
+	personaloverlay = $("#triggers_personal a[rel]").overlay({top: top,
 			left: 0,
 			speed: 500,
 			fixed: false,
@@ -224,11 +226,8 @@ $(document).ready(function(){
 				$(".apple_overlay_personal").width( document.body.clientWidth+15);
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			}
-			
-		}).click(function(){
-	  //Whatever you want to happen when the row is clicked goes here, for example:
-	  Load_personal_area(); //Fires the previously defined onclick event for #overlay.
-	});
+            Load_personal_area(personal_tab_open);
+		});
 });
 
 function Inizialize_cols_height(){
@@ -239,3 +238,25 @@ function Inizialize_cols_height(){
 			$('.cols').height(334);
 		}
 	}
+function Open_overlay_personal(tab){
+    personal_tab_open = tab;
+    personaloverlay.overlay().load();
+
+	if(document.documentElement.clientWidth >=1200){
+		$(".apple_overlay_personal").width(995);
+		$(".apple_overlay_personal").height(553);
+
+		$(".apple_overlay_personal").css("left",(document.body.clientWidth-995)/2);
+		if( ((document.body.clientHeight-553) /2)<50){
+			$(".apple_overlay_personal").css("top",50);
+		}else{
+			$(".apple_overlay_personal").css("top",(document.body.clientHeight-553)/2);
+		}
+	}else{
+		$(".apple_overlay_personal").css("left",0);
+		$(".apple_overlay_personal").css("top",0);
+		$(".apple_overlay_personal").height( document.body.clientHeight);
+		$(".apple_overlay_personal").width( document.body.clientWidth+15);
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+}

@@ -139,7 +139,7 @@ $(document).ready(function(){
 			  var obj = jQuery.parseJSON(data);
 			  if(obj.result=="true"){
 				  var username=$("#in_username").val();
-				  location.href=prepath+obj.user+'/index.php?personal_area=true';
+				  location.href=prepath+obj.user+'/index.php/personal_area';
 			  }else{
 				 $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
 			  }

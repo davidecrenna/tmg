@@ -96,7 +96,7 @@ function Save_main_photo(){
 	ajaxRequest.onreadystatechange = function(){
 		if(ajaxRequest.readyState == 4){
 			location.href = "photo.php?u="+username;
-			window.parent.location.href = "../../"+username+"/index.php?personal_area=true&tab=interfaccia";
+			window.parent.location.href = "../../"+username+"/index.php/personal_area/interfaccia";
 		}
 	}
 	var username=document.getElementById("in_username").value;
@@ -168,6 +168,5 @@ function change_foto_slide(index){
 }
 function return_to_the_card(){
 	var username=document.getElementById("in_username").value;
-	location.href='../../'+username+'/index.php?personal_area=true';
-	//window.open('../../'+username+'/index.php?personal_area=true');
+	location.href='../../'+username+'/index.php/personal_area';
 }

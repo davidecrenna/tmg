@@ -7,7 +7,7 @@ function Hide_Setting_Saved(div){
 }
 function torna_alla_card(){
 	var username=document.getElementById("in_username").value;
-	location.href = "../../"+username+"/index.php?personal_area=true";
+	location.href = "../../"+username+"/index.php/personal_area";
 }
 function visualizza_curr(){
 	var username=document.getElementById("in_username").value;

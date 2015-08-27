@@ -8,9 +8,7 @@
 		if($basic->Is_user($u)){
 			header('Content-type: text/html;charset=utf-8');
 			require_once "header.php";
-			$color=$_GET['color'];
-			$personal_area=$_GET['personal_area'];
-			$card= new Card(NULL,$u,$color,$personal_area);
+			$card= new Card(NULL,$u,$_GET['color'],$_GET['personal_area'],$_GET["tab"]);
 			$card->Show_card();
 			
 		}else{

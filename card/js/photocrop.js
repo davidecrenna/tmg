@@ -3,7 +3,6 @@ function Annulla_crop(){
 	var ajaxRequest = create_ajaxRequest();
 	ajaxRequest.onreadystatechange = function(){
 		if(ajaxRequest.readyState == 4){
-			//location.href="../../"+username+"/index.php?personal_area=true&tab=photo";
 			location.href="photo.php?u="+username;
 		}
 	}
@@ -31,7 +30,6 @@ function Crop_photo(){
 	var ajaxRequest = create_ajaxRequest();
 	ajaxRequest.onreadystatechange = function(){
 		if(ajaxRequest.readyState == 4){
-			//location.href="../../"+username+"/index.php?personal_area=true&tab=photo";
 			location.href="photo.php?u="+username;
 		}
 	}

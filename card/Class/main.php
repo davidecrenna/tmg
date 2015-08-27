@@ -123,11 +123,13 @@ class Card {
 		OUT: -
 		DESCRIPTION: (constructor) Initialize the class, calculate username of the user from server's url, call Get_from_db that populate class attributes.
 	*/
-	function Card($server_uri=NULL,$username = NULL, $color = NULL, $personal_area=NULL){
+	function Card($server_uri=NULL,$username = NULL, $options_color = NULL, $options_personal_area=NULL ,$options_tab=NULL){
 		$this->basic = new Basic();
 		$this->mysql_database = new MySqlDatabase();
-		$this->color_preview=$color;
-		$this->personal_area=$personal_area;
+		$this->color_preview=$options_color;
+
+		$this->options_personal_area=$options_personal_area;
+        $this->options_tab=$options_tab;
 		if($server_uri!=NULL){
 			$server_uri=str_replace("index.php","",$server_uri);
 			if(strpos($server_uri,"?"))
@@ -3340,7 +3342,7 @@ class Card {
 		return $uploader->Render();
 	}
 	
-	/*  METHOD: Show_main_sections()
+	/*  _scrollableMETHOD: Show_main_sections()
 		
 		IN: -
 		OUT: {on video print card social buttons}
@@ -3710,37 +3712,13 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 		</html>';
 		
 		
-				if($this->personal_area!=NULL){
-					echo '<script language="javascript" type="text/javascript"> $(document).ready(function() {
-								personaloverlay.overlay().load();
-								
-								var ajaxRequest = create_ajaxRequest();
-								ajaxRequest.onreadystatechange = function(){
-									if(ajaxRequest.readyState == 4){
-										document.getElementById("personal_area_login").innerHTML = ajaxRequest.responseText;';
-										
-										if($this->is_user_logged()){
-											if(isset($_GET['tab'])){
-												echo 'personal_tab_change("'.$_GET['tab'].'");';
-											}
-										}
-										echo '
-									}
-								}
-								var username=document.getElementById("in_username").value;
-								var params="load_personal_area="+true+"&Username="+username;
-								//Send the proper header infomation along with the request
-								ajaxRequest.open("POST", "../card/php/card_handler.php" , true);
-								ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-								ajaxRequest.setRequestHeader("Content-length", params .length);
-								ajaxRequest.setRequestHeader("Connection", "close");
-								ajaxRequest.send(params);
-								
-						});
-						
-						
-						
+				if($this->options_personal_area!=NULL){
+					echo '<script language="javascript" type="text/javascript">
+                            $(document).ready(function() {
+                                Open_overlay_personal("'.$this->options_tab.'");
+							});
 						</script>';
+
 				}
 				
 	}
