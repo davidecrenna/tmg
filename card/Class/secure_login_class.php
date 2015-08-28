@@ -76,8 +76,8 @@ class classe_login
                 // verifichiamo che non sia disabilitato in seguito all'esecuzione di troppi tentativi di accesso errati.
                 if($this->Check_brute($user_id) == true) {
                     // Account disabilitato
-                    // Invia un e-mail all'utente avvisandolo che il suo account è stato disabilitato.
-                    return false;
+
+                    return 2;
                 } else {
                     if($db_password == $password) { // Verifica che la password memorizzata nel database corrisponda alla password fornita dall'utente.
                         // Password corretta!
@@ -90,19 +90,19 @@ class classe_login
                         $_SESSION['login_string'] = hash('sha512', $password.$user_browser);
                         // Login eseguito con successo.
                         sleep(1);
-                        return true;
+                        return 0;
                     } else {
                         // Password incorretta.
                         // Registriamo il tentativo fallito nel database.
                         $now = time();
                         $this->mysql_database->Insert_login_attempt($user_id,$now);
                         sleep(1);
-                        return false;
+                        return 1;
                     }
                 }
             } else {
                 // L'utente inserito non esiste.
-                return false;
+                return 1;
             }
         }
     }

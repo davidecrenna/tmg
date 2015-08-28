@@ -25,14 +25,16 @@
 		if (trim($_POST['user'])!="" && trim($_POST['pwd'])!="" && trim($_POST['copia_sfida'])!="")
         {
 			$login = new classe_login();
-			
-			if ($login->verifica_login($_POST['user'],$_POST['pwd'],$_POST['copia_sfida']))
+			$res = $login->verifica_login($_POST['user'],$_POST['pwd'],$_POST['copia_sfida']);
+			if ($res==0)
 			{
 				$json_string = json_encode(array("result"=>"true","user"=>$_POST['user'])); 
 				echo $json_string;
-			}
-			else{
-				$json_string = json_encode(array("result"=>"false")); 
+			}else if($res==1){
+				$json_string = json_encode(array("result"=>"false","msg"=>"1"));
+				echo $json_string;
+			}else if($res==2){
+				$json_string = json_encode(array("result"=>"false","msg"=>"2"));
 				echo $json_string;
 			}
 			exit;

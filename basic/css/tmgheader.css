@@ -257,15 +257,18 @@
 		cursor: pointer;
 		z-index: 90000;
 	}
-	
-	
+
+
 	.ajax_login{
 		color: #000;
-		font-size: 0.85em;
+		font-size: 0.70em;
 		margin-top: 1em;
 		padding-left: 0.8em;
 		text-align: left;
-		width: 17em;
+		width: 24em;
+		position: relative;
+		height: 4em;
+		line-height: 1em;
 	}
 	.login_container{
 		height:240px;
@@ -356,6 +359,7 @@
 		height:80px;
 		left: 80%;
 		position: relative;
+		top: -20%;
 	}
 	/* END OVERLAY LOGIN */
 	

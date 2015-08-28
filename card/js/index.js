@@ -44,7 +44,7 @@ function Personal_password_save(){
 	var new_pass= $('#input_nuova_pass').val();
 	var confirm_pass=$('#input_confirm_nuova_pass').val();
 	var username = $("#in_username").val();
-	
+
 	if((!Ctrl_old_pass())|| (!Ctrl_confirm_pass())){
 		$('#personal_password_ajax_panel').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Devi compilare tutti i campi.');
 		return false;
@@ -54,8 +54,6 @@ function Personal_password_save(){
 		$('#personal_password_ajax_panel').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Le password devono coincidere.');	
 		return false;	
 	}
-	
-	
 	$.ajax({
 	  type: 'POST',
 	  url: "../card/php/card_handler.php",
@@ -1242,7 +1240,10 @@ function Personal_form_submit(prepath){
                     location.href=prepath+obj.user+'/index.php/personal_area';
                 }
             }else{
-                $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
+                if(obj.msg==1)
+                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;color:#000;">Hai dimenticato la password?</a>');
+                if(obj.msg==2)
+                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="Javascript:show_recupero_password()" style="color:#000;cursor:pointer;">recupero password</a>');
             }
         },
         error:function(){

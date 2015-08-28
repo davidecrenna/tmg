@@ -25,7 +25,7 @@ $(document).ready(function(){
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}
 	});
-	
+
 	var overlay_login = $("#overlay_login a[rel]").overlay({top: top,
 			left: 0,
 			speed: 500,
@@ -37,7 +37,7 @@ $(document).ready(function(){
 				/*elem = document.getElementById("overlay");
 				elem.style.visibility="visible";
 				var username = $("#in_username").val();
-				window.location.href = '../' + username; */  
+				window.location.href = '../' + username; */
 			},
 			onBeforeLoad: function() {
 				$(window).scrollTop();
@@ -49,9 +49,9 @@ $(document).ready(function(){
 			if(document.documentElement.clientWidth >=1200){
 				$(".apple_overlay_login").width(995);
 				$(".apple_overlay_login").height(553);
-				
+
 				$(".apple_overlay_login").css("left",(document.body.clientWidth-995)/2);
-				
+
 				if( ((document.body.clientHeight-553) /2)<50){
 					$(".apple_overlay_login").css("top",50);
 				}else{
@@ -64,8 +64,8 @@ $(document).ready(function(){
 				$(".apple_overlay_login").width( document.body.clientWidth+15);
 				$("html, body").animate({ scrollTop: 0 }, "slow");
 			}
-			
-			
+
+
 		}).click(function(){
 	  		Load_login("../");
 	});
@@ -91,13 +91,13 @@ $(document).ready(function(){
 		  }
 		});
 	}
-	 
+
 	function Login_request_sfida(prepath){
 		var user = $("#login_user").val();
 		$.ajax({
 		  type: 'POST',
 		  url: prepath+"card/php/card_handler.php",
-		  data: { __user: "true", 
+		  data: { __user: "true",
 					user: user
 				 },
 		  dataType: "html",
@@ -113,9 +113,9 @@ $(document).ready(function(){
 		  }
 		});
 	}
-	
+
 	function Login_submit(prepath){
-		
+
 		var sfida = $("#copia_sfida").val();
    	 	var pwd = $("#login_pwd").val();
 		var pwd = hex_sha512(pwd);
@@ -126,7 +126,7 @@ $(document).ready(function(){
 		$.ajax({
 		  type: 'POST',
 		  url: prepath+"card/php/card_handler.php",
-		  data: { __submit: "true", 
+		  data: { __submit: "true",
 					user: login_user,
 					pwd: pwd,
 					copia_sfida: sfida

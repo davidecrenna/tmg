@@ -23,6 +23,7 @@ class Card {
 	public $user_id;
 	public $personalemail;
 	public $password;
+    public $salt;
 	public $Nome;
 	public $Cognome;
 	public $Professione;
@@ -162,7 +163,7 @@ class Card {
 		
 	*/
 	function Get_from_db(){
-		$this->mysql_database->Get_from_db($this->username,$this->user_id,$this->Nome,$this->Cognome,$this->Professione,$this->password,$this->personalemail,$this->user_level,$this->society,$this->resta_collegato,$this->id_referente,$this->is_giovane,$this->Category,$this->status,$this->remove_data,$this->data_iscrizione,$this->codfis,$this->alternative_url,$this->photo1_path, $this->user_photo_slide_path,$this->user_photo_slide_big_path, $this->contact_rows,$this->social_rows, $this->newsletter_rows, $this->user_newsletter_rows_count, $this->newsletter_group,$this->bv_cellulare,$this->bv_email,$this->bv_tmg_email,$this->bv_web,$this->bv_professione,$this->curriculum_europeo_data ,$this->opt_curr,$this->folders,$this->cellulare,$this->email_bv_value, $this->alt_professione,$this->colore_card,$this->flagnameshowed,$this->sudime,$this->news_rows,$this->empty_news_rows,$this->user_news_rows_count,$this->email_messages,$this->email_messages_sent,$this->email_messages_trash,$this->address_via,$this->address_citta,$this->address_desc,$this->address_on,$this->job_categories,$this->num_subuser,$this->total_ammount,$this->total_confirmed,$this->total_payed);
+		$this->mysql_database->Get_from_db($this->username,$this->user_id,$this->Nome,$this->Cognome,$this->Professione,$this->password,$this->salt,$this->personalemail,$this->user_level,$this->society,$this->resta_collegato,$this->id_referente,$this->is_giovane,$this->Category,$this->status,$this->remove_data,$this->data_iscrizione,$this->codfis,$this->alternative_url,$this->photo1_path, $this->user_photo_slide_path,$this->user_photo_slide_big_path, $this->contact_rows,$this->social_rows, $this->newsletter_rows, $this->user_newsletter_rows_count, $this->newsletter_group,$this->bv_cellulare,$this->bv_email,$this->bv_tmg_email,$this->bv_web,$this->bv_professione,$this->curriculum_europeo_data ,$this->opt_curr,$this->folders,$this->cellulare,$this->email_bv_value, $this->alt_professione,$this->colore_card,$this->flagnameshowed,$this->sudime,$this->news_rows,$this->empty_news_rows,$this->user_news_rows_count,$this->email_messages,$this->email_messages_sent,$this->email_messages_trash,$this->address_via,$this->address_citta,$this->address_desc,$this->address_on,$this->job_categories,$this->num_subuser,$this->total_ammount,$this->total_confirmed,$this->total_payed);
 	}
 	
 			
@@ -799,17 +800,39 @@ class Card {
 		DESCRIPTION: Update settings (userdata table) in the DB.
 	*/
 	public function Update_impostazioni_password($old_pass,$new_pass){
-		if((md5($old_pass)==$this->password)&&($old_pass!="")&&($old_pass!=NULL)&&($new_pass!="")&&($new_pass!=NULL)){
-			$this->Update_tmg_email_password($old_pass,$new_pass);
-			
-			$this->Send_email_new_password($new_pass);
-			
-			$this->mysql_database->Update_impostazioni_password($this->user_id,$new_pass);
-			return true;
-		}else{
-			return false;
-		}
+        $hash_old_pass= hash('sha512',trim($old_pass));
+        $hash_new_pass= hash('sha512',trim($new_pass));
+        if( hash('sha512',trim($hash_old_pass.$this->salt)) == trim($this->password)){
+            $this->Update_tmg_email_password($old_pass, $new_pass);
+            if(!DEVELOPMENT) {
+                $this->Send_email_new_password($new_pass);
+            }
+            $this->mysql_database->Update_impostazioni_password($hash_new_pass,$this->salt,$this->user_id);
+            return true;
+        }else{
+            return false;
+        }
 	}
+
+    private function encrypt_data($data, $key ,$salt) {
+        $salt = substr($salt, 0, 32);
+        $key = substr($key, 0, 12);
+        $key = substr(hash('sha256', $salt.$key.$salt), 0, 32);
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $data, MCRYPT_MODE_ECB, $iv));
+        return $encrypted;
+    }
+    private function decrypt_data($data, $key ,$salt) {
+        $salt = substr($salt, 0, 32);
+        $key = substr($key, 0, 12);
+        $key = substr(hash('sha256', $salt.$key.$salt), 0, 32);
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, base64_decode($data), MCRYPT_MODE_ECB, $iv);
+        return $decrypted;
+    }
+
 	public function Update_tmg_email_password($old_pass,$new_pass){
 		$server_ip=SERVER_IP;
 		$server_login=SERVER_LOGIN;
@@ -849,7 +872,7 @@ class Card {
 		$mail = new PHPMailer(true);
 			try { 
 			  $mail->AddAddress($emailtmg, $this->username);
-			  //$mail->AddAddress($this->personalemail, $this->username);
+
 			  $mail->SetFrom("no-reply@topmanagergroup.com", "TopManagerGroup.com");
 			  
 			  $oggetto = $this->username.", Hai cambiato la tua password TopManagerGroup.com.";
