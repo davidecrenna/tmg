@@ -29,4 +29,6 @@
 	define('FATTURE',"fatture");
 	define('SESSION',"sessions");
 	define('LOGIN_ATTEMPTS',"login_attempts");
+    define('NOTIFY_PASSWORD_EMAIL_TABLE',"notify_password_email");
+
 ?>

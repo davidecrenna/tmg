@@ -23,7 +23,6 @@ class Card {
 	public $user_id;
 	public $personalemail;
 	public $password;
-    public $salt;
 	public $Nome;
 	public $Cognome;
 	public $Professione;
@@ -163,7 +162,7 @@ class Card {
 		
 	*/
 	function Get_from_db(){
-		$this->mysql_database->Get_from_db($this->username,$this->user_id,$this->Nome,$this->Cognome,$this->Professione,$this->password,$this->salt,$this->personalemail,$this->user_level,$this->society,$this->resta_collegato,$this->id_referente,$this->is_giovane,$this->Category,$this->status,$this->remove_data,$this->data_iscrizione,$this->codfis,$this->alternative_url,$this->photo1_path, $this->user_photo_slide_path,$this->user_photo_slide_big_path, $this->contact_rows,$this->social_rows, $this->newsletter_rows, $this->user_newsletter_rows_count, $this->newsletter_group,$this->bv_cellulare,$this->bv_email,$this->bv_tmg_email,$this->bv_web,$this->bv_professione,$this->curriculum_europeo_data ,$this->opt_curr,$this->folders,$this->cellulare,$this->email_bv_value, $this->alt_professione,$this->colore_card,$this->flagnameshowed,$this->sudime,$this->news_rows,$this->empty_news_rows,$this->user_news_rows_count,$this->email_messages,$this->email_messages_sent,$this->email_messages_trash,$this->address_via,$this->address_citta,$this->address_desc,$this->address_on,$this->job_categories,$this->num_subuser,$this->total_ammount,$this->total_confirmed,$this->total_payed);
+		$this->mysql_database->Get_from_db($this->username,$this->user_id,$this->Nome,$this->Cognome,$this->Professione,$this->password,$this->personalemail,$this->user_level,$this->society,$this->resta_collegato,$this->id_referente,$this->is_giovane,$this->Category,$this->status,$this->remove_data,$this->data_iscrizione,$this->codfis,$this->alternative_url,$this->photo1_path, $this->user_photo_slide_path,$this->user_photo_slide_big_path, $this->contact_rows,$this->social_rows, $this->newsletter_rows, $this->user_newsletter_rows_count, $this->newsletter_group,$this->bv_cellulare,$this->bv_email,$this->bv_tmg_email,$this->bv_web,$this->bv_professione,$this->curriculum_europeo_data ,$this->opt_curr,$this->folders,$this->cellulare,$this->email_bv_value, $this->alt_professione,$this->colore_card,$this->flagnameshowed,$this->sudime,$this->news_rows,$this->empty_news_rows,$this->user_news_rows_count,$this->email_messages,$this->email_messages_sent,$this->email_messages_trash,$this->address_via,$this->address_citta,$this->address_desc,$this->address_on,$this->job_categories,$this->num_subuser,$this->total_ammount,$this->total_confirmed,$this->total_payed);
 	}
 	
 			
@@ -800,14 +799,14 @@ class Card {
 		DESCRIPTION: Update settings (userdata table) in the DB.
 	*/
 	public function Update_impostazioni_password($old_pass,$new_pass){
-        $hash_old_pass= hash('sha512',trim($old_pass));
-        $hash_new_pass= hash('sha512',trim($new_pass));
-        if( hash('sha512',trim($hash_old_pass.$this->salt)) == trim($this->password)){
+        $lib = new PasswordLib\PasswordLib();
+        $hash_new_pass = $lib->createPasswordHash($new_pass);
+        if( $lib->verifyPasswordHash($old_pass, $this->password)){
             $this->Update_tmg_email_password($old_pass, $new_pass);
             if(!DEVELOPMENT) {
                 $this->Send_email_new_password($new_pass);
             }
-            $this->mysql_database->Update_impostazioni_password($hash_new_pass,$this->salt,$this->user_id);
+            $this->mysql_database->Change_password($hash_new_pass,$this->user_id);
             return true;
         }else{
             return false;
@@ -867,6 +866,7 @@ class Card {
 			 return false;
 		 }	
 	}
+
 	public function Send_email_new_password($new_pass){
 		$emailtmg = $this->Get_member_email();
 		$mail = new PHPMailer(true);
@@ -3180,21 +3180,6 @@ class Card {
 		closedir($handler);
 	}
 	
-	private function getRandPassword()
-	{
-		$N_Caratteri = 8;
-		$Stringa = "";
-		for($I=0;$I<$N_Caratteri;$I++){
-			do{
-				$N = ceil(rand(48,122));
-			}while(!((($N >= 48) && ($N <= 57)) || (($N >= 65) && ($N <= 90)) || (($N >= 97) && ($N <= 122))));
-				
-			
-			$Stringa = $Stringa.chr($N);
-		}
-		return $Stringa;
-	}
-	
 	//##################################################################################
 	//GENERIC FUNCTIONS END
 	//##################################################################################
@@ -3686,7 +3671,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 			</div>
 		</div>
 		<div id="bodydiv" style="position:relative; top:-10px;">';
-			$this->basic->Show_header(true,$this->username,$this->is_user_logged(),$this->photo1_path);
+			$this->basic->Show_header(true);
 			$this->Show_input_username();
 			echo '<div align="center">';
 			echo '<div style="clear:both;"></div>';	
@@ -4844,8 +4829,8 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 	//LOGIN(IN PERSONAL AREA) FUNCTIONS START
 	//##################################################################################
 	public function Show_personal_login_on_card(){
-		echo '<div class="login_container">';
-            echo "<div class='login_content_container'>
+		echo '<div class="login_container" id="login_container">';
+            echo "<div class='login_content_container' >
                 LOGIN
 			</div>
 			<div class='login_label'>NOME UTENTE</div>";
@@ -4888,36 +4873,104 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 		echo '</div>';
 	}
 	public function Show_recupero_password_on_card(){
-		echo '<div class="personal_recupero">';
-			echo '<p style="text-align:left; padding-left:35px; font-size:14px; font-weight:700; position:absolute; top:80px; left:0px; color:#000;">Inviami una email con la nuova password.</p>';
-			echo '<div style="text-align:left; font-size:16px; position:absolute; top:125px; left:110px;">';
-				echo "<div class='personal_button' onclick='Javascript:invia_recupero()'>
+		echo '<p class="recupero_text">Inserisci la tua email o il tuo username con cui ti sei iscritto.</p>';
+
+		echo '<input  class="login_input" type="text" name="personal_login_recupero" id="personal_login_recupero" onkeydown="PressioneInvioRecupero(event);" value="" />';
+            echo '<div class="recupero_btn">';
+                echo "<div class='personal_button' onclick='Javascript:Invia_recupero()'>
 						<span class='text14px'>INVIA</a>
 					  </div>
 					  <div class='personal_button' onclick='Javascript:torna_login()'>
 						<span class='text14px'>INDIETRO</a>
 					  </div>";
-			/*<img src="../image/card_'.$this->colore_card.'/btn/btn_invia_login.png" onclick="Javascript:invia_recupero()" style="cursor:pointer;"/>&nbsp;<img src="../image/card_'.$this->colore_card.'/btn/btn_indietro.png" onclick="Javascript:torna_login()" style="cursor:pointer;"/></p>';*/
-			echo "<div id='recupero_saved' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='../image/icone/ok.png' alt='Informazioni salvate' width='22' height='19' /> Una email ti è stata inviata all'indirizzo ".$this->personalemail.". Per eventuali problemmi contattaci a info@topmanagergroup.com.</p></div>";
-			echo "<div id='recupero_error' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='../image/icone/error.png' alt='Informazioni salvate' width='22' height='19' /> Si è verificato un problema nell'invio della e-mail. Se non sei iscritto ancora al gruppo visita la nostra <a href='../index.php' style='color:#000;'>Homepage</p></a></p></div>";
-			echo "</div>";
-		echo '</div>';
+
+			    echo '<div id="ajax_recupero" class="ajax_recupero"></div>';
+		    echo "<div class='login_img'></div>";
+		echo "</div>";
 	}
 	
 	public function Recupero_password(){
-		$password = $this->getRandPassword();
-		$this->mysql_database->Change_password($password,$this->user_id);
-		$this->Update_tmg_email_password("",$password);
-		
-		$this->send_mail_recupero($password);
-		
+        $crypt = new PasswordLib\PasswordLib();
+        $new_pass = $crypt->getRandomToken(16);
+        $hash_new_pass = $crypt->createPasswordHash($new_pass);
+
+
+        $this->mysql_database->Save_notify_change_tmg_email_password($new_pass,$this->user_id);
+        $this->mysql_database->Change_password($hash_new_pass,$this->user_id);
+		if(!DEVELOPMENT) {
+            $this->Notify_update_tmg_email_password($new_pass);
+            $this->send_mail_recupero($new_pass);
+        }
 	}
-	
+    function Notify_update_tmg_email_password($password){
+        $mail = new PHPMailer(true);
+        try {
+            $mail->AddAddress("info@topmanagergroup.com","Servizio cambio password");
+            $mail->SetFrom("no-reply@topmanagergroup.com", $this->Getnameshowed());
+
+            $oggetto = "Richiesta cambio password";
+
+            $mail->Subject = $oggetto;
+
+            $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
+
+            $messaggio = "<html>
+                        <style>
+                            #corpomail{
+                                width: 576px;
+                                text-align: left;
+                                color:#000;
+                            }
+                            body{
+                                font-family:'Franklin Gothic Medium';
+                                font-size:14px;
+                                background-color:#fff;
+                            }
+                            #titolo{
+                                font-size:20px;
+                            }
+
+                        </style>
+                            <body>
+                            <div align='center'>
+
+                                <div align='center'id='corpomail'>
+                                    <img src='".PATH_SITO."image/banner/logo_small.png' width='368' height='140' />
+                                    <p id='titolo'>CAMBIO PASSWORD USER: ".$this->Getnameshowed()."</p>
+                                    <br/>
+                                    <p>NUOVE CREDENZIALI DA IMPOSTARE</p>
+                                    Username: ".$this->Get_member_email()."<br/>
+                                    Password: ".$password."<br/>
+
+                                    <br/>
+                                    Puoi cambiare la tua password nella sezione IMPOSTAZIONI della tua PERSONAL AREA:
+                                    <a href='".PATH_SITO."/roundcube'>".PATH_SITO."/roundcube
+                                </div>
+                                <div align='center' id='copyright'>
+                                    <p>Topmanagergroup Corporation ".date("Y")."</p>
+                                </div>
+                            </div>
+                            </body>
+                        </html>
+                        ";
+
+            $mail->MsgHTML($messaggio);
+            $mail->Send();
+        }
+
+        catch
+        (phpmailerException $e){
+            echo $e->errorMessage(); //Pretty error messages from PHPMailer
+        }catch(Exception $e){
+            echo $e->getMessage(); //Boring error messages from anything else!
+        }
+    }
+
 	
 	public function send_mail_recupero($password){
 		$mail = new PHPMailer(true);
 		try { 
-			$mail->AddAddress(trim($this->personalemail),"prova");
+			$mail->AddAddress(trim($this->personalemail),$this->Getnameshowed());
 			$mail->SetFrom("no-reply@topmanagergroup.com", "TopManagerGroup.com");
 			  
 			$oggetto = "Recupero password TopManagerGroup.com.";
@@ -4950,11 +5003,17 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 							<img src='".PATH_SITO."image/banner/logo_small.png' width='368' height='140' />
 							<p id='titolo'>".$this->Getnameshowed().", la tua password TopManagerGroup.com.</p>
 							<p>Ecco le tue nuove credenziali:</p>
-							E-mail: ".$this->Get_member_email()."<br/>
+							Username: ".$this->username."<br/>
 							Password: ".$password."<br/>
 							<br/>
-							Puoi cambiare la tua password nella sezione IMPOSTAZIONI della tua PERSONAL AREA 
-							</p>
+							<p>Utilizza la stessa credenziali per accedere alla tua email topmanagergroup qui:</p>
+							Username: ".$this->Get_member_email()."<br/>
+							Password: ".$password."<br/>
+                            <strong>ATTENZIONE: Per motivi tecnici, il cambio password della email Topmanagergroup richiede un intervento
+                            manuale da parte del nostro staff che potrebbe richiedere 1-2 giorni lavorativi.</strong>
+							<br/>
+							Puoi cambiare la tua password nella sezione IMPOSTAZIONI della tua PERSONAL AREA:
+							<a href='".PATH_SITO.$this->username."/personalarea'>".PATH_SITO.$this->username."/personalarea</a>
 							<p>Per qualsiasi problema contattaci all'indirizzo info@topmanagergroup.com</p>
 							<p>Se non sei ".$this->Getnameshowed()." ignora questa email.</p>
 						</div>
@@ -5010,75 +5069,43 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 		OUT: -
 		DESCRIPTION: return true if user is logged, if not return false .
 	*/
-	public function is_user_logged(){
-		// Verifica che tutte le variabili di sessione siano impostate correttamente
-		if(isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
+	public function is_user_logged()
+    {
+        // Verifica che tutte le variabili di sessione siano impostate correttamente
+        if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
             $user_id = $_SESSION['user_id'];
-			$login_string = $_SESSION['login_string'];
-			$username = $_SESSION['username'];
-			$user_browser = $_SERVER['HTTP_USER_AGENT']; // reperisce la stringa 'user-agent' dell'utente.
-			if ($stmt = $this->mysql_database->Get_stmt_logged()) {
-				$stmt->bind_param('i', $user_id); // esegue il bind del parametro '$user_id'.
-				$stmt->execute(); // Esegue la query creata.
-				$stmt->store_result();
+            $login_string = $_SESSION['login_string'];
+            $username = $_SESSION['username'];
+            $user_browser = $_SERVER['HTTP_USER_AGENT']; // reperisce la stringa 'user-agent' dell'utente.
+            if ($stmt = $this->mysql_database->Get_stmt_logged()) {
+                $stmt->bind_param('i', $user_id); // esegue il bind del parametro '$user_id'.
+                $stmt->execute(); // Esegue la query creata.
+                $stmt->store_result();
 
-				if($stmt->num_rows == 1) { // se l'utente esiste
-					$stmt->bind_result($db_password); // recupera le variabili dal risultato ottenuto.
-					$stmt->fetch();
-					$login_check = hash('sha512', $db_password.$user_browser);
-					if($login_check == $login_string) {
-						// Login eseguito!!!!
-						return true;
-					} else {
-						//  Login non eseguito
-						return false;
-					}
-				} else {
-					// Login non eseguito
-					return false;
-				}
-			} else {
-				// Login non eseguito
-				return false;
-			}
-		} else {
-			// Login non eseguito
-			return false;
-		}
-
-
-
-//	if(isset($_SESSION['ID'])&&isset($_SESSION['Cognome'])&&isset($_SESSION['Username'])){
-//			if(($_SESSION['ID']==$this->user_id)&&($_SESSION['Cognome']==$this->Cognome)&&($_SESSION['Username']==$this->username)){
-//				return true;
-//			}else{
-//				return false;
-//			}
-//		}else{
-//			return false;
-//		}
-	}
-	
-	
-	/*  METHOD: Show_logout_button()
-		
-		IN: -
-		OUT: -
-		DESCRIPTION: show logout button.
-	*/
-	public function Show_logout_button(){
-		echo "<div class='personal_button' onclick='Logout()' style='width:80px; padding-top:4px; color:#FFF'>
-							<span class='text14px'>LOGOUT</span>
-						</div>";
-		/*echo "<div class='styledbutton grey' id='log_out_button'  name='log_out_button' alt='logout' onclick='Javascript:Logout()'>
-			<span class='text14px' style='color:#FFF'>LOGOUT</a>
-		  </div>";*/
-	}
-	
-	
-	
-	
-	
+                if ($stmt->num_rows == 1) { // se l'utente esiste
+                    $stmt->bind_result($db_password); // recupera le variabili dal risultato ottenuto.
+                    $stmt->fetch();
+                    $login_check = hash('sha512', $db_password . $user_browser);
+                    if ($login_check == $login_string) {
+                        // Login eseguito!!!!
+                        return true;
+                    } else {
+                        //  Login non eseguito
+                        return false;
+                    }
+                } else {
+                    // Login non eseguito
+                    return false;
+                }
+            } else {
+                // Login non eseguito
+                return false;
+            }
+        } else {
+            // Login non eseguito
+            return false;
+        }
+    }
 	
 	/*  METHOD: Show_personal_logged()
 		
@@ -5849,7 +5876,8 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 	public function Show_personal_card_evidenza(){
 			echo '<table id="personal_tabella_agenda_news" class="personal_tabella_agenda_news">';
 					$back_row_color_array = array("#3366cc", "#6699ff", "#addee5", "#ade8a6", "#bdc9d7","#b4df89","#dfc889");
-					$rand_back_row_color = array_rand($back_row_color_array, sizeof($this->news_rows));
+                    if(sizeof($this->news_rows)>0)
+					    $rand_back_row_color = array_rand($back_row_color_array, sizeof($this->news_rows));
 					$k=0;
 					foreach($this->news_rows as $news_row){
 						if($back_row_color_array[$rand_back_row_color[$k]]=="")

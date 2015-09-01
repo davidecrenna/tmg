@@ -113,12 +113,23 @@ $(document).ready(function(){
 		  }
 		});
 	}
-
+    function PressioneLogin(e) {
+        // IE
+        var tasto;
+        if(window.event){
+            tasto = e.keyCode;
+        }
+        // Netscape/Firefox/Opera
+        else if(e.which){
+            tasto = e.which;
+        }
+        if (tasto == 13) {
+            Login_submit("../");
+        }
+    }
 	function Login_submit(prepath){
-
 		var sfida = $("#copia_sfida").val();
    	 	var pwd = $("#login_pwd").val();
-		var pwd = hex_sha512(pwd);
 		var login_user = $("#login_user").val();
 
 		$('#login_pwd').val("");
@@ -136,13 +147,23 @@ $(document).ready(function(){
 			$('#ajax_login').html('<img src="'+prepath+'image/icone/ajax_small.gif" alt="Loading..." />');
 		  },
 		  success:function(data){
-			  var obj = jQuery.parseJSON(data);
+			  /*var obj = jQuery.parseJSON(data);
 			  if(obj.result=="true"){
 				  var username=$("#in_username").val();
-				  location.href=prepath+obj.user+'/index.php/personal_area';
+				  location.href=prepath+obj.user+'/personal_area';
 			  }else{
 				 $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
-			  }
+			  }*/
+
+              var obj = jQuery.parseJSON(data);
+              if(obj.result=="true"){
+                  location.href=prepath+obj.user+'/personal_area';
+              }else{
+                  if(obj.msg==1)
+                      $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
+                  if(obj.msg==2)
+                      $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="Javascript:show_recupero_password()" style="color:#000;cursor:pointer;text-decoration: underline;">recupero password</a>');
+              }
 		  },
 		  error:function(){
 			// failed request; give feedback to user
@@ -150,3 +171,27 @@ $(document).ready(function(){
 		  }
 		});
 	}
+    function Logout(prepath){
+        var avatar_username = $("#avatar_username").val();
+        $.ajax({
+            type: 'POST',
+            url: prepath+"card/php/card_handler.php",
+            data: { Logout: "true",
+                Username: avatar_username
+            },
+            dataType: "html",
+            beforeSend:function(){
+            },
+            success:function(data){
+                if(prepath==""){
+                    location.href='index.php';
+                }else{
+                    location.href=prepath+avatar_username;
+                }
+            },
+            error:function(){
+                // failed request; give feedback to user
+                $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+            }
+        });
+    }

@@ -2,7 +2,7 @@
 define('DB_ERROR_LOG_FILE','../../config/db_log_file.txt');
 interface Database
 {
-	function Get_from_db(&$username,&$user_id,&$Nome,&$Cognome,&$Professione,&$password,&$salt,&$email,&$user_level,&$society,&$resta_collegato,&$id_referente,&$is_giovane,&$Category,&$status,&$remove_data,&$data_iscrizione,&$codfiscale,&$alternative_url,&$photo1_path,&$user_photo_slide_path,&$user_photo_slide_big_path,&$contact_rows,&$social_rows, &$newsletter_rows,&$user_newsletter_rows_count,&$newsletter_group,&$bv_cellulare,&$bv_email,&$bv_tmg_email,&$bv_web,&$bv_professione, &$curriculum_europeo_data, &$opt_curr,&$folders,&$cellulare,&$email_bv_value, &$alt_professione,&$colore_card,&$flagnameshowed,&$sudime,&$news_rows,&$empty_news_rows,&$user_news_rows_count,&$email_messages,&$email_messages_sent,&$email_messages_trash,&$address_via,&$address_citta,&$address_desc,&$address_on,&$job_categories,&$num_subuser,&$total_ammount,&$total_confirmed,&$total_payed);
+	function Get_from_db(&$username,&$user_id,&$Nome,&$Cognome,&$Professione,&$password,&$email,&$user_level,&$society,&$resta_collegato,&$id_referente,&$is_giovane,&$Category,&$status,&$remove_data,&$data_iscrizione,&$codfiscale,&$alternative_url,&$photo1_path,&$user_photo_slide_path,&$user_photo_slide_big_path,&$contact_rows,&$social_rows, &$newsletter_rows,&$user_newsletter_rows_count,&$newsletter_group,&$bv_cellulare,&$bv_email,&$bv_tmg_email,&$bv_web,&$bv_professione, &$curriculum_europeo_data, &$opt_curr,&$folders,&$cellulare,&$email_bv_value, &$alt_professione,&$colore_card,&$flagnameshowed,&$sudime,&$news_rows,&$empty_news_rows,&$user_news_rows_count,&$email_messages,&$email_messages_sent,&$email_messages_trash,&$address_via,&$address_citta,&$address_desc,&$address_on,&$job_categories,&$num_subuser,&$total_ammount,&$total_confirmed,&$total_payed);
 
 	function Update_curriculum($text, $user_id);
 
@@ -95,8 +95,10 @@ interface Database
 	
 	function Update_europ_cv_step4($compartistiche, $comptecniche, $comprelativeallav, $altrecompedinteressi, $user_id);
 	
-	function Update_impostazioni_password($hash_new_pass,$salt,$user_id);
-	
+	function Change_password($hash_new_pass,$user_id);
+
+    function Save_notify_change_tmg_email_password($new_pass,$user_id);
+
 	function Change_card_colour($colour, $user_id);
 	
 	function Update_impostazioni_curr($user_id,$change_opt_curr);
@@ -119,8 +121,6 @@ interface Database
 	function Set_user_table($user_id,$email,$username);
 	
   	function delete_me($user_id,$id_referente,$status,$eliminazione_immediata,$username);
-	
-	function Change_password($password,$user_id);
 	
 	function Change_folder_password($folder_name,$folder_pass,$user_id);
 	
@@ -241,7 +241,7 @@ class MySqlDatabase implements Database{
 		}
 		
 	}
-	public function Get_from_db(&$username, &$user_id, &$Nome, &$Cognome, &$Professione, &$password, &$salt, &$email, &$user_level,&$society,&$resta_collegato,&$id_referente,&$is_giovane,&$Category,&$status,&$remove_data,&$data_iscrizione,&$codfiscale,&$alternative_url,&$photo1_path, &$user_photo_slide_path,&$user_photo_slide_big_path, &$contact_rows, &$social_rows, &$newsletter_rows,&$user_newsletter_rows_count,&$newsletter_group,&$bv_cellulare,&$bv_email,&$bv_tmg_email,&$bv_web,&$bv_professione,&$curriculum_europeo_data, &$opt_curr,&$folders,&$cellulare,&$email_bv_value, &$alt_professione,&$colore_card,&$flagnameshowed,&$sudime,&$news_rows,&$empty_news_rows,&$user_news_rows_count,&$email_messages,&$email_messages_sent,&$email_messages_trash,&$address_via,&$address_citta,&$address_desc,&$address_on,&$job_categories,&$num_subuser,&$total_ammount,&$total_confirmed,&$total_payed){
+	public function Get_from_db(&$username, &$user_id, &$Nome, &$Cognome, &$Professione, &$password, &$email, &$user_level,&$society,&$resta_collegato,&$id_referente,&$is_giovane,&$Category,&$status,&$remove_data,&$data_iscrizione,&$codfiscale,&$alternative_url,&$photo1_path, &$user_photo_slide_path,&$user_photo_slide_big_path, &$contact_rows, &$social_rows, &$newsletter_rows,&$user_newsletter_rows_count,&$newsletter_group,&$bv_cellulare,&$bv_email,&$bv_tmg_email,&$bv_web,&$bv_professione,&$curriculum_europeo_data, &$opt_curr,&$folders,&$cellulare,&$email_bv_value, &$alt_professione,&$colore_card,&$flagnameshowed,&$sudime,&$news_rows,&$empty_news_rows,&$user_news_rows_count,&$email_messages,&$email_messages_sent,&$email_messages_trash,&$address_via,&$address_citta,&$address_desc,&$address_on,&$job_categories,&$num_subuser,&$total_ammount,&$total_confirmed,&$total_payed){
 		
 		$query = "SELECT * FROM ".USER_TABLE." WHERE Username= ?";
 		if($stmt = $this->sec_mysqli->prepare($query)){
@@ -256,7 +256,6 @@ class MySqlDatabase implements Database{
 				$Cognome =  $row["Cognome"];
 				$Professione = $row["Professione"];
 				$password = $row["Password"];
-                $salt = $row["Salt"];
 				$email = $row["Email"];
 				$user_level = $row["Level"];
 				$resta_collegato = $row["cod_cookie"];
@@ -1397,23 +1396,13 @@ class MySqlDatabase implements Database{
 		
 	}
 	public function Add_slide_photo($photo_name, $user_id , $photo_path, &$user_photo_slide_path , $index){
-		
 		$query="INSERT INTO ".USER_SLIDE_TABLE." (id_user,id_photo_num,path_photo) VALUES(?,?,?)";
 		$stmt = $this->sec_mysqli->prepare($query);
-		
-		
-		
 		$stmt->bind_param("iis",$user_id,$index,$photo_name);
 		$stmt->execute();
-		
-		
 		$stmt->close();
-		
-		
-		
 		//aggiorno i dati della card
 		$user_photo_slide_path[$index] = $photo_path;
-		
 	}
 	public function Recreate_photo_slide( $user_id , $user_photo_slide_path,$user_photo_slide_big_path){
 		
@@ -1491,107 +1480,64 @@ class MySqlDatabase implements Database{
 		}else{
 			$bv_check_professione=0;
 		}
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_BV_TABLE." SET cellulare=?,email=?,email_tmg=?, professione=?, web=?  WHERE id_user=?");
-		
-		
 		$stmt->bind_param("iiiiii",$bv_check_cellulare,$bv_check_email,$bv_check_tmg_email,$bv_check_professione,$personal_in_bv_web, $user_id);
-		
 		$stmt->execute();
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_DATA_TABLE." SET cellulare=?, email_bv=?, alt_professione=?  WHERE id_user=?");
-		
-		
 		$stmt->bind_param("sssi",$bv_cellulare,$bv_email,$bv_professione,$user_id);
-		
 		$stmt->execute();
-		
 		$stmt->close();
-		
-		
 	}
 	
 	public function Update_europ_cv_step1($nomecognome, $sottotitolo, $sesso, $cittadinanza, $dataluogo, $user_id){
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_CURREUROP_TABLE." SET nomecognome=?, sottotitolo=?, sesso=?, cittadinanza=?, dataluogo=? WHERE id_user=?");
-		
 		$stmt->bind_param("sssssi", $nomecognome,  $sottotitolo,  $sesso,  $cittadinanza, $dataluogo, $user_id);
-		
 		$stmt->execute();
-		
 		$stmt->close();
-		
-		
 	}
 	
 	public function Update_europ_cv_step2($istruzformaz, $esplavorativa, $user_id){
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_CURREUROP_TABLE." SET istruzformaz=?, esplavorativa=? WHERE id_user=?");
-		
-		
 		$stmt->bind_param("ssi",$istruzformaz, $esplavorativa,$user_id);
-		
 		$stmt->execute();
-		
 		$stmt->close();
-		
-		
 	}
 	public function Update_europ_cv_step3($linguestraniere, $madrelingua, $capacitacompet, $compinformatiche, $comprelsoc, $comporganiz, $user_id){
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_CURREUROP_TABLE." SET linguestraniere=?, madrelingua=?, capacitacompet=?, compinformatiche=?, comprelsoc=?, comporganiz=? WHERE id_user=?");
-		
-		
-		
 		$stmt->bind_param("ssssssi",$linguestraniere, $madrelingua, $capacitacompet, $compinformatiche, $comprelsoc, $comporganiz, $user_id);
-		
 		$stmt->execute();
-		
 		$stmt->close();
-		
-		
-		
 	}
 	public function Update_europ_cv_step4($compartistiche, $comptecniche, $comprelativeallav, $altrecompedinteressi, $user_id){
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_CURREUROP_TABLE." SET compartistiche=?, comptecniche=?, comprelativeallav=?, altrecompedinteressi=? WHERE id_user=?");
-		
-		
 		$stmt->bind_param("ssssi",$compartistiche, $comptecniche, $comprelativeallav, $altrecompedinteressi, $user_id);
-		
 		$stmt->execute();
-		
 		$stmt->close();
-		
-		
 	}
 	
 	public function Update_europ_cv_step5($patente, $ulteriori, $user_id){
-		
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_CURREUROP_TABLE." SET patente=?, ulteriori=? WHERE id_user=?");
-		
-		
 		$stmt->bind_param("ssi",$patente, $ulteriori, $user_id);
-		
 		$stmt->execute();
-		
 		$stmt->close();
-		
-		
 	}
 	
-	public function Update_impostazioni_password($hash_new_pass,$salt,$user_id){
-		
+	public function Change_password($hash_new_pass,$user_id){
 		if($hash_new_pass!=NULL){
 			$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Password=? WHERE ID=?");
-			$hash = hash('sha512',trim($hash_new_pass.$salt));
-			$stmt->bind_param("si",$hash , $user_id);
+			$stmt->bind_param("si",$hash_new_pass , $user_id);
 
 			$stmt->execute();	
 		}
 		$stmt->close();
-		
 	}
+    public function Save_notify_change_tmg_email_password($new_pass,$user_id){
+        $query="INSERT INTO ".NOTIFY_PASSWORD_EMAIL_TABLE." (id_user,password) VALUES(?,?)";
+        $stmt = $this->sec_mysqli->prepare($query);
+        $stmt->bind_param("is",$user_id,$new_pass);
+        $stmt->execute();
+        $stmt->close();
+    }
 	public function Update_impostazioni_curr($user_id,$change_opt_curr){
 		
 		if($change_opt_curr=="true")
@@ -1826,15 +1772,6 @@ class MySqlDatabase implements Database{
 		
 		
 	}
-	public function Change_password($password,$user_id){
-		
-		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET Password=? WHERE ID=?");
-		
-		$stmt->bind_param("si",md5($password), $user_id);
-		$stmt->execute();
-		$stmt->close();
-		
-	}
 	
 	public function delete_me($user_id,$id_referente,$status,$eliminazione_immediata,$username){
 		if($user_id==0||$user_id==NULL||$user_id==""){
@@ -1901,15 +1838,12 @@ class MySqlDatabase implements Database{
 		$stmt->bind_param("i",$user_id);
 		$stmt->execute();
 
-		
 		$query="DELETE FROM ".USER_POSITION_TABLE." WHERE id_user=?";
 		$stmt = $this->mysqli->prepare($query);
 		$stmt->bind_param("i",$user_id);
 		$stmt->execute();
-		
 		//Qui quando eliminavo l'utente decrementavo i sub_user del referente ma essi verranno decrementati dopo un'anno dall'ultima iscrizione dell'utente
-		
-		
+
 		//Quando elimino un utente che ha status == 3 quindi "NON PAGATO" oppure se lo elimino in modo immediato dal pannello amministrazione, elimino anche da tabella SUB_USER e decremento la colonna sub_user dalla tabella PROMOTER del referente
 		if($status == 3 || $eliminazione_immediata!=NULL){
 			if($status == 3){
@@ -1917,15 +1851,11 @@ class MySqlDatabase implements Database{
 			}else if($eliminazione_immediata!=NULL){
 				echo "Eliminazione immediata dell'utente";
 			}
-			
 			//elimino dalla tabella SUB_USER
 			$query="DELETE FROM ".SUB_USER_TABLE." WHERE username=?";
 			$stmt = $this->mysqli->prepare($query);
-			
 			$stmt->bind_param("s",$username);
 			$stmt->execute();
-			
-			
 			//prendo il numero dei sub_user del referente
 			$query = "SELECT * FROM ".USER_PROMOTER_TABLE." WHERE id_user= ? ";
 			if($stmt = $this->sec_mysqli->prepare($query)){
@@ -1935,7 +1865,6 @@ class MySqlDatabase implements Database{
 				$this->Show_error("Problema USER_PROMOTER_TABLE ");
 				}else{
 					$num_subuser = $row["num_subuser"];
-			
 			   }
 			   $stmt->free_result();
 			   $stmt->close();
@@ -1944,30 +1873,17 @@ class MySqlDatabase implements Database{
 			if($num_subuser!=0){
 				$num_subuser--;
 			}
-			
-			
 			$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_PROMOTER_TABLE." SET num_subuser=? WHERE id_user=?");
-			
-			
 			$stmt->bind_param("ii", $num_subuser, $id_referente);
-			
 			$stmt->execute();
 			$stmt->close();
-			
-			
 		}
 	}
 	public function Change_folder_password($folder_name,$folder_pass,$user_id){
-		
 		  $stmt = $this->sec_mysqli->prepare("UPDATE ".USER_FILEBOX_TABLE." SET folder_pass=? WHERE folder_name=? AND id_user=?");
-		  
 		  $stmt->bind_param("ssi",$folder_pass,$folder_name,$user_id);
-		  
 		  $stmt->execute();
-		  
 		  $stmt->close();
-		  
-		  
 	}
 	public function invia_sfida($sfida,$user){
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET sfida_corrente=? WHERE Username=?");
@@ -1979,15 +1895,12 @@ class MySqlDatabase implements Database{
 		$this->sec_mysqli = new mysqli($this->db_host, $this->sec_db_user , $this->sec_db_password, $this->db_database);
         $this->sec_mysqli->set_charset('utf8');
 		$stmt = $this->sec_mysqli->prepare("UPDATE ".USER_TABLE." SET sfida_corrente=NULL WHERE Username=?");
-		
 		$stmt->bind_param("s",$user);
-		
 		$stmt->execute();
-		
 		$stmt->close();
 	}
 	public function Get_stmt_login(){
-		$query = "SELECT ID, Username, Password, Salt FROM ".USER_TABLE." WHERE Username = ? AND sfida_corrente=? LIMIT 1";
+		$query = "SELECT ID, Username, Password FROM ".USER_TABLE." WHERE Username = ? AND sfida_corrente=? LIMIT 1";
 		return $this->sec_mysqli->prepare($query);
 	}
     public function Get_stmt_logged(){

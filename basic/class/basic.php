@@ -1,10 +1,12 @@
 <?php
 include("database.php");
 class Basic {
+    public $userdata = array();
 	//DB configuration
 	private $mysql_database;
 	public function __construct() {
-		$this->mysql_database = new BasicMySqlDatabase();
+        $this->mysql_database = new BasicMySqlDatabase();
+
 		 // set our custom session functions.
 		 session_set_save_handler(array($this, 'open_session'), array($this, 'close_session'), array($this, 'read_session'), array($this, 'write_session'), array($this, 'destroy_session'), array($this, 'gc_session'));
 	   
@@ -21,27 +23,8 @@ class Basic {
 	* PARAMS: ---
 	* RETURN: ---
 	*/
-	public function Show_header($is_card,$username=false,$logged=false,$photo=false){
-		/*if($this->Is_mobile()){
-		     echo '<div id="tmgheader" class="tmgheader tmgheader_mobile">
-		 		
-					<div class="tmgheader_mobile_logo">';
-						if($is_card)
-							echo '<a href="../index.php">'; 
-						else
-							echo '<a href="index.php">';
-						echo '<img src="../../image/banner/logo_headertmg_mobile.png" alt="Logo Topmanagergroup.com" title="Logo Topmanagergroup.com"/></a>
-					</div>
-					<div class="tmgheader_mobile_actions">
-						<div id="triggers_personal">';
-							if($username=="davidecrenna"){
-								echo '<img src="../../image/icone/icona_user.png" style="width:32px; height:32px;" alt="Accesso Personal Area." title="Login." rel="#personal_area"/>';
-							}
-						echo '</div>
-					</div>
-				
-		 		</div> ';
-		}else{*/
+	public function Show_header($is_card){
+        $this->userdata = $this->Get_user_logged();
 			 echo '<div id="tmgheader" class="tmgheader" align="center">
 			 		<div class="tmgheader_container">
 						<div class="tmgheader_logo">';
@@ -59,13 +42,13 @@ class Basic {
 						
 						echo '
 							<div id="menu_avatar_container" class="triggers_personal">';
-								$this->Show_menu_avatar($is_card,$username,$logged,$photo);
+								$this->Show_menu_avatar($is_card);
 							echo '</div>';
-							if(!$logged){
+							if(!$this->userdata["username"]){
 								if($is_card){
 									echo '
 										<div class="ti_piace_la_card">
-											<a href="../index.php?tab=iscrizione&u='.$username.'" class="banner_right_text">
+											<a href="../index.php?tab=iscrizione&u='.$this->userdata["username"].'" class="banner_right_text">
 												Ti piace la card?<br/>
 												Crea la tua gratis.
 											</a>
@@ -88,28 +71,25 @@ class Basic {
 		 		</div> ';
 			if(!$is_card)
 				$this->Show_overlay_login();
-		/*}*/
 	}
 	
 	
 	public function Show_overlay_login(){
 		echo '<div class="apple_overlay_login" id="login">
 				<div class="scrollable vertical_personal">
-					 <div class="item_personal" id="area_login">';
-						 //$this->Show_Login();
-					 echo ' </div>
+					 <div class="item_personal" id="area_login"></div>
 				</div>
-			  </div>';
+			 </div>';
 	}
 	public function Show_Login($prepath="",$in_login=NULL,$password=NULL,$error_messsage=NULL,$login_attempt=NULL){
 		echo "<div class='login_container'>
-			<div class='login_content_container'>
+			<div class='login_content_container' id='login_container'>
 				LOGIN
 			</div>
 			<div class='login_label'>NOME UTENTE</div>";
 			echo '<input type="text" name="login_user" id="login_user" class="login_input" value="" onchange="Javascript:Login_request_sfida(\''.$prepath.'\')" />';
 			echo "<div class='login_label'>PASSWORD</div>";
-			echo '<input type="password" class="login_input" name="login_pwd" id="login_pwd" value="" />';
+			echo '<input type="password" class="login_input" name="login_pwd" id="login_pwd" onkeydown="PressioneLogin(event)" value="" />';
 			echo "
 			<div class='styledbutton grey login_button' onclick='Javascript:Login_submit(\"".$prepath."\")'>
 				<span class='text14px'>LOGIN</a>
@@ -123,14 +103,16 @@ class Basic {
 	}
 	
 	/*
-	* PUBLIC FUNCTION: Show_menu_avatar($is_card,$username,$logged,$photo)
+	* PUBLIC FUNCTION: Show_menu_avatar($is_card)
 	* DESCRIPTION: Print the avatar menu
-	* PARAMS: boolean $is_card, string $username, boolean $logged, string $photo
+	* PARAMS: boolean $is_card
 	* RETURN: boolean value
 	*/
-	public function Show_menu_avatar($is_card=true,$username,$logged,$photo){
-		if(!$logged){
-			if(!$this->Is_mobile()||($is_card && $username== "davidecrenna")){
+	public function Show_menu_avatar($is_card=true){
+        $this->userdata = $this->Get_user_logged();
+		if(!$this->userdata){
+            echo '<input type="hidden" value="" id="avatar_username" />';
+			if(!$this->Is_mobile()||($is_card && $this->userdata["username"]== "davidecrenna")){
 				if($is_card){
 					echo '<span id="triggers_personal">
 							<a rel="#personal_area" style="color:#000">
@@ -150,23 +132,31 @@ class Basic {
 				}
 			}
 		}else{
+            echo '<input type="hidden" value="'.$this->userdata["username"].'" id="avatar_username" />';
 			echo '<ul class="avatar_header_menu">
 					<li>
 						<div class="header_button_utente">';
-							echo '<img src="../../'.USERS_PATH.$username.'/'.USER_PHOTO_PATH.'main/'.$photo.'" alt="Avatar Utente." title="Avatar '.$username.'." class="avatar_utente" /> &nbsp;&nbsp;'.strtoupper($username).'
+							echo '<img src="../../'.USERS_PATH.$this->userdata["username"].'/'.USER_PHOTO_PATH.'main/'.$this->userdata["photo"].'" alt="Avatar Utente." title="Avatar '.$this->userdata["username"].'." class="avatar_utente" /> &nbsp;&nbsp;'.strtoupper($this->userdata["username"]).'
 						';
 			
 						echo '</div>
 						<ul class="sub">
-							<li>
-								<a onclick="Logout()" style="color:#000">
+							<li>';
+                                if($is_card)
+                                    echo '<a onclick="Logout(\'../\')" style="color:#000">';
+                                else
+                                    echo '<a onclick="Logout(\'\')" style="color:#000">';
+                                echo '
 									<div class="avatar_header_menu_element"><img src="../../image/icone/logout.png" style="width:28px; height:28px; vertical-align:middle;" alt="Logout." title="Logout utente." /> LOGOUT					</div>
 								</a>
 							</li>
 							<li>
-								<span id="triggers_personal">
-									<a rel="#personal_area" style="color:#000">
-										<div class="avatar_header_menu_element">
+								<span id="triggers_personal">';
+								    if($is_card)
+									    echo '<a rel="#personal_area" style="color:#000">';
+                                    else
+                                        echo '<a href="'.$this->userdata["username"].'/personal_area" style="color:#000">';
+										echo '<div class="avatar_header_menu_element">
 											<img src="../../image/icone/icona_user.png" style="width:28px; height:28px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> PERSONAL AREA															
 										</div>
 									</a>
@@ -187,6 +177,17 @@ class Basic {
     public function Is_user($username){
 		return $this->mysql_database->Is_user($username);
 	}
+
+	/*
+	* PUBLIC FUNCTION: Is_email($email)
+	* DESCRIPTION: Return if a email exists or not in the DB
+	* PARAMS: string $email
+	* RETURN: boolean value
+	*/
+	public function Is_email($email){
+		return $this->mysql_database->Is_email($email);
+	}
+
 	/*
 	* PUBLIC FUNCTION: Print_phpinfo()
 	* DESCRIPTION: Print Server's php info 
@@ -200,13 +201,40 @@ class Basic {
 	
 	
 	public function Get_user_logged(){
-		if(isset($_SESSION['ID'])&&isset($_SESSION['Cognome'])&&isset($_SESSION['Username'])){
-			if(($_SESSION['ID'])&&($_SESSION['Cognome'])&&($_SESSION['Username'])){
-				return $_SESSION['Username'];
-			}else{
+		// Verifica che tutte le variabili di sessione siano impostate correttamente
+		if(isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
+			$user_id = $_SESSION['user_id'];
+			$login_string = $_SESSION['login_string'];
+			$username = $_SESSION['username'];
+			$user_browser = $_SERVER['HTTP_USER_AGENT']; // reperisce la stringa 'user-agent' dell'utente.
+			if ($stmt = $this->mysql_database->Get_stmt_avatar_logged()) {
+				$stmt->bind_param('i', $user_id); // esegue il bind del parametro '$user_id'.
+				$stmt->execute(); // Esegue la query creata.
+				$stmt->store_result();
+
+				if($stmt->num_rows == 1) { // se l'utente esiste
+					$stmt->bind_result($db_username, $db_password); // recupera le variabili dal risultato ottenuto.
+					$stmt->fetch();
+					$login_check = hash('sha512', $db_password.$user_browser);
+					if($login_check == $login_string) {
+						// Login eseguito!!!!
+                        $data["username"] = $db_username;
+                        $data["photo"] = $this->mysql_database->Get_main_photo_path($user_id);
+						return $data;
+					} else {
+						//  Login non eseguito
+						return false;
+					}
+				} else {
+					// Login non eseguito
+					return false;
+				}
+			} else {
+				// Login non eseguito
 				return false;
 			}
-		}else{
+		} else {
+			// Login non eseguito
 			return false;
 		}
 	}
@@ -264,6 +292,7 @@ class Basic {
 	   // This line regenerates the session and delete the old one. 
 	   // It also generates a new encryption key in the database. 
 	   session_regenerate_id(true);
+
 	}
 	function open_session() {
 	   return true;

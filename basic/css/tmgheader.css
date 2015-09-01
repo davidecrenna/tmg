@@ -53,6 +53,7 @@
 		width: 54%;
 		text-align: right;
 		min-width: 15.2em;
+		font-size: 0.8em;
 	}
 	.tmgheader_actions_card{
 		float: right;
@@ -361,6 +362,25 @@
 		position: relative;
 		top: -20%;
 	}
+	.recupero_btn{
+        margin-top: 1em;
+	}
+	.recupero_text{
+		font-size: 0.9em;
+		color:#000;
+	}
+    .ajax_recupero{
+        color: #000;
+        font-size: 0.70em;
+        margin-top: 1em;
+        padding-left: 0.8em;
+        text-align: left;
+        width: 24em;
+        position: relative;
+        height: 4em;
+        line-height: 1em;
+        /*background-color:red;*/
+    }
 	/* END OVERLAY LOGIN */
 	
 /* -----------------------------------

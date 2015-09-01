@@ -205,6 +205,13 @@ $(document).ready(function(){
 				window.location.href = '../' + username;   
 			},
 			onBeforeLoad: function() {
+                var username = $("#in_username").val();
+                var avatar_username = $("#avatar_username").val();
+                if(avatar_username!="") {
+                    if (avatar_username != username) {
+                        location.href = '../' + avatar_username + '/personal_area';
+                    }
+                }
 				$(window).scrollTop();
 			},
 			mask: {
@@ -239,6 +246,13 @@ function Inizialize_cols_height(){
 		}
 	}
 function Open_overlay_personal(tab){
+	var username = $("#in_username").val();
+	var avatar_username = $("#avatar_username").val();
+	if(avatar_username!="") {
+		if (avatar_username != username) {
+			location.href = '../' + avatar_username + '/personal_area';
+		}
+	}
     personal_tab_open = tab;
     personaloverlay.overlay().load();
 

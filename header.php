@@ -24,7 +24,8 @@
 	require_once "card/Class/favicon.inc.php";
 	require_once "card/Class/secure_login_class.php";
 	//END CARD CLASS -----------------------------------------------------------------------------
-	
+
+	require_once 'card/php/PasswordLib/PasswordLib.phar';
 	require_once('PHPMailer/class.phpmailer.php');
 	require_once('httpsocket/httpsocket.php');
 ?>

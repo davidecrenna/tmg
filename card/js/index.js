@@ -78,7 +78,7 @@ function Personal_password_save(){
 			$("#input_pass_corrente").val("");
 			$("#input_nuova_pass").val("");
 			$('#input_confirm_nuova_pass').val("");
-			var t=setTimeout("Logout(); return_to_the_card();",8000);
+			var t=setTimeout("Logout('../'); return_to_the_card();",8000);
 			
 		}
 	 },
@@ -300,28 +300,6 @@ function Unset_account_deleted(){
 		return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function PressioneInvioLogin(e) {
       // IE
@@ -1211,7 +1189,6 @@ function Personal_login_request_sfida(prepath){
 function Personal_form_submit(prepath){
     var sfida = $("#copia_sfida").val();
     var pwd = $("#personal_login_pwd").val();
-    var pwd = hex_sha512(pwd);
     var login_user = $("#personal_login_user").val();
 
     $('#personal_login_pwd').val("");
@@ -1234,16 +1211,14 @@ function Personal_form_submit(prepath){
                 var username=$("#in_username").val();
                 if(obj.user == username){
                     Load_personal_area("interfaccia");
-                    Aggiorna_menu_avatar();
-
                 }else{
-                    location.href=prepath+obj.user+'/index.php/personal_area';
+                    location.href=prepath+obj.user+'/personal_area';
                 }
             }else{
                 if(obj.msg==1)
-                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;color:#000;">Hai dimenticato la password?</a>');
+                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
                 if(obj.msg==2)
-                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="Javascript:show_recupero_password()" style="color:#000;cursor:pointer;">recupero password</a>');
+                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="Javascript:show_recupero_password()" style="color:#000;cursor:pointer;text-decoration: underline;">recupero password</a>');
             }
         },
         error:function(){
@@ -1251,67 +1226,8 @@ function Personal_form_submit(prepath){
             $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
         }
     });
+}
 
-/*
-	var copia_sfida = $("#copia_sfida").val();
-	codifica_password();
-	var pwd = $("#personal_login_pwd").val();
-	var personal_login_user = $("#personal_login_user").val();
-	
-	
-	$.ajax({
-	  type: 'POST',
-	  url: "../card/php/card_handler.php",
-	  data: { __submit: "true", 
-				user: personal_login_user,
-				pwd: pwd,
-				copia_sfida: copia_sfida
-			 },
-	  dataType: "html",
-	  beforeSend:function(){
-		$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
-	  },
-	  success:function(data){
-		  var obj = jQuery.parseJSON(data);
-		  if(obj.result=="true"){
-			  var username=$("#in_username").val();
-			  if(obj.user == username){
-				  Load_personal_area();
-				  Aggiorna_menu_avatar();
-				  
-			  }else{
-				  location.href='../'+obj.user+'/index.php?personal_area=true';
-			  }
-		  }else{
-			 $('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
-			  
-		  }
-	  },
-	  error:function(){
-		// failed request; give feedback to user
-		$('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
-	  }
-	});*/
-}
-function Logout(){
-	var ajaxRequest = create_ajaxRequest();
-	ajaxRequest.onreadystatechange = function(){
-		if(ajaxRequest.readyState == 4){
-			Aggiorna_menu_avatar();
-			location.href='../'+username;
-		}
-	}
-	
-	var username=document.getElementById("in_username").value;
-	var params="Logout="+true+"&Username="+username;
-	
-	//Send the proper header infomation along with the request
-	ajaxRequest.open("POST", "../card/php/card_handler.php" , true);
-	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajaxRequest.setRequestHeader("Content-length", params .length);
-	ajaxRequest.setRequestHeader("Connection", "close");
-	ajaxRequest.send(params);
-}
 function Aggiorna_menu_avatar(){
 	var username = $("#in_username").val();
 	$.ajax({
@@ -1334,56 +1250,77 @@ function Aggiorna_menu_avatar(){
 	 });
 }
 function Load_personal_area(tab){
-	var username = $("#in_username").val();
-	$.ajax({
-	  type: 'POST',
-	  url: "../card/php/card_handler.php",
-	  data: { Check_user_logged: "true", 
-				Username: username
-			 },
-	  dataType: "html",
-	  beforeSend:function(){
-		//$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
-	  },
-	  success:function(checklogged){
-		  	  $.ajax({
-				  type: 'POST',
-				  url: "../card/php/card_handler.php",
-				  data: { load_personal_area: "true", 
-							Username: username
-						 },
-				  dataType: "html",
-				  beforeSend:function(){
-					//$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
-				  },
-				  success:function(data){
-					  $("#personal_area_login").html(data);
-					  var obj = jQuery.parseJSON(checklogged);
-		  			  if(obj.result=="true"){
-						  document.getElementById("biglietto_preview").innerHTML="<iframe src='../card/php/bigliettovisita_preview.php?u="+username+"' width='407' height='247' frameborder='0'></iframe>";
-						  document.getElementById("dove_siamo_preview").innerHTML="<iframe src='../card/php/show_maps_preview.php?u="+username+"' width='407' height='247' frameborder='0'></iframe>";
-						  GeneratePersonalMenu();
-						  Refresh_notifica_message();
-						  Set_progress_size_bar();
-                          if(tab!="interfaccia"){
-                              personal_tab_change(tab);
-                          }
-					  }
-				  },
-				  error:function(){
-					// failed request; give feedback to user
-					$('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
-				  }
-			   });
+    $.ajax({
+        type: 'POST',
+        url: "../card/php/card_handler.php",
+        data: { Aggiorna_menu_avatar: "true"
+        },
+        dataType: "html",
+        beforeSend:function(){
+            $('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
+        },
+        success:function(data){
+            $("#menu_avatar_container").html(data);
+            var username = $("#in_username").val();
+            var avatar_username = $("#avatar_username").val();
+            if(avatar_username!="") {
+                if (avatar_username != username) {
+                    location.href = '../' + avatar_username + '/personal_area';
+                }
+            }
+            $.ajax({
+                type: 'POST',
+                url: "../card/php/card_handler.php",
+                data: { Check_user_logged: "true",
+                    Username: avatar_username
+                },
+                dataType: "html",
+                beforeSend:function(){
+                    //$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
+                },
+                success:function(checklogged){
+                   $.ajax({
+                        type: 'POST',
+                        url: "../card/php/card_handler.php",
+                        data: { load_personal_area: "true",
+                            Username: avatar_username
+                        },
+                        dataType: "html",
+                        beforeSend:function(){
+                            //$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
+                        },
+                        success:function(data){
+                            $("#personal_area_login").html(data);
+                            var obj = jQuery.parseJSON(checklogged);
+                            if(obj.result=="true"){
+                                document.getElementById("biglietto_preview").innerHTML="<iframe src='../card/php/bigliettovisita_preview.php?u="+avatar_username+"' width='407' height='247' frameborder='0'></iframe>";
+                                document.getElementById("dove_siamo_preview").innerHTML="<iframe src='../card/php/show_maps_preview.php?u="+avatar_username+"' width='407' height='247' frameborder='0'></iframe>";
+                                GeneratePersonalMenu();
+                                Refresh_notifica_message();
+                                Set_progress_size_bar();
+                                if(tab!="interfaccia"&&tab!=""){
+                                    personal_tab_change(tab);
+                                }
+                            }
+                        },
+                        error:function(){
+                            // failed request; give feedback to user
+                            $('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+                        }
+                    });
 
-	  },
-	  error:function(){
-		// failed request; give feedback to user
-		$('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
-	  }
-	});
-	
-	
+                },
+                error:function(){
+                    // failed request; give feedback to user
+                    $('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+                }
+            });
+        },
+        error:function(){
+            // failed request; give feedback to user
+            $('#ajax_login').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+        }
+    });
 }
 
 
@@ -1835,45 +1772,78 @@ function torna_filebox_public_main(){
 
 
 function show_recupero_password(){
-	var ajaxRequest = create_ajaxRequest();
-	ajaxRequest.onreadystatechange = function(){
-		if(ajaxRequest.readyState == 4){
-			document.getElementById('personal_login_container').innerHTML = ajaxRequest.responseText;
-		}
-	}
-	
-	var username = document.getElementById("in_username").value;
-	var params="Recupero_pass="+true+"&Username="+username;
-	
-	//Send the proper header infomation along with the request
-	ajaxRequest.open("POST", "../card/php/card_handler.php" , true);
-	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajaxRequest.setRequestHeader("Content-length", params .length);
-	ajaxRequest.setRequestHeader("Connection", "close");
-	ajaxRequest.send(params);
+	var username = $("#in_username").val();
+    $.ajax({
+        type: 'POST',
+        url: "../card/php/card_handler.php",
+        data: { Load_recupero_pass: "true",
+            Username: username
+        },
+        dataType: "html",
+        beforeSend:function(){
+            $('#login_container').html('<img src="../../image/icone/spinner-big.gif" style="width:10%" alt="Loading..." />');
+        },
+        success:function(data){
+            $('#login_container').html(data);
+        },
+        error:function(){
+            // failed request; give feedback to user
+            $('#login_container').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+
+        }
+    });
 }
-function invia_recupero(){
-	var ajaxRequest = create_ajaxRequest();
-	ajaxRequest.onreadystatechange = function(){
-		if(ajaxRequest.readyState == 4){
-			alert(ajaxRequest.responseText);/*
-			if($.trim(ajaxRequest.responseText)=="1")
-				Show_Setting_Saved('recupero_saved');
-			else
-				Show_Setting_Saved('recupero_error');
-			*/
-		}
+function PressioneInvioRecupero(e) {
+	// IE
+	var tasto;
+	if(window.event){
+		tasto = e.keyCode;
 	}
-	var username = document.getElementById("in_username").value;
-	
-	var params="Invia_recupero="+true+"&Username="+username;
-	
-	//Send the proper header infomation along with the request
-	ajaxRequest.open("POST", "../card/php/card_handler.php" , true);
-	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajaxRequest.setRequestHeader("Content-length", params .length);
-	ajaxRequest.setRequestHeader("Connection", "close");
-	ajaxRequest.send(params);	
+	// Netscape/Firefox/Opera
+	else if(e.which){
+		tasto = e.which;
+	}
+	if (tasto == 13) {
+		Invia_recupero();
+	}
+}
+function Invia_recupero(){
+	var recupero = $("#personal_login_recupero").val();
+
+	$.ajax({
+		type: 'POST',
+		url: "../card/php/card_handler.php",
+		data: { Invia_recupero: "true",
+			recupero: recupero
+		},
+		dataType: "html",
+		beforeSend:function(){
+			$('#ajax_recupero').html('<img src="../../image/icone/spinner-big.gif" style="width:10%" alt="Loading..." />');
+		},
+		success:function(data){
+			//$('#ajax_recupero').html(data);
+			/* echo "<div id='recupero_saved' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='../image/icone/ok.png' alt='Informazioni salvate' width='22' height='19' /> Una email ti è stata inviata all'indirizzo ".$this->personalemail.". Per eventuali problemmi contattaci a info@topmanagergroup.com.</p></div>";
+			 echo "<div id='recupero_error' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='../image/icone/error.png' alt='Informazioni salvate' width='22' height='19' /> Si è verificato un problema nell'invio della e-mail. Se non sei iscritto ancora al gruppo visita la nostra <a href='../index.php' style='color:#000;'>Homepage</p></a></p></div>";*/
+			/*
+			 if($.trim(ajaxRequest.responseText)=="1")
+			 Show_Setting_Saved('recupero_saved');
+			 else
+			 Show_Setting_Saved('recupero_error');
+			 */
+			var obj = jQuery.parseJSON(data);
+			if(obj.result=="true"){
+				$('#ajax_recupero').html("Una email è stata inviata all'indirizzo "+obj.address+".");
+			}else{
+				$('#ajax_recupero').html("Account non trovato. L'username o l'indirizzo inserito non è presente nel Database.");
+			}
+		},
+		error:function(){
+			// failed request; give feedback to user
+			$('#ajax_recupero').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+
+		}
+	});
+
 }
 function torna_login(){
 	var ajaxRequest = create_ajaxRequest();

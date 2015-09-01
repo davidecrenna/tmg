@@ -1,7 +1,8 @@
 <?php
-   require_once "headerbasic.php";
-   include("header.php");
-   $login = new Login();
+    require_once "headerbasic.php";
+    include("header.php");
+    $login = new Login();
+    $basic->sec_session_start();
 ?>
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml">

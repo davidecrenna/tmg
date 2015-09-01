@@ -3,7 +3,9 @@ define('DB_ERROR_LOG_FILE','../../config/db_log_file.txt');
 interface BasicDatabase
 {
 	function Is_user($username);
-	
+	function Is_email($email);
+    function Get_stmt_avatar_logged();
+    function Get_main_photo_path($user_id);
 	//SESSION
 	function Read_stmt_session();
 	function Write_stmt_session();
@@ -47,9 +49,30 @@ class BasicMySqlDatabase implements BasicDatabase{
 	   $this->sec_mysqli->kill($thread_id);
 	   $this->sec_mysqli->close();
    }
+
+    public function Get_stmt_avatar_logged(){
+        $query = "SELECT Username, Password FROM ".USER_TABLE." WHERE ID = ? LIMIT 1";
+        return $this->sec_mysqli->prepare($query);
+    }
+
+    public function Get_main_photo_path($user_id){
+        $query = "SELECT photo_1 FROM ".USER_DATA_TABLE." WHERE id_user= ?";
+        if($stmt = $this->sec_mysqli->prepare($query)){
+            $stmt->bind_param('i',$user_id);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($photo);
+
+            $stmt->fetch();
+            if($photo==NULL){
+                return false;
+            }else{
+                return $photo;
+            }
+        }
+    }
    
    public function Is_user($username){
-	 $ctrl=1;
 	 $query = "SELECT Username FROM ".USER_TABLE." WHERE Username= ?";
 	 if($stmt = $this->sec_mysqli->prepare($query)){
 		$stmt->bind_param('s',$username);
@@ -59,17 +82,29 @@ class BasicMySqlDatabase implements BasicDatabase{
 
 		 $stmt->fetch();
 		 if($user==NULL){
-			  $ctrl=1;
-		  }else{   
-			  $ctrl=0;
+             return false;
+		  }else{
+             return true;
 		 }
 	  }
-	  
-	  if($ctrl==0)
-		  return true;
-	  return false;
-		
    }
+	public function Is_email($email){
+		$query = "SELECT Username FROM ".USER_TABLE." WHERE Email= ?";
+		if($stmt = $this->sec_mysqli->prepare($query)){
+			$stmt->bind_param('s',$email);
+			$stmt->execute();
+			$stmt->store_result();
+			$stmt->bind_result($user);
+
+			$stmt->fetch();
+			if($user==NULL){
+                return false;
+			}else{
+                return $user;
+			}
+		}
+	}
+
    
    //SESSION
    public function Read_stmt_session(){

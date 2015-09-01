@@ -49,8 +49,7 @@
 		if($card->is_user_logged()){
 			 $json_string = json_encode(array("result"=>"true")); 
 			 echo $json_string;
-		}else{ 					
-			 $card->Logout();
+		}else{
 			  $json_string = json_encode(array("result"=>"false")); 
 			 echo $json_string;
 		 }	
@@ -92,8 +91,7 @@
 	}
 	if(isset($_POST["Aggiorna_menu_avatar"]))
 	{
-		$card = new Card(NULL,$_POST["Username"]);
-		$card->basic->Show_menu_avatar(true,$card->username, $card->is_user_logged(),$card->photo1_path);
+		$basic->Show_menu_avatar(true);
 	}
 	
 	
@@ -1690,13 +1688,29 @@
 
 //-------RECUPERO PASSWORD-------------------------------------------------------------------
 
-if(isset($_POST['Recupero_pass'])){
+if(isset($_POST['Load_recupero_pass'])){
 	$card = new Card(NULL,$_POST["Username"]);
 	echo $card->Show_recupero_password_on_card();
 }
-if(isset($_POST['Invia_recupero'])){
-	$card = new Card(NULL,$_POST["Username"]);
-	echo $card->Recupero_password();	
+if(isset($_POST['Invia_recupero'])) {
+	$recupero = $_POST["recupero"];
+    $user = $basic->Is_email($recupero);
+    if($user){
+        $card = new Card(NULL, $user);
+        echo $card->Recupero_password();
+        $json_string = json_encode(array("result"=>"true","address"=>$recupero));
+        echo $json_string;
+        return;
+    }else if ($basic->Is_user($recupero)){
+        $card = new Card(NULL, $recupero);
+        echo $card->Recupero_password();
+        $json_string = json_encode(array("result"=>"true","address"=>$card->personalemail));
+        echo $json_string;
+        return;
+    }
+
+    $json_string = json_encode(array("result"=>"false"));
+    echo $json_string;
 }
 if(isset($_POST['Torna_login'])){
 	$card = new Card(NULL,$_POST["Username"]);
