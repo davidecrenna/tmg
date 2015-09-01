@@ -48,6 +48,13 @@
       <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="time" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
     </table>
+    <table name="notify_password_email" schema="" catalog="topmanager_db" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="password" sqlType="CHAR" precision="16" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <index name="unique_ID" unique="true" columns="ID"/>
+    </table>
     <table name="promoter" schema="" catalog="topmanager_db" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
@@ -77,7 +84,6 @@
       <column name="Username" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Email" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Password" sqlType="CHAR" precision="128" scale="0" nullable="true" jdbcType="1"/>
-      <column name="Salt" sqlType="CHAR" precision="128" scale="0" nullable="false" jdbcType="1"/>
       <column name="Nome" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Cognome" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Professione" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
@@ -95,6 +101,7 @@
       <column name="alternative_url" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="remove_date" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="eph" sqlType="CHAR" precision="128" scale="0" nullable="false" jdbcType="1"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="user_abuse" schema="" catalog="topmanager_db" type="TABLE">

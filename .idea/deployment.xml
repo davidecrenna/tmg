@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Topmanager DEV" uploadOnCheckin="13b0ec58-dc93-4184-b600-14abeaa473c8" showNewOnTargetInSync="false">
+  <component name="PublishConfigData" serverName="Topmanager DEV" showNewOnTargetInSync="false">
     <serverData>
       <paths name="Topmanager DEV">
         <serverdata>
@@ -17,6 +17,5 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="Topmanager DEV" />
   </component>
 </project>
