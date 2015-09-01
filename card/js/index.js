@@ -1191,6 +1191,10 @@ function Personal_form_submit(prepath){
     var pwd = $("#personal_login_pwd").val();
     var login_user = $("#personal_login_user").val();
 
+	if(pwd == "" || login_user == "") {
+		$('#ajax_login').html('<img src="' + prepath + 'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="show_recupero_password(\'../\',\'1\')" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
+		return false;
+	}
     $('#personal_login_pwd').val("");
     $("#personal_login_user").val("");
     $.ajax({
@@ -1216,9 +1220,9 @@ function Personal_form_submit(prepath){
                 }
             }else{
                 if(obj.msg==1)
-                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
+                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="show_recupero_password(\'../\',\'1\')" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
                 if(obj.msg==2)
-                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="Javascript:show_recupero_password()" style="color:#000;cursor:pointer;text-decoration: underline;">recupero password</a>');
+                    $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="show_recupero_password(\'../\',\'1\')" style="color:#000;cursor:pointer;text-decoration: underline;">recupero password</a>');
             }
         },
         error:function(){
@@ -1290,7 +1294,7 @@ function Load_personal_area(tab){
                             //$('#ajax_login').html('<img src="../../image/icone/ajax_small.gif" alt="Loading..." />');
                         },
                         success:function(data){
-                            $("#personal_area_login").html(data);
+                            $("#area_login").html(data);
                             var obj = jQuery.parseJSON(checklogged);
                             if(obj.result=="true"){
                                 document.getElementById("biglietto_preview").innerHTML="<iframe src='../card/php/bigliettovisita_preview.php?u="+avatar_username+"' width='407' height='247' frameborder='0'></iframe>";
@@ -1770,99 +1774,6 @@ function torna_filebox_public_main(){
 	document.getElementById("file_box_public_main").style.display = "block";
 }
 
-
-function show_recupero_password(){
-	var username = $("#in_username").val();
-    $.ajax({
-        type: 'POST',
-        url: "../card/php/card_handler.php",
-        data: { Load_recupero_pass: "true",
-            Username: username
-        },
-        dataType: "html",
-        beforeSend:function(){
-            $('#login_container').html('<img src="../../image/icone/spinner-big.gif" style="width:10%" alt="Loading..." />');
-        },
-        success:function(data){
-            $('#login_container').html(data);
-        },
-        error:function(){
-            // failed request; give feedback to user
-            $('#login_container').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
-
-        }
-    });
-}
-function PressioneInvioRecupero(e) {
-	// IE
-	var tasto;
-	if(window.event){
-		tasto = e.keyCode;
-	}
-	// Netscape/Firefox/Opera
-	else if(e.which){
-		tasto = e.which;
-	}
-	if (tasto == 13) {
-		Invia_recupero();
-	}
-}
-function Invia_recupero(){
-	var recupero = $("#personal_login_recupero").val();
-
-	$.ajax({
-		type: 'POST',
-		url: "../card/php/card_handler.php",
-		data: { Invia_recupero: "true",
-			recupero: recupero
-		},
-		dataType: "html",
-		beforeSend:function(){
-			$('#ajax_recupero').html('<img src="../../image/icone/spinner-big.gif" style="width:10%" alt="Loading..." />');
-		},
-		success:function(data){
-			//$('#ajax_recupero').html(data);
-			/* echo "<div id='recupero_saved' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='../image/icone/ok.png' alt='Informazioni salvate' width='22' height='19' /> Una email ti è stata inviata all'indirizzo ".$this->personalemail.". Per eventuali problemmi contattaci a info@topmanagergroup.com.</p></div>";
-			 echo "<div id='recupero_error' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='../image/icone/error.png' alt='Informazioni salvate' width='22' height='19' /> Si è verificato un problema nell'invio della e-mail. Se non sei iscritto ancora al gruppo visita la nostra <a href='../index.php' style='color:#000;'>Homepage</p></a></p></div>";*/
-			/*
-			 if($.trim(ajaxRequest.responseText)=="1")
-			 Show_Setting_Saved('recupero_saved');
-			 else
-			 Show_Setting_Saved('recupero_error');
-			 */
-			var obj = jQuery.parseJSON(data);
-			if(obj.result=="true"){
-				$('#ajax_recupero').html("Una email è stata inviata all'indirizzo "+obj.address+".");
-			}else{
-				$('#ajax_recupero').html("Account non trovato. L'username o l'indirizzo inserito non è presente nel Database.");
-			}
-		},
-		error:function(){
-			// failed request; give feedback to user
-			$('#ajax_recupero').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
-
-		}
-	});
-
-}
-function torna_login(){
-	var ajaxRequest = create_ajaxRequest();
-	ajaxRequest.onreadystatechange = function(){
-		if(ajaxRequest.readyState == 4){
-			document.getElementById('personal_login_container').innerHTML = ajaxRequest.responseText;
-		}
-	}
-
-	var username = document.getElementById("in_username").value;
-	var params="Torna_login="+true+"&Username="+username;
-	
-	//Send the proper header infomation along with the request
-	ajaxRequest.open("POST", "../card/php/card_handler.php" , true);
-	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajaxRequest.setRequestHeader("Content-length", params .length);
-	ajaxRequest.setRequestHeader("Connection", "close");
-	ajaxRequest.send(params);	
-}
 
 function forminput_login_click(){
 	document.getElementById('user').value = "";
@@ -2837,10 +2748,6 @@ function open_card(username){
 function go_to_webmail(){
 	window.open('../roundcube/');
 }
-
-
-
-
 
 //------------------------------------------------------------------------------------------------------------
 //OTHER STUFF START

@@ -94,23 +94,7 @@ function Login(){
     ajax.send(risorsa);
     return true;
 }
-function show_recupero_password(){
-	var ajaxRequest = create_ajaxRequest();
-	ajaxRequest.onreadystatechange = function(){
-		if(ajaxRequest.readyState == 4){
-			document.getElementById('personal_login_container').innerHTML = ajaxRequest.responseText;
-		}
-	}
 
-	var params="Recupero_pass_error="+true;
-	
-	//Send the proper header infomation along with the request
-	ajaxRequest.open("POST", "card/php/card_handler.php" , true);
-	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajaxRequest.setRequestHeader("Content-length", params .length);
-	ajaxRequest.setRequestHeader("Connection", "close");
-	ajaxRequest.send(params);
-}
 
 function invia_recupero(){
 	var ajaxRequest = create_ajaxRequest();
@@ -126,23 +110,6 @@ function invia_recupero(){
 	var email = document.getElementById("in_recupero_email").value;
 	var params="Invia_recupero="+true;
 	params+="&email="+email;
-	
-	//Send the proper header infomation along with the request
-	ajaxRequest.open("POST", "card/php/card_handler.php" , true);
-	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajaxRequest.setRequestHeader("Content-length", params .length);
-	ajaxRequest.setRequestHeader("Connection", "close");
-	ajaxRequest.send(params);	
-}
-function torna_login(){
-	var ajaxRequest = create_ajaxRequest();
-	ajaxRequest.onreadystatechange = function(){
-		if(ajaxRequest.readyState == 4){
-			document.getElementById('personal_login_container').innerHTML = ajaxRequest.responseText;
-		}
-	}
-
-	var params="Torna_login_error="+true;
 	
 	//Send the proper header infomation along with the request
 	ajaxRequest.open("POST", "card/php/card_handler.php" , true);

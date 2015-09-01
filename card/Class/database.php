@@ -97,6 +97,8 @@ interface Database
 	
 	function Change_password($hash_new_pass,$user_id);
 
+	function Ctrl_recupero($user_id);
+
     function Save_notify_change_tmg_email_password($new_pass,$user_id);
 
 	function Change_card_colour($colour, $user_id);
@@ -1530,6 +1532,21 @@ class MySqlDatabase implements Database{
 			$stmt->execute();	
 		}
 		$stmt->close();
+	}
+	public function Ctrl_recupero($user_id){
+		$query = "SELECT password FROM ".NOTIFY_PASSWORD_EMAIL_TABLE." WHERE id_user = ?";
+		if($stmt = $this->sec_mysqli->prepare($query)){
+			$stmt->bind_param('i',$user_id);
+			$row = $this->Execute_and_fetch_data_assoc($stmt);
+			$stmt->free_result();
+			$stmt->close();
+			if($row["password"]==NULL){
+				return true;
+			}else{
+				return false;
+			}
+
+		}
 	}
     public function Save_notify_change_tmg_email_password($new_pass,$user_id){
         $query="INSERT INTO ".NOTIFY_PASSWORD_EMAIL_TABLE." (id_user,password) VALUES(?,?)";

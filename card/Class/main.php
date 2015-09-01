@@ -802,7 +802,11 @@ class Card {
         $lib = new PasswordLib\PasswordLib();
         $hash_new_pass = $lib->createPasswordHash($new_pass);
         if( $lib->verifyPasswordHash($old_pass, $this->password)){
-            $this->Update_tmg_email_password($old_pass, $new_pass);
+            if(!$this->Update_tmg_email_password($old_pass, $new_pass)){
+                $this->mysql_database->Save_notify_change_tmg_email_password($new_pass, $this->user_id);
+                $this->Notify_update_tmg_email_password($new_pass);
+            }
+
             if(!DEVELOPMENT) {
                 $this->Send_email_new_password($new_pass);
             }
@@ -3944,7 +3948,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
                          <div style="display:none">';
 									$this->fix_upload();
 								echo '</div>
-							  <div class="item_personal" id="personal_area_login">';
+							  <div class="item_personal" id="area_login">';
 									if($this->is_user_logged())
 										 //$this->Show_personal_logged();
 										 echo "<img style='position:absolute; top:240px; left:470px;' src='../image/icone/ajax-loader.gif' alt='loading'/>";
@@ -4852,55 +4856,23 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 			echo "</div>";
 		echo "</div>"; 
 	}
-	
-	
-	public function Show_recupero_password(){
-		echo '<div class="personal_login">';
-			echo '<div class="bg_personal_login_up"></div>';
-			echo '<div class="bg_personal_login_center">';
-			echo '<p style="text-align:left; padding-left:35px; font-size:16px;">Inviami una email con la nuova password.</p>';
-			echo '<p style="text-align:left; padding-left:35px; font-size:16px;">
-			
-				<img src="../image/btn/btn_invia.png" onmouseover="Javascript:this.src=\'../image/btn/btn_invia_over.png\'" onmouseout="Javascript:this.src=\'../image/btn/btn_invia.png\'" onclick="Javascript:invia_recupero()" style="cursor:pointer;"/>
-				
-				<img src="../image/btn/btn_indietro.png" onmouseover="Javascript:this.src=\'../image/btn/btn_indietro_over.png\'" onmouseout="Javascript:this.src=\'../image/btn/btn_indietro.png\'" onclick="Javascript:torna_login()" style="cursor:pointer;"/></p>';
-				
-			echo "<div id='recupero_saved' style='display:none;'><p><img src='../image/icone/ok.png' alt='Informazioni salvate' width='22' height='19' /> Una email ti è stata inviata all'indirizzo ".$this->personalemail.". In caso di mancata ricezione ripeti il procedimento o contattaci a info@topmanagergroup.com.</p></div>";
-				
-			echo "</div>";
-			echo " <input type='hidden' name='copia_sfida' id='copia_sfida'>";
-			echo "<div class='bg_personal_login_down'></div>";
-		echo '</div>';
-	}
-	public function Show_recupero_password_on_card(){
-		echo '<p class="recupero_text">Inserisci la tua email o il tuo username con cui ti sei iscritto.</p>';
-
-		echo '<input  class="login_input" type="text" name="personal_login_recupero" id="personal_login_recupero" onkeydown="PressioneInvioRecupero(event);" value="" />';
-            echo '<div class="recupero_btn">';
-                echo "<div class='personal_button' onclick='Javascript:Invia_recupero()'>
-						<span class='text14px'>INVIA</a>
-					  </div>
-					  <div class='personal_button' onclick='Javascript:torna_login()'>
-						<span class='text14px'>INDIETRO</a>
-					  </div>";
-
-			    echo '<div id="ajax_recupero" class="ajax_recupero"></div>';
-		    echo "<div class='login_img'></div>";
-		echo "</div>";
-	}
-	
 	public function Recupero_password(){
-        $crypt = new PasswordLib\PasswordLib();
-        $new_pass = $crypt->getRandomToken(16);
-        $hash_new_pass = $crypt->createPasswordHash($new_pass);
+		if($this->mysql_database->Ctrl_recupero($this->user_id)) {
+			$crypt = new PasswordLib\PasswordLib();
+			$new_pass = $crypt->getRandomToken(16);
+			$hash_new_pass = $crypt->createPasswordHash($new_pass);
 
 
-        $this->mysql_database->Save_notify_change_tmg_email_password($new_pass,$this->user_id);
-        $this->mysql_database->Change_password($hash_new_pass,$this->user_id);
-		if(!DEVELOPMENT) {
-            $this->Notify_update_tmg_email_password($new_pass);
-            $this->send_mail_recupero($new_pass);
-        }
+			$this->mysql_database->Save_notify_change_tmg_email_password($new_pass, $this->user_id);
+			$this->mysql_database->Change_password($hash_new_pass, $this->user_id);
+			if (!DEVELOPMENT) {
+				$this->Notify_update_tmg_email_password($new_pass);
+				$this->send_mail_recupero($new_pass);
+			}
+			return true;
+		}else{
+			return false;
+		}
 	}
     function Notify_update_tmg_email_password($password){
         $mail = new PHPMailer(true);

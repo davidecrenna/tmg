@@ -743,7 +743,7 @@
 		$card = new Card(NULL,$_POST["Username"]);
 		if($card->is_user_logged()){
 			if($card->Update_impostazioni_password($_POST["old_pass"],$_POST["new_pass"])){
-				$json_string = json_encode(array("result"=>"true","email"=>$card->Get_member_email())); 
+				$json_string = json_encode(array("result"=>"true","email"=>$card->personalemail));
 				echo $json_string;
 				$card->Logout();
 			}else{
@@ -1689,47 +1689,36 @@
 //-------RECUPERO PASSWORD-------------------------------------------------------------------
 
 if(isset($_POST['Load_recupero_pass'])){
-	$card = new Card(NULL,$_POST["Username"]);
-	echo $card->Show_recupero_password_on_card();
+	echo $basic->Show_recupero_password($_POST["prepath"],$_POST["iscard"]);
 }
 if(isset($_POST['Invia_recupero'])) {
 	$recupero = $_POST["recupero"];
     $user = $basic->Is_email($recupero);
     if($user){
         $card = new Card(NULL, $user);
-        echo $card->Recupero_password();
-        $json_string = json_encode(array("result"=>"true","address"=>$recupero));
+        if($card->Recupero_password()){
+			$json_string = json_encode(array("result"=>"0","address"=>$recupero));
+		}else{
+			$json_string = json_encode(array("result"=>"1","address"=>$recupero));
+		}
+
         echo $json_string;
         return;
     }else if ($basic->Is_user($recupero)){
         $card = new Card(NULL, $recupero);
-        echo $card->Recupero_password();
-        $json_string = json_encode(array("result"=>"true","address"=>$card->personalemail));
+		if($card->Recupero_password()){
+			$json_string = json_encode(array("result"=>"0","address"=>$card->personalemail));
+		}else{
+			$json_string = json_encode(array("result"=>"1","address"=>$card->personalemail));
+		}
         echo $json_string;
         return;
     }
 
-    $json_string = json_encode(array("result"=>"false"));
+    $json_string = json_encode(array("result"=>"2"));
     echo $json_string;
 }
-if(isset($_POST['Torna_login'])){
-	$card = new Card(NULL,$_POST["Username"]);
-	echo $card->Show_personal_login_on_card();
-}
 
-if(isset($_POST['Recupero_pass_error'])){
-	$login = new Login();
-	echo $login->Show_recupero_password();
-}
-if(isset($_POST['Invia_recupero_error'])){
-	$login = new Login();
-	echo $login->Recupero_password($_POST["email"]);	
-}
-if(isset($_POST['Torna_login_error'])){
-	$login = new Login();
-	echo $login->Show_login();
-}
-		
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------

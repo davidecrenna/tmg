@@ -72,7 +72,74 @@ class Basic {
 			if(!$is_card)
 				$this->Show_overlay_login();
 	}
-	
+
+
+    /*
+	* PUBLIC FUNCTION: Show_menu_avatar($is_card)
+	* DESCRIPTION: Print the avatar menu
+	* PARAMS: boolean $is_card
+	* RETURN: boolean value
+	*/
+    public function Show_menu_avatar($is_card=true){
+        $this->userdata = $this->Get_user_logged();
+        if(!$this->userdata){
+            echo '<input type="hidden" value="" id="avatar_username" />';
+            if(!$this->Is_mobile()||($is_card && $this->userdata["username"]== "davidecrenna")){
+                if($is_card){
+                    echo '<span id="triggers_personal">
+							<a rel="#personal_area" style="color:#000">
+								<div class="card_menu_avatar_text">
+									PERSONAL AREA
+								</div>
+								<div class="card_menu_avatar_icon">
+									<img src="../../image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." />
+								</div>
+
+							</a>
+						  </span>';
+                }else{
+                    echo '<span id="overlay_login"><a rel="#login" style="color:#000">
+						<img src="../../image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> LOGIN
+					</a></span>';
+                }
+            }
+        }else{
+            echo '<input type="hidden" value="'.$this->userdata["username"].'" id="avatar_username" />';
+            echo '<ul class="avatar_header_menu">
+					<li>
+						<div class="header_button_utente">';
+            echo '<img src="../../'.USERS_PATH.$this->userdata["username"].'/'.USER_PHOTO_PATH.'main/'.$this->userdata["photo"].'" alt="Avatar Utente." title="Avatar '.$this->userdata["username"].'." class="avatar_utente" /> &nbsp;&nbsp;'.strtoupper($this->userdata["username"]).'
+						';
+
+            echo '</div>
+						<ul class="sub">
+							<li>';
+            if($is_card)
+                echo '<a onclick="Logout(\'../\')" style="color:#000">';
+            else
+                echo '<a onclick="Logout(\'\')" style="color:#000">';
+            echo '
+									<div class="avatar_header_menu_element"><img src="../../image/icone/logout.png" style="width:28px; height:28px; vertical-align:middle;" alt="Logout." title="Logout utente." /> LOGOUT					</div>
+								</a>
+							</li>
+							<li>
+								<span id="triggers_personal">';
+            if($is_card)
+                echo '<a rel="#personal_area" style="color:#000">';
+            else
+                echo '<a href="'.$this->userdata["username"].'/personal_area" style="color:#000">';
+            echo '<div class="avatar_header_menu_element">
+											<img src="../../image/icone/icona_user.png" style="width:28px; height:28px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> PERSONAL AREA
+										</div>
+									</a>
+								</span>
+							</li>
+						</ul>
+					</li>
+				</ul>';
+        }
+
+    }
 	
 	public function Show_overlay_login(){
 		echo '<div class="apple_overlay_login" id="login">
@@ -82,8 +149,8 @@ class Basic {
 			 </div>';
 	}
 	public function Show_Login($prepath="",$in_login=NULL,$password=NULL,$error_messsage=NULL,$login_attempt=NULL){
-		echo "<div class='login_container'>
-			<div class='login_content_container' id='login_container'>
+		echo "<div class='login_container' id='login_container'>
+			<div class='login_content_container' >
 				LOGIN
 			</div>
 			<div class='login_label'>NOME UTENTE</div>";
@@ -101,73 +168,28 @@ class Basic {
 		echo "<input type='hidden' name='copia_sfida' id='copia_sfida'>";
 		echo '<input type="hidden" name="pwd_codified" id="pwd_codified" value="" />';
 	}
-	
-	/*
-	* PUBLIC FUNCTION: Show_menu_avatar($is_card)
-	* DESCRIPTION: Print the avatar menu
-	* PARAMS: boolean $is_card
-	* RETURN: boolean value
-	*/
-	public function Show_menu_avatar($is_card=true){
-        $this->userdata = $this->Get_user_logged();
-		if(!$this->userdata){
-            echo '<input type="hidden" value="" id="avatar_username" />';
-			if(!$this->Is_mobile()||($is_card && $this->userdata["username"]== "davidecrenna")){
-				if($is_card){
-					echo '<span id="triggers_personal">
-							<a rel="#personal_area" style="color:#000">
-								<div class="card_menu_avatar_text">
-									PERSONAL AREA
-								</div>	
-								<div class="card_menu_avatar_icon">
-									<img src="../../image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." />
-								</div> 
-																						
-							</a>
-						  </span>';
-				}else{
-					echo '<span id="overlay_login"><a rel="#login" style="color:#000">
-						<img src="../../image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> LOGIN															
-					</a></span>';	
-				}
-			}
-		}else{
-            echo '<input type="hidden" value="'.$this->userdata["username"].'" id="avatar_username" />';
-			echo '<ul class="avatar_header_menu">
-					<li>
-						<div class="header_button_utente">';
-							echo '<img src="../../'.USERS_PATH.$this->userdata["username"].'/'.USER_PHOTO_PATH.'main/'.$this->userdata["photo"].'" alt="Avatar Utente." title="Avatar '.$this->userdata["username"].'." class="avatar_utente" /> &nbsp;&nbsp;'.strtoupper($this->userdata["username"]).'
-						';
-			
-						echo '</div>
-						<ul class="sub">
-							<li>';
-                                if($is_card)
-                                    echo '<a onclick="Logout(\'../\')" style="color:#000">';
-                                else
-                                    echo '<a onclick="Logout(\'\')" style="color:#000">';
-                                echo '
-									<div class="avatar_header_menu_element"><img src="../../image/icone/logout.png" style="width:28px; height:28px; vertical-align:middle;" alt="Logout." title="Logout utente." /> LOGOUT					</div>
-								</a>
-							</li>
-							<li>
-								<span id="triggers_personal">';
-								    if($is_card)
-									    echo '<a rel="#personal_area" style="color:#000">';
-                                    else
-                                        echo '<a href="'.$this->userdata["username"].'/personal_area" style="color:#000">';
-										echo '<div class="avatar_header_menu_element">
-											<img src="../../image/icone/icona_user.png" style="width:28px; height:28px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> PERSONAL AREA															
-										</div>
-									</a>
-								</span>
-							</li>            
-						</ul>    
-					</li>
-				</ul>';
-		}
-		
+
+	public function Show_recupero_password($prepath="",$iscard=0){
+		echo '<p class="recupero_text">Inserisci la tua email o il tuo username con cui ti sei iscritto.</p>';
+
+		echo '<input  class="login_input" type="text" name="personal_login_recupero" id="personal_login_recupero" onkeydown="PressioneInvioRecupero(event);" value="" />';
+		echo '<div class="recupero_btn">';
+		echo "<div class='personal_button' onclick='Invia_recupero()'>
+						<span class='text14px'>INVIA</a>
+					  </div>";
+                        if($iscard==0)
+                            echo "<div class='personal_button' onclick='Load_login(\"".$prepath."\")'>";
+                        else
+                            echo "<div class='personal_button' onclick='Load_personal_area()'>";
+						echo "<span class='text14px'>INDIETRO</a>
+					  </div>";
+
+		echo '<div id="ajax_recupero" class="ajax_recupero"></div>';
+		echo "<div class='login_img'></div>";
+		echo "</div>";
 	}
+	
+
 	/*
 	* PUBLIC FUNCTION: Is_user($username)
 	* DESCRIPTION: Return if a user exists or not in the DB

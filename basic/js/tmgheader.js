@@ -132,6 +132,11 @@ $(document).ready(function(){
    	 	var pwd = $("#login_pwd").val();
 		var login_user = $("#login_user").val();
 
+		if(pwd == "" || login_user == "" || pwd ==null || login_user == null || !login_user || !pwd) {
+			$('#ajax_login').html('<img src="' + prepath + 'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="show_recupero_password(\'../\',\'0\')" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
+			return false;
+		}
+
 		$('#login_pwd').val("");
 		$("#login_user").val("");
 		$.ajax({
@@ -147,22 +152,14 @@ $(document).ready(function(){
 			$('#ajax_login').html('<img src="'+prepath+'image/icone/ajax_small.gif" alt="Loading..." />');
 		  },
 		  success:function(data){
-			  /*var obj = jQuery.parseJSON(data);
-			  if(obj.result=="true"){
-				  var username=$("#in_username").val();
-				  location.href=prepath+obj.user+'/personal_area';
-			  }else{
-				 $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;">Hai dimenticato la password?</a>');
-			  }*/
-
-              var obj = jQuery.parseJSON(data);
+			 var obj = jQuery.parseJSON(data);
               if(obj.result=="true"){
                   location.href=prepath+obj.user+'/personal_area';
               }else{
                   if(obj.msg==1)
-                      $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="Javascript:show_recupero_password()" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
+                      $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Ricontrolla i tuoi dati.<br/> <a target="_self" onclick="show_recupero_password(\''+prepath+'\',\'0\')" style="cursor:pointer;color:#000; text-decoration: underline;">Hai dimenticato la password?</a>');
                   if(obj.msg==2)
-                      $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="Javascript:show_recupero_password()" style="color:#000;cursor:pointer;text-decoration: underline;">recupero password</a>');
+                      $('#ajax_login').html('<img src="'+prepath+'image/icone/error.png" style="width:10px; padding-right:1px;" alt="Errore" /> Account disabilitato. Hai effettuato troppi tentativi di login errati nelle ultime due ore.<br/> Riprova tra due ore o effettua un <a target="_self" onclick="show_recupero_password(\''+prepath+'\',\'0\')" style="color:#000;cursor:pointer;text-decoration: underline;">recupero password</a>');
               }
 		  },
 		  error:function(){
@@ -195,3 +192,70 @@ $(document).ready(function(){
             }
         });
     }
+function show_recupero_password(prepath,iscard){
+	$.ajax({
+		type: 'POST',
+		url: prepath+"card/php/card_handler.php",
+			data: { Load_recupero_pass: "true",
+					prepath: prepath,
+					iscard: iscard
+		},
+		dataType: "html",
+		beforeSend:function(){
+			$('#login_container').html('<img src="'+prepath+'image/icone/spinner-big.gif" style="width:10%" alt="Loading..." />');
+		},
+		success:function(data){
+			$('#login_container').html(data);
+		},
+		error:function(){
+			// failed request; give feedback to user
+			$('#login_container').html('<img src="'+prepath+'image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+
+		}
+	});
+}
+function PressioneInvioRecupero(e) {
+	// IE
+	var tasto;
+	if(window.event){
+		tasto = e.keyCode;
+	}
+	// Netscape/Firefox/Opera
+	else if(e.which){
+		tasto = e.which;
+	}
+	if (tasto == 13) {
+		Invia_recupero();
+	}
+}
+function Invia_recupero(){
+	var recupero = $("#personal_login_recupero").val();
+	$.ajax({
+		type: 'POST',
+		url: "../card/php/card_handler.php",
+		data: { Invia_recupero: "true",
+			recupero: recupero
+		},
+		dataType: "html",
+		beforeSend:function(){
+			$('#ajax_recupero').html('<img src="../../image/icone/spinner-big.gif" style="width:10%" alt="Loading..." />');
+		},
+		success:function(data){
+			var obj = jQuery.parseJSON(data);
+			if(obj.result==0){
+				$('#ajax_recupero').html("Una email è stata inviata all'indirizzo "+obj.address+".");
+			}else if(obj.result==2){
+				$('#ajax_recupero').html("Account non trovato. L'username o l'indirizzo inserito non è presente nel Database.");
+			}else if(obj.result==1){
+				$('#ajax_recupero').html("Una email è già stata inviata all'indirizzo "+obj.address+". Se non riesci a recuperare la tua password contattaci all'indirizzo info@topmanagergroup.com");
+			}
+		},
+		error:function(){
+			// failed request; give feedback to user
+			$('#ajax_recupero').html('<img src="../../image/icone/error.png" style="vertical-align:middle; padding-right:4px;" alt="Errore" /> Errore di connessione. Riprova o ricarica la pagina.');
+
+		}
+	});
+
+}
+

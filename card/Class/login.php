@@ -88,16 +88,6 @@ class Login
 			      <span class='text14px'>ENTRA</a>
 			  </div>";
 	}
-	public function Show_recupero_password(){
-		echo '<div class="personal_recupero">';
-			echo '<label><input type="text" id="in_recupero_email" class="in_recupero_email"/></label>';
-			echo '<p style="text-align:left; padding-left:35px; font-size:16px; position:absolute; top:80px; left:0px; color:#000;">Inviami una email con la nuova password.</p>';
-			echo '<p style="text-align:left; font-size:16px; position:absolute; top:110px; left:130px;"><img src="image/login/btn/btn_invia.png" onclick="Javascript:invia_recupero()" style="cursor:pointer;"/>&nbsp;<img src="image/login/btn/btn_indietro.png" onclick="Javascript:torna_login()" style="cursor:pointer;"/></p>';
-			echo "<div id='recupero_saved' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='image/icone/ok.png' alt='Informazioni salvate' width='22' height='19' /> Una email ti è stata inviata all'indirizzo indicato. Altrimenti contattaci a info@topmanagergroup.com.</p></div>";
-			echo "<div id='recupero_error' style='display:none; text-align:left; font-size:14px; position:absolute; top:150px; left:20px; width:300px; color:#000;'><p><img src='image/icone/error.png' alt='Errore' width='22' height='19' /> Si è verificato un problema nell'invio della e-mail. Se non sei iscritto ancora al gruppo visita la nostra <a href='../index.php' style='color:#000;'>Homepage</p></a></p></div>";
-			echo "</div>";
-		echo '</div>';
-	}
 
 }
 ?>
