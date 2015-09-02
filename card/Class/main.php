@@ -802,12 +802,11 @@ class Card {
         $lib = new PasswordLib\PasswordLib();
         $hash_new_pass = $lib->createPasswordHash($new_pass);
         if( $lib->verifyPasswordHash($old_pass, $this->password)){
-            if(!$this->Update_tmg_email_password($old_pass, $new_pass)){
-                $this->mysql_database->Save_notify_change_tmg_email_password($new_pass, $this->user_id);
-                $this->Notify_update_tmg_email_password($new_pass);
-            }
-
             if(!DEVELOPMENT) {
+                if(!$this->Update_tmg_email_password($old_pass, $new_pass)){
+                    $this->mysql_database->Save_notify_change_tmg_email_password($new_pass, $this->user_id);
+                    $this->Notify_update_tmg_email_password($new_pass);
+                }
                 $this->Send_email_new_password($new_pass);
             }
             $this->mysql_database->Change_password($hash_new_pass,$this->user_id);
