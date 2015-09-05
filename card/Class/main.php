@@ -5205,7 +5205,7 @@ Chiaro per chi lo guarda, con l\'essenziale per presentare te stesso o la tua at
 			echo "</div>";
 			if($this->opt_curr==1){
 				echo "<div class='download_european'>";
-				echo "<span style='font-size:14px; font-weight:600; padding-bottom:10px;'>Visualizza</span>";
+				echo "<span style='font-size:14px; font-weight:600; padding-bottom:10px; color:#000'>Visualizza</span>";
 				$this->Show_open_european_curriculum();
 				echo "</div>";
 				echo "<div id='overlay_curriculum_noadobe' class='overlay_curriculum_noadobe'>";

@@ -400,10 +400,11 @@
 		-o-border-radius: 5px;
 		-khtml-border-radius: 5px;
 		border: 1px solid #BAB8B8;
-		color:#FFF;
+		color:#000;
 		-webkit-box-shadow: #000 0 0 12px;
   		-moz-box-shadow: #000 0 0 12px;
 		box-shadow: 1.3em 1.3em 1.5em -0.6em rgba(105,101,105,1);
+		font-weight:700;
 	}
 	.overlay_title_container{
 		margin: 2.5em auto 0px;
