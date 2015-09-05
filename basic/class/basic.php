@@ -23,17 +23,14 @@ class Basic {
 	* PARAMS: ---
 	* RETURN: ---
 	*/
-	public function Show_header($is_card){
+	public function Show_header($is_card,$prepath="",$no_overlay=false){
         $this->userdata = $this->Get_user_logged();
 			 echo '<div id="tmgheader" class="tmgheader" align="center">
 			 		<div class="tmgheader_container">
 						<div class="tmgheader_logo">';
-						if($is_card)
-							echo '<a href="../index.php">'; 
-						else
-							echo '<a href="index.php">';
+                        echo '<a href="'.$prepath.'index.php">';
 						echo '
-							<img src="../../image/banner/logo_headertmg.png" id="tmgheader_logo_img" alt="Logo Topmanagergroup.com" title="Logo Topmanagergroup.com"/></a>
+							<img src="'.$prepath.'image/banner/logo_headertmg.png" id="tmgheader_logo_img" alt="Logo Topmanagergroup.com" title="Logo Topmanagergroup.com"/></a>
 						</div>';
 						if($is_card)
 							echo '<div class="tmgheader_actions_card">';
@@ -42,13 +39,13 @@ class Basic {
 						
 						echo '
 							<div id="menu_avatar_container" class="triggers_personal">';
-								$this->Show_menu_avatar($is_card);
+                                $this->Show_menu_avatar($is_card,$prepath,$no_overlay);
 							echo '</div>';
 							if(!$this->userdata["username"]){
 								if($is_card){
 									echo '
 										<div class="ti_piace_la_card">
-											<a href="../index.php?tab=iscrizione&u='.$this->userdata["username"].'" class="banner_right_text">
+											<a href="'.$prepath.'index.php?tab=iscrizione&u='.$this->userdata["username"].'" class="banner_right_text">
 												Ti piace la card?<br/>
 												Crea la tua gratis.
 											</a>
@@ -56,7 +53,7 @@ class Basic {
 									}else{
 										echo '
 										<div class="iscriviti">
-											<a href="../index.php?tab=iscrizione" class="banner_right_text">
+											<a href="'.$prepath.'index.php?tab=iscrizione" class="banner_right_text">
 												Iscriviti gratis </br>
 												Crea la tua card
 											</a>
@@ -69,7 +66,7 @@ class Basic {
 						</div>
 					</div>
 		 		</div> ';
-			if(!$is_card)
+			if(!$is_card&&!$no_overlay)
 				$this->Show_overlay_login();
 	}
 
@@ -80,7 +77,7 @@ class Basic {
 	* PARAMS: boolean $is_card
 	* RETURN: boolean value
 	*/
-    public function Show_menu_avatar($is_card=true){
+    public function Show_menu_avatar($is_card=true,$prepath="",$no_overlay=false){
         $this->userdata = $this->Get_user_logged();
         if(!$this->userdata){
             echo '<input type="hidden" value="" id="avatar_username" />';
@@ -92,15 +89,21 @@ class Basic {
 									PERSONAL AREA
 								</div>
 								<div class="card_menu_avatar_icon">
-									<img src="../../image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." />
+									<img src="'.$prepath.'image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." />
 								</div>
 
 							</a>
 						  </span>';
                 }else{
-                    echo '<span id="overlay_login"><a rel="#login" style="color:#000">
-						<img src="../../image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> LOGIN
-					</a></span>';
+                    if(!$no_overlay) {
+                        echo '<span id="overlay_login"><a rel="#login" style="color:#000">
+						<img src="' . $prepath . 'image/icone/icona_user.png" style="width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> LOGIN
+					    </a></span>';
+                    }else{
+                        echo '<a href="'.$prepath.'index.php?show_login=true" style="color:#000; cursor:pointer; text-decoration:none;">
+						<img src="' . $prepath . 'image/icone/icona_user.png" style=" width:32px; height:32px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> LOGIN
+					    </a>';
+                    }
                 }
             }
         }else{
@@ -108,18 +111,15 @@ class Basic {
             echo '<ul class="avatar_header_menu">
 					<li>
 						<div class="header_button_utente">';
-            echo '<img src="../../'.USERS_PATH.$this->userdata["username"].'/'.USER_PHOTO_PATH.'main/'.$this->userdata["photo"].'" alt="Avatar Utente." title="Avatar '.$this->userdata["username"].'." class="avatar_utente" /> &nbsp;&nbsp;'.strtoupper($this->userdata["username"]).'
+            echo '<img src="'.$prepath.USERS_PATH.$this->userdata["username"].'/'.USER_PHOTO_PATH.'main/'.$this->userdata["photo"].'" alt="Avatar Utente." title="Avatar '.$this->userdata["username"].'." class="avatar_utente" /> &nbsp;&nbsp;'.strtoupper($this->userdata["username"]).'
 						';
 
             echo '</div>
 						<ul class="sub">
 							<li>';
-            if($is_card)
-                echo '<a onclick="Logout(\'../\')" style="color:#000">';
-            else
-                echo '<a onclick="Logout(\'\')" style="color:#000">';
+                echo '<a onclick="Logout(\''.$prepath.'\')" style="color:#000">';
             echo '
-									<div class="avatar_header_menu_element"><img src="../../image/icone/logout.png" style="width:28px; height:28px; vertical-align:middle;" alt="Logout." title="Logout utente." /> LOGOUT					</div>
+									<div class="avatar_header_menu_element"><img src="'.$prepath.'image/icone/logout.png" style="width:28px; height:28px; vertical-align:middle;" alt="Logout." title="Logout utente." /> LOGOUT					</div>
 								</a>
 							</li>
 							<li>
@@ -127,9 +127,9 @@ class Basic {
             if($is_card)
                 echo '<a rel="#personal_area" style="color:#000">';
             else
-                echo '<a href="'.$this->userdata["username"].'/personal_area" style="color:#000">';
+                echo '<a href="'.$prepath.$this->userdata["username"].'/personal_area" style="color:#000">';
             echo '<div class="avatar_header_menu_element">
-											<img src="../../image/icone/icona_user.png" style="width:28px; height:28px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> PERSONAL AREA
+											<img src="'.$prepath.'image/icone/icona_user.png" style="width:28px; height:28px; vertical-align:middle;" alt="Accesso Personal Area." title="Login." /> PERSONAL AREA
 										</div>
 									</a>
 								</span>

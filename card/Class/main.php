@@ -3674,7 +3674,7 @@ initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 			</div>
 		</div>
 		<div id="bodydiv" style="position:relative; top:-10px;">';
-			$this->basic->Show_header(true);
+			$this->basic->Show_header(true,"../");
 			$this->Show_input_username();
 			echo '<div align="center">';
 			echo '<div style="clear:both;"></div>';	

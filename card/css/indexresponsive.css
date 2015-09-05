@@ -639,6 +639,8 @@
 		width: 100%;
 		padding-top: 0.2em;
 		color:#000;
+		font-size: 0.9em;
+		font-weight: 700;
 	}
 	.filebox_photo_content{
 		max-width: 770px;
@@ -656,6 +658,8 @@
 		width: 100%;
 		padding-top: 0.2em;
 		color:#000;
+		font-size: 0.9em;
+		font-weight: 700;
 	}
 	.filebox_document_content{
 		max-width: 770px;

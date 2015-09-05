@@ -91,7 +91,7 @@
 	}
 	if(isset($_POST["Aggiorna_menu_avatar"]))
 	{
-		$basic->Show_menu_avatar(true);
+		$basic->Show_menu_avatar(true,"../");
 	}
 	
 	

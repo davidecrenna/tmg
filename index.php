@@ -112,13 +112,7 @@ PERSONE CHE POSSONO CAMBIARE IL TUO PERCORSO VOGLIONO SAPERE CHI SEI</span>
     		<div style="width:242px; text-align:center; margin-top:36px; height:23px; float:left; font-size:13px; font-weight:700;  background-color:#623939; padding-top:5px; padding-right:10px;" class="rounded" id="div_banner_sx"><span style="font-size:13px;" id="user_accedi"><a target="_self" onclick="change_scheda('scheda6');" style="cursor:pointer;"><span style="font-size:13px; font-weight:700; color:#F4CE38;">Iscriviti al gruppo</span></a></span>
             </div>
     	</div>-->
-        <?php $user = $basic->Get_user_logged();
-			  if($user){
-				  $card = new Card(NULL,$user);
-				  echo $basic->Show_header(false,$card->username,$card->is_user_logged(),$card->photo1_path);
-			  }else{
-				  echo $basic->Show_header(false);
-			  }?>
+        <?php  echo $basic->Show_header(false,""); ?>
     </div>
 	<div align="center">
         <div class="cols card_shadowed" id="scheda1">
@@ -720,5 +714,15 @@ e verrà effettuato al superamento della soglia minima di 100 euro guadagnati.<b
         <?		
 		}	
 	}
+    if(isset($_GET['show_login'])){
+            ?>
+            <script>
+                $(document).ready(function() {
+                    Open_overlay_login();
+                });
+            </script>
+            <?
+    }
+
 	
 ?>

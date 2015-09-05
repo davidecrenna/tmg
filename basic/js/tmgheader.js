@@ -1,4 +1,5 @@
 // JavaScript Document
+var overlay_login;
 $(document).ready(function(){
 	$(window).resize(function() {
 		if(document.documentElement.clientWidth <=615){
@@ -26,7 +27,7 @@ $(document).ready(function(){
 		}
 	});
 
-	var overlay_login = $("#overlay_login a[rel]").overlay({top: top,
+	overlay_login = $("#overlay_login a[rel]").overlay({top: top,
 			left: 0,
 			speed: 500,
 			fixed: false,
@@ -41,6 +42,7 @@ $(document).ready(function(){
 			},
 			onBeforeLoad: function() {
 				$(window).scrollTop();
+                Load_login("../");
 			},
 			mask: {
 				color: '#000'
@@ -66,9 +68,7 @@ $(document).ready(function(){
 			}
 
 
-		}).click(function(){
-	  		Load_login("../");
-	});
+		});
 });
 
 	function Load_login(prepath){
@@ -258,4 +258,24 @@ function Invia_recupero(){
 	});
 
 }
+function Open_overlay_login(){
+    overlay_login.overlay().load();
+    if(document.documentElement.clientWidth >=1200){
+        $(".apple_overlay_login").width(995);
+        $(".apple_overlay_login").height(553);
 
+        $(".apple_overlay_login").css("left",(document.body.clientWidth-995)/2);
+
+        if( ((document.body.clientHeight-553) /2)<50){
+            $(".apple_overlay_login").css("top",50);
+        }else{
+            $(".apple_overlay_login").css("top",(document.body.clientHeight-553)/2);
+        }
+    }else{
+        $(".apple_overlay_login").css("left",0);
+        $(".apple_overlay_login").css("top",0);
+        $(".apple_overlay_login").height( document.body.clientHeight);
+        $(".apple_overlay_login").width( document.body.clientWidth+15);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+}
